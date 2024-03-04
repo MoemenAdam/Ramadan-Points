@@ -50,6 +50,34 @@
   @apply px-14 py-2 w-fit text-center rounded-lg bg-secondary ;
 }
 
+.qFrameTop {
+  height: 23px;
+}
+.qFrameMiddle{
+    line-height: 2.35em;
+}
+.qFrameBottom {
+  height: 23px;
+  rotate: 180deg;
+}
+.quranText{
+  background-color: #f7fce3 ;
+    padding: 16px 14px;
+    font-size: 24px;
+    font-family: hafs,"Times New Roman";
+}
+.suraHeaderFrame{
+  background: url(assets/sura-frame.png) no-repeat center center;
+    margin: 5px 0px;
+    text-align: center;
+    font-family: hafs, "Times New Roman";
+    font-size: 20px;
+    line-height: 45px;
+    height: 49px;
+}
+.qFrame {
+  background: url(assets/frame.png) repeat-y;
+}
 
 .select-dropdown,
 .select-dropdown * {
@@ -64,6 +92,7 @@
   background-color: #304E64;
   color:white;
   border-radius: 4px;
+  border-radius: 8px;
 }
 .select-dropdown select {
   font-size: 1rem;
