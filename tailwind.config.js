@@ -7,8 +7,14 @@ export default {
   theme: {
     extend: {
       colors:{
-        primary: '#304E64',
-        secondary: '#F4CE14',
+        'primary': '#304E64',
+        'secondary': '#F4CE14',
+        'black':'#0E190F',
+        'white':'#F2F2F2',
+      },
+      screens:{
+        'nav': '920px',
+        'mobile': '450px',
       }
     },
   },
