@@ -3,9 +3,17 @@ import { useFetch } from "../../../CustomHooks/useFetch"
 import SurahLoader from "./SurahLoader"
 import { motion } from 'framer-motion'
 import { FaCaretRight, FaCaretLeft } from "react-icons/fa";
+import {PagePerSurah} from '../../../store/QuranPages'
 
-
-const map = {}
+const map = {
+  '1': 'سُورَةُ ٱلْفَاتِحَةِ',
+  '2': 'سُورَةُ البَقَرَةِ',
+  '50': 'سُورَةُ آل عِمرَانَ',
+  '77': 'سُورَةُ النِّسَاء',
+  // i want all surah names and their start page number
+  '106': 'سُورَةُ المَائـِدَةِ',
+  
+}
 const init = {
   number: 1,
   name: "سُورَةُ ٱلْفَاتِحَةِ",
