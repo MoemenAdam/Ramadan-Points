@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState,memo } from "react";
 import { useFetch } from "../../../CustomHooks/useFetch"
 import SurahLoader from "./SurahLoader"
 import { LayoutGroup, motion } from 'framer-motion'
@@ -113,26 +114,24 @@ function convertToArabicNumbers(englishNumber) {
 
   return arabicNumber;
 }
-function Pagenation({ page, setPageNumber, setPageTurn }) {
-
+function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,surahsPerPage }) {
   const handlePageChange = (num) => {
+    if(page + num<=0 || page + num>604)return;
     setPageNumber(prev => prev + num);
   }
-
   return (
     <div className="flex items-center justify-center flex-grow">
-      {page >= 604 && <div><FaCaretRight color="gray" size={25} /></div>}
-      {page < 604 && <div onClick={() => handlePageChange(1)} className="cursor-pointer"><FaCaretRight size={25} /></div>}
+      {page <= 1 && <div><FaCaretRight color="gray" size={25} /></div>}
+      {page > 1 && <div onClick={() => handlePageChange(-1)} className="cursor-pointer"><FaCaretRight size={25} /></div>}
 
       <div className="px-4 select-none">{page}</div>
 
-      {page <= 1 && <div><FaCaretLeft color="gray" size={25} /></div>}
-      {page > 1 && <div onClick={() => handlePageChange(-1)} className="cursor-pointer"><FaCaretLeft size={25} /></div>}
+      {page >= 604 && <div><FaCaretLeft color="gray" size={25} /></div>}
+      {page < 604 && <div onClick={() => handlePageChange(1)} className="cursor-pointer"><FaCaretLeft size={25} /></div>}
     </div>
   )
 }
-function QuranTextLoop({ ele,aya,surahNumber,surah,surahName }) {
-  if(!aya)return null;
+function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   if(surahName!==aya?.surah?.name)return null;
   return (
     <>
@@ -140,7 +139,7 @@ function QuranTextLoop({ ele,aya,surahNumber,surah,surahName }) {
         {aya.numberInSurah === 1 ?
           <>
             <span>
-              {surahNumber === 1 ?
+              {aya.surah.name === 'سُورَةُ ٱلْفَاتِحَةِ' ?
                 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
                 : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1]
               }
@@ -157,79 +156,26 @@ function QuranTextLoop({ ele,aya,surahNumber,surah,surahName }) {
     </>
   )
 }
-function QuranText({surahName, surahNumber, surah}) {
-  return (
-    <div className="mt-20 sm:mt-10 md:mt-0" id="quranText">
-      <div className="suraHeaderFrame font-semibold">{surahName}</div>
-      {surahNumber !== 1 && <div className="ayaText text-center">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>}
-      <div>
-        {surah?.map((aya) => {
-          if(aya.surah && aya?.surah?.name!==surahName){
-            return null;
-          }
-          
-          return(
-            <span key={aya.number} className="hover:bg-ayah ayaText duration-500 ">
-              {aya.numberInSurah === 1 ?
-                <>
-                  <span>
-                    {surahNumber === 1 ?
-                      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
-                      : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1]
-                    }
-                  </span>
-                  <span className="px-2 text-green-600 font-semibold">{convertToArabicNumbers(aya.numberInSurah)}</span>
-                </>
-                :
-                <>
-                  <span>{aya.text}</span>
-                  <span className="px-2 text-green-600 font-semibold">{convertToArabicNumbers(aya.numberInSurah)}</span>
-                </>
-              }
-            </span>
-          )
-        })
-        }
-      </div>
-    </div>
-  )
-}
-export default function Quran({ surahNumber, setSurahNumber }) {
+// )
+export default memo(function Quran({ surahNumber, setSurahNumber }) {
   const [pageNumber, setPageNumber] = useState(parseInt(localStorage.getItem('PageNumber')) || parseInt(PagePerSurah[surahNumber-1].number));
-  const [pageTurn, setPageTurn] = useState(false);
-  // const { data: surahsData, loading: surahsLoading } = useFetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.asad`)
   const { data: surahsPerPage, loading: surahsPerPageLoading } = useFetch(`https://api.alquran.cloud/v1/page/${pageNumber}/ar.asad`)
   const [surahsInPage, setSurahsInPage] = useState(surahsPerPage?.data?.surahs || []);
 
   const [surah, setSurah] = useState(surahsPerPage?.data?.ayahs || init.ayahs);
-  // console.log(surahsPerPage);
   const [surahName, setSurahName] = useState(PagePerSurah[surahNumber-1].name || localStorage.getItem('SurahName') || 'سُورَةُ ٱلْفَاتِحَةِ');
+  localStorage.setItem('PageNumber', pageNumber);
   localStorage.setItem('SurahName', surahName);
-    localStorage.setItem('PageNumber', pageNumber);
   
   useEffect(() => {
     setSurah(surahsPerPage?.data?.ayahs || surah);
     setSurahsInPage(Object.values(surahsPerPage?.data?.surahs || surahsInPage))
     setSurahName(PagePerSurah[surahNumber-1].name || surahName);
-    setPageNumber(parseInt(PagePerSurah[surahNumber-1].number));
-    // setPageTurn(false);
   }, [surahNumber, surahsPerPage])
 
-  useEffect(() => { 
-    // if (surahsData?.data?.ayahs[0].page === pageNumber) return;
-    // setSurah(surahsPerPage?.data?.ayahs || surah);
-  //   console.log(surahsPerPage?.data?.surahs[0]);
-  //   setSurahName(
-  //     (surahsPerPage?.data?.surahs[0]
-  //       ?
-  //       Object.values(surahsPerPage?.data?.surahs[0])
-  //       :surahName
-  //     ));
-  //   setSurahsInPage(Object.values(surahsPerPage?.data?.surahs || surahsInPage))
-  //   localStorage.setItem('PageNumber', pageNumber);
-    console.log(1);
-  }, [pageNumber, surahsPerPage])
-
+  useEffect(() => {
+    setPageNumber(parseInt(PagePerSurah[surahNumber-1].number));
+  },[surahNumber])
   // this func will check if our sora have beem started in the previous page
   const handleQuranMap  = (surahsInPage,name)=>{
     if(surahsInPage[0].name===name){
@@ -244,7 +190,7 @@ export default function Quran({ surahNumber, setSurahNumber }) {
     return(
       <>
         <div className="suraHeaderFrame font-semibold">{name}</div>
-        {surahNumber !== 1 && <div className="ayaText text-center">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>}
+        {name !== 'سُورَةُ ٱلْفَاتِحَةِ' && <div className="ayaText text-center">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>}
       </>
     )
   }
@@ -268,27 +214,19 @@ export default function Quran({ surahNumber, setSurahNumber }) {
                 {handleQuranMap(surahsInPage,ele.name)}
                 {surah?.map((aya,idx)=>(
                     <span key={idx}>
-                      <QuranTextLoop ele={ele} surahName={ele.name} surahNumber={surahNumber} aya={aya}surah={surah}/>
+                      <QuranText ele={ele} surahName={ele.name} surahNumber={surahNumber} aya={aya}surah={surah}/>
                     </span>
                   ))
                 }
               </div>
             ))}
             </>
-            {/* {pageTurn?
-            :
-              <QuranText surahName={surahName} surahNumber={surahNumber} surah={surah}/>
-            }
-             */}
-             {/* <QuranText surahName={surahName} surahNumber={surahNumber} surah={surah}/> */}
           </div>
           <div className="mt-10 w-full text-xl font-semibold text-center ">
-          {/* <Pagenation page={pageNumber} setPageNumber={setPageNumber} setPageTurn={setPageTurn} />
-           */}
-           <Pagenation page={pageNumber} setPageNumber={setPageNumber}  />
+           <Pagenation page={pageNumber} setPageNumber={setPageNumber} surahNumber={surahNumber} setSurahNumber={setSurahNumber} surahName={surahName} surahsPerPage={surahsPerPage} />
           </div>
         </div>
       }
     </>
   )
-}
+})
