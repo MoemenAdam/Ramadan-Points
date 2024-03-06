@@ -109,6 +109,8 @@ export default function QuranSearch({surahNumber, setSurahNumber}) {
                 <option value="علي جابر"> علي جابر </option>
                 <option value="ماهر المعيقلي"> ماهر المعيقلي </option>
                 <option value="ياسر الدوسري"> ياسر الدوسري </option>
+                <option value="محمد صديق المنشاوي"> محمد صديق المنشاوي </option>
+                <option value="عبدالباسط عبدالصمد"> عبدالباسط عبدالصمد </option>
                 <option value="عبدالله عواد الجهني"> عبدالله عواد الجهني </option>
                 <option value="علي بن عبدالرحمن الحذيفي"> علي بن عبدالرحمن الحذيفي </option>
               </select>
