@@ -6,7 +6,7 @@ import { useFetch } from '../../../CustomHooks/useFetch'
 
 export default function QuranSearch({surahNumber, setSurahNumber}) {
   const [type , setType] = useState('surah')
-  const [ReaderName, setReaderName] = useState('مشاري العفاسي')
+  const [ReaderName, setReaderName] = useState(localStorage.getItem('ReaderName') || 'مشاري العفاسي')
   const [autoPlay, setAutoPlay] = useState(false);
   const {data: surahsData, loading: surahsLoading} = useFetch('https://api.alquran.cloud/v1/surah')
   const {data: readers, loading: readersLoading} = useFetch('https://mp3quran.net/api/v3/reciters')
@@ -19,9 +19,12 @@ export default function QuranSearch({surahNumber, setSurahNumber}) {
     setType(type)
   }
   function handleSurahChoose(number){
+    localStorage.setItem('SurahNumber', number);
     setSurahNumber(number)
   }
   function handleReaderChoose(e){
+    setAutoPlay(true);
+    localStorage.setItem('ReaderName', e.target.value);
     setReaderName(e.target.value)
   }
   return (
@@ -98,12 +101,10 @@ export default function QuranSearch({surahNumber, setSurahNumber}) {
         </div>
       </section>
       <section className='px-4 rounded-3xl h-[160px] flex flex-col justify-center items-center' style={{boxShadow:'0px 20px 40px 10px rgba(0,0,0,0.75)'}}>
-        {readersLoading && <SurahLoader />}
-        {!readersLoading && 
           <div>
             <h1 className='text-center font-bold mb-2'> القارئ </h1>
             <div className='flex justify-center rounded-3xl'>
-              <select onClick={handleReaderChoose} className='w-[80%] outline-none select-dropdown rounded-3xl' name="Reader" id="">
+              <select onClick={handleReaderChoose} className='w-[80%] outline-none select-dropdown rounded-3xl' name="Reader" id="" defaultValue={localStorage.getItem('ReaderName') || 'مشاري العفاسي'} >
                 <option value="مشاري العفاسي"> مشاري العفاسي  </option>
                 <option value="علي جابر"> علي جابر </option>
                 <option value="ماهر المعيقلي"> ماهر المعيقلي </option>
@@ -112,13 +113,17 @@ export default function QuranSearch({surahNumber, setSurahNumber}) {
                 <option value="علي بن عبدالرحمن الحذيفي"> علي بن عبدالرحمن الحذيفي </option>
               </select>
             </div>
-            <div className='mt-2'>
-              {autoPlay && <audio className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev+1)%114)}} controls src={surahUrl}/>}
+            <div className='mt-2 w-[300px] h-[54px] flex items-center'>
+                {readersLoading && <SurahLoader />}
+                {!readersLoading && 
+                  <>
+                    {autoPlay && <audio className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls src={surahUrl}/>}
 
-              {!autoPlay && <audio className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev+1)%114)}} controls src={surahUrl}/>}
+                    {!autoPlay && <audio className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls src={surahUrl}/>}
+                  </>
+                }
             </div>
           </div>
-        }
       </section>
     </>
   )

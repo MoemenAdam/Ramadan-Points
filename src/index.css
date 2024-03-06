@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: hafs;
+  src: url('assets/HAFS.otf') format('opentype');
+}
+
 *{
   direction: rtl;
 }
@@ -15,6 +21,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.surahbg{
+  background-image: url('assets/surahbg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .active{
@@ -68,6 +81,7 @@
 }
 .suraHeaderFrame{
   background: url(assets/sura-frame.png) no-repeat center center;
+  background-size: contain;
     margin: 5px 0px;
     text-align: center;
     font-family: hafs, "Times New Roman";
@@ -120,4 +134,10 @@
   border-top: 5px solid #aaa;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
+}
+
+.ayaText{
+  font-family: hafs,"Times New Roman";
+  font-size: 30px;
+  line-height: 50px;
 }
