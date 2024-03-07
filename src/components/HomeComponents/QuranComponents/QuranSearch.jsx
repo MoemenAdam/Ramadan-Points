@@ -6,8 +6,7 @@ import { useFetch } from '../../../CustomHooks/useFetch'
 
 
 
-export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicked,Jozoa,setJozoa, setJozoaClicked}) {
-  const [type , setType] = useState('surah')
+export default function QuranSearch({type , setType,surahNumber, setSurahNumber, setSurahClicked,Jozoa,setJozoa, setJozoaClicked}) {
   const [ReaderName, setReaderName] = useState(localStorage.getItem('ReaderName') || 'مشاري العفاسي')
   const [autoPlay, setAutoPlay] = useState(false);
   const {data: surahsData, loading: surahsLoading} = useFetch('https://api.alquran.cloud/v1/surah')
@@ -27,6 +26,7 @@ export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicke
   }
   function handleJozaaChoose(number){
     setJozoa(number);
+    localStorage.setItem('Jozoa',Jozoa);
     setJozoaClicked(prev=>prev+1)
   }
   function handleReaderChoose(e){

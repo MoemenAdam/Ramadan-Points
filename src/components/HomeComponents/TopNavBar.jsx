@@ -7,10 +7,10 @@ export default function TopNavBar() {
       <section>
         <img className="select-none pointer-events-none absolute hidden sm:block -left-14 " src={Lites} alt="" />
       </section>
-      <div className="mainMargin text-white flex items-center justify-between">
+      <div className="text-white flex items-center justify-between">
         <section className="z-10">
           <Link to="/">
-            <img className="select-none pointer-events-none w-28 h-28 flex-grow" src="Logo.png" alt="Logo" />
+            <img className="select-none pointer-events-none w-28 h-28 flex-grow mr-6 lg:mr-8" src="Logo.png" alt="Logo" />
           </Link>
         </section>
         <section className="nav:flex-grow z-20">

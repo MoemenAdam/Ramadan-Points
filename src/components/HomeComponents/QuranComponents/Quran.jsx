@@ -158,16 +158,18 @@ function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   )
 }
 // )
-export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked,Jozoa,setJozoa,JozoaClicked }) {
+export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClicked,Jozoa,setJozoa,JozoaClicked }) {
   const [pageNumber, setPageNumber] = useState(parseInt(localStorage.getItem('PageNumber')) || parseInt(PagePerSurah[surahNumber-1].number));
   const { data: surahsPerPage, loading: surahsPerPageLoading } = useFetch(`https://api.alquran.cloud/v1/page/${pageNumber}/ar.asad`)
   const { data: JozoaData, loading: JozoaLoading } = useFetch(`https://api.alquran.cloud/v1/juz/${Jozoa}/ar.asad`)
   const [surahsInPage, setSurahsInPage] = useState(surahsPerPage?.data?.surahs || []);
+  const [JozoaHolder, setJozoaHolder] = useState(Jozoa || 1)
 
   const [surah, setSurah] = useState(surahsPerPage?.data?.ayahs || init.ayahs);
   const [surahName, setSurahName] = useState(PagePerSurah[surahNumber-1]?.name || localStorage.getItem('SurahName') || 'سُورَةُ ٱلْفَاتِحَةِ');
   localStorage.setItem('PageNumber', pageNumber);
   localStorage.setItem('SurahName', surahName);
+  localStorage.setItem('Jozoa',Jozoa);
   
   useEffect(() => {
     setSurah(surahsPerPage?.data?.ayahs || surah);
@@ -183,23 +185,18 @@ export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked,Jo
   },[surahClicked])
 
   useEffect(()=>{
-    // setSurahName(JozoaData?.data?.ayahs[0]?.surah?.englishName || surahName)
-    // setSurahNumber()
     const holder = Object.values(surahsPerPage?.data?.surahs||[]);
     if(holder.length===0)return;
+    setJozoaHolder(surahsPerPage?.data?.ayahs[0]?.juz);
     if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){
       localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0]?.number);
       setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ))
     }
   },[pageNumber,surahsPerPage])
   useEffect(()=>{
-    if(JozoaData.length===0)return;
-    setPageNumber(JozoaData?.data?.ayahs[0]?.page || 1);
-    // const holder = Object.values(JozoaData?.data?.surahs||[])[0]?.name;
-    // setSurahName((!holder?.length?null:holder) || surahName)
-    // setSurahNumber(JozoaData?.data?.ayahs[0]?.surah?.number || surahNumber);
-    // localStorage.setItem('SurahNumber', JozoaData?.data?.ayahs[0]?.surah?.number||surahNumber);
-  },[JozoaClicked])
+    if(type!=='jozoa')return;
+    setPageNumber(JozoaData?.data?.ayahs[0]?.page || pageNumber);
+  },[JozoaData])
 
   // this func will check if our sora have beem started in the previous page
   const handleQuranMap  = (surahsInPage,name)=>{
@@ -219,7 +216,6 @@ export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked,Jo
       </>
     )
   }
-
   return (
     <>
       {(surahsPerPageLoading) ?
@@ -229,7 +225,7 @@ export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked,Jo
 
         <div className="flex flex-col justify-center items-center">
           <div className="w-full text-xl font-semibold flex justify-between flex-wrap px-10">
-            <div>الجزء {()=>{convertToArabicNumbers(surahsPerPage?.data?.ayahs[0]?.juz)}}</div>
+            <div>الجزء {convertToArabicNumbers(JozoaHolder)}</div>
             <div>{surahName}</div>
           </div>
           <div className='max-w-[600px] h-fit min-h-[700px] surahbg p-10'>
