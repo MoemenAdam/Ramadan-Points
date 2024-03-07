@@ -118,6 +118,11 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
   const handlePageChange = (num) => {
     if(page + num<=0 || page + num>604)return;
     setPageNumber(prev => prev + num);
+    const holder = Object.values(surahsPerPage?.data?.surahs);
+    if(parseInt( holder[1]?holder[1]?.number:holder[0].number ) !== surahNumber){
+      localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0].number);
+      setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0].number ))
+    }
   }
   return (
     <div className="flex items-center justify-center flex-grow">
@@ -157,7 +162,7 @@ function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   )
 }
 // )
-export default memo(function Quran({ surahNumber, setSurahNumber }) {
+export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked }) {
   const [pageNumber, setPageNumber] = useState(parseInt(localStorage.getItem('PageNumber')) || parseInt(PagePerSurah[surahNumber-1].number));
   const { data: surahsPerPage, loading: surahsPerPageLoading } = useFetch(`https://api.alquran.cloud/v1/page/${pageNumber}/ar.asad`)
   const [surahsInPage, setSurahsInPage] = useState(surahsPerPage?.data?.surahs || []);
@@ -175,7 +180,7 @@ export default memo(function Quran({ surahNumber, setSurahNumber }) {
 
   useEffect(() => {
     setPageNumber(parseInt(PagePerSurah[surahNumber-1].number));
-  },[surahNumber])
+  },[surahClicked])
   // this func will check if our sora have beem started in the previous page
   const handleQuranMap  = (surahsInPage,name)=>{
     if(surahsInPage[0].name===name){

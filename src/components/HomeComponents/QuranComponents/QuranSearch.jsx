@@ -4,7 +4,7 @@ import SurahLoader from "./SurahLoader"
 
 import { useFetch } from '../../../CustomHooks/useFetch'
 
-export default function QuranSearch({surahNumber, setSurahNumber}) {
+export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicked}) {
   const [type , setType] = useState('surah')
   const [ReaderName, setReaderName] = useState(localStorage.getItem('ReaderName') || 'مشاري العفاسي')
   const [autoPlay, setAutoPlay] = useState(false);
@@ -21,6 +21,7 @@ export default function QuranSearch({surahNumber, setSurahNumber}) {
   function handleSurahChoose(number){
     localStorage.setItem('SurahNumber', number);
     setSurahNumber(number)
+    setSurahClicked(prev=>prev+1);
   }
   function handleReaderChoose(e){
     setAutoPlay(true);
