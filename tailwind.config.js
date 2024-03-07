@@ -16,6 +16,9 @@ export default {
       screens:{
         'nav': '920px',
         'mobile': '450px',
+        'fold':'300px',
+        'fold2':'400px',
+        'fold3':'600px',
       }
     },
   },

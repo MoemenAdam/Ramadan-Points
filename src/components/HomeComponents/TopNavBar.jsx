@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Lites from "./Lites.svg"
+import { GiHamburgerMenu } from "react-icons/gi";
+
 export default function TopNavBar() {
   return (
     <>
       <section>
-        <img className="select-none pointer-events-none absolute hidden sm:block -left-14 " src={Lites} alt="" />
+        <img className="select-none pointer-events-none absolute block -left-14 " src={Lites} alt="" />
       </section>
       <div className="text-white flex items-center justify-between">
         <section className="z-10">
@@ -24,8 +26,8 @@ export default function TopNavBar() {
               <li><NavLink to="/login">تسجيل الدخول</NavLink></li>
             </ul>
           </nav>
-          <nav className="nav:hidden block ">
-            burger menu
+          <nav className="nav:hidden block pl-6 cursor-pinter">
+            <GiHamburgerMenu size={30}/>
           </nav>
         </section>
       </div>

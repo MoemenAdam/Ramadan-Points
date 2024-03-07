@@ -30,10 +30,35 @@
   background-size: 100% 100%;
 }
 
+.loginbg{
+  background-image: url('assets/Loginbg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.loginColor{
+  background: linear-gradient(90.16deg, #9B7D24 50%, #D7B550 100%);
+  font-weight: bold;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.loginColor2{
+  background-image: linear-gradient(90deg, #9B7D24 50.28%, #D7B550 100%);
+}
+
+.loginInput{
+  @apply bg-transparent border-b-2 border-[#D7B55099] text-white brightness-90 outline-none p-2;
+}
+.loginInput::selection {
+  background-color: #9B7D24;
+}
+.loginInput {
+  caret-color: #ffcc00;
+}
 .active{
   position: relative;
 }
-
 .active::after {
   content: "";
   position: absolute;
