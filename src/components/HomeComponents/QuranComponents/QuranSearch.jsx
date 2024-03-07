@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SurahLoader from "./SurahLoader"
-
+import {Alljozoa} from '../../../store/QuranPages'
 import { useFetch } from '../../../CustomHooks/useFetch'
 
-export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicked}) {
+
+
+export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicked,Jozoa,setJozoa, setJozoaClicked}) {
   const [type , setType] = useState('surah')
   const [ReaderName, setReaderName] = useState(localStorage.getItem('ReaderName') || 'مشاري العفاسي')
   const [autoPlay, setAutoPlay] = useState(false);
@@ -22,6 +24,10 @@ export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicke
     localStorage.setItem('SurahNumber', number);
     setSurahNumber(number)
     setSurahClicked(prev=>prev+1);
+  }
+  function handleJozaaChoose(number){
+    setJozoa(number);
+    setJozoaClicked(prev=>prev+1)
   }
   function handleReaderChoose(e){
     setAutoPlay(true);
@@ -65,7 +71,7 @@ export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicke
                         return(
                           <motion.div
                           onClick={()=>{setAutoPlay(false);handleSurahChoose(e.number)}} key={e.number} 
-                          className={`flex justify-between py-3 mb-4 mr-2 pr-3 pl-3  cursor-pointer select-none gap-5 ${surahNumber===e.number?'bg-blue-300 transition-colors duration-500':''}`}>
+                          className={`flex justify-between py-3 mb-4 mr-2 px-3  cursor-pointer select-none gap-5 ${surahNumber===e.number?'bg-blue-300 transition-colors duration-500':''}`}>
                             <h1 className='w-fit'> {e.name.split('سُورَةُ').join(' ')} </h1>
                             <h1 className='text-left w-fit'> {e.englishName} </h1>
                           </motion.div>
@@ -92,8 +98,18 @@ export default function QuranSearch({surahNumber, setSurahNumber, setSurahClicke
                 </div>
                 {surahsLoading && <SurahLoader />}
                 {!surahsLoading && 
-                  <div>
-                    الجزء هنا ...
+                  <div
+                  style={{direction: 'ltr' ,scrollbarWidth: 'thin'}}
+                  className='flex flex-col items-center rtl overflow-hidden overflow-y-auto h-[450px]'>
+                    {Alljozoa.map(e=>{
+                      return(
+                        <motion.div
+                        onClick={()=>{handleJozaaChoose(e.number)}} key={e.number} 
+                        className={`flex justify-between py-3 mb-4 -mr-5 px-10  cursor-pointer select-none gap-5 ${Jozoa===e.number?'bg-blue-300 transition-colors duration-500':''}`}>
+                          <h1 className='w-fit'> {e.name} </h1>
+                        </motion.div>
+                      )
+                    })}
                   </div>
                 }
               </motion.div>

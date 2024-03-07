@@ -5,6 +5,7 @@ import SurahLoader from "./SurahLoader"
 import { LayoutGroup, motion } from 'framer-motion'
 import { FaCaretRight, FaCaretLeft } from "react-icons/fa";
 import {PagePerSurah} from '../../../store/QuranPages'
+import {Alljozoa} from '../../../store/QuranPages'
 
 const init = {
   number: 1,
@@ -118,11 +119,6 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
   const handlePageChange = (num) => {
     if(page + num<=0 || page + num>604)return;
     setPageNumber(prev => prev + num);
-    const holder = Object.values(surahsPerPage?.data?.surahs);
-    if(parseInt( holder[1]?holder[1]?.number:holder[0].number ) !== surahNumber){
-      localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0].number);
-      setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0].number ))
-    }
   }
   return (
     <div className="flex items-center justify-center flex-grow">
@@ -162,25 +158,49 @@ function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   )
 }
 // )
-export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked }) {
+export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked,Jozoa,setJozoa,JozoaClicked }) {
   const [pageNumber, setPageNumber] = useState(parseInt(localStorage.getItem('PageNumber')) || parseInt(PagePerSurah[surahNumber-1].number));
   const { data: surahsPerPage, loading: surahsPerPageLoading } = useFetch(`https://api.alquran.cloud/v1/page/${pageNumber}/ar.asad`)
+  const { data: JozoaData, loading: JozoaLoading } = useFetch(`https://api.alquran.cloud/v1/juz/${Jozoa}/ar.asad`)
   const [surahsInPage, setSurahsInPage] = useState(surahsPerPage?.data?.surahs || []);
 
   const [surah, setSurah] = useState(surahsPerPage?.data?.ayahs || init.ayahs);
-  const [surahName, setSurahName] = useState(PagePerSurah[surahNumber-1].name || localStorage.getItem('SurahName') || 'سُورَةُ ٱلْفَاتِحَةِ');
+  const [surahName, setSurahName] = useState(PagePerSurah[surahNumber-1]?.name || localStorage.getItem('SurahName') || 'سُورَةُ ٱلْفَاتِحَةِ');
   localStorage.setItem('PageNumber', pageNumber);
   localStorage.setItem('SurahName', surahName);
   
   useEffect(() => {
     setSurah(surahsPerPage?.data?.ayahs || surah);
     setSurahsInPage(Object.values(surahsPerPage?.data?.surahs || surahsInPage))
-    setSurahName(PagePerSurah[surahNumber-1].name || surahName);
-  }, [surahNumber, surahsPerPage])
+  }, [surahsPerPage])
+
+  useEffect(()=>{
+    setSurahName(PagePerSurah[surahNumber-1]?.name || surahName);
+  },[surahNumber])
 
   useEffect(() => {
     setPageNumber(parseInt(PagePerSurah[surahNumber-1].number));
   },[surahClicked])
+
+  useEffect(()=>{
+    // setSurahName(JozoaData?.data?.ayahs[0]?.surah?.englishName || surahName)
+    // setSurahNumber()
+    const holder = Object.values(surahsPerPage?.data?.surahs||[]);
+    if(holder.length===0)return;
+    if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){
+      localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0]?.number);
+      setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ))
+    }
+  },[pageNumber,surahsPerPage])
+  useEffect(()=>{
+    if(JozoaData.length===0)return;
+    setPageNumber(JozoaData?.data?.ayahs[0]?.page || 1);
+    // const holder = Object.values(JozoaData?.data?.surahs||[])[0]?.name;
+    // setSurahName((!holder?.length?null:holder) || surahName)
+    // setSurahNumber(JozoaData?.data?.ayahs[0]?.surah?.number || surahNumber);
+    // localStorage.setItem('SurahNumber', JozoaData?.data?.ayahs[0]?.surah?.number||surahNumber);
+  },[JozoaClicked])
+
   // this func will check if our sora have beem started in the previous page
   const handleQuranMap  = (surahsInPage,name)=>{
     if(surahsInPage[0].name===name){
@@ -209,13 +229,13 @@ export default memo(function Quran({ surahNumber, setSurahNumber,surahClicked })
 
         <div className="flex flex-col justify-center items-center">
           <div className="w-full text-xl font-semibold flex justify-between flex-wrap px-10">
-            <div>الجزء</div>
+            <div>الجزء {()=>{convertToArabicNumbers(surahsPerPage?.data?.ayahs[0]?.juz)}}</div>
             <div>{surahName}</div>
           </div>
           <div className='max-w-[600px] h-fit min-h-[700px] surahbg p-10'>
             <>
             {surahsInPage?.map((ele)=>(
-              <div key={ele.name} className="mt-30 sm:mt-10 md:mt-0" id="quranTextLoop">
+              <div key={ele.name} className="pt-10 sm:pt-10 md:pt-0" id="quranTextLoop">
                 {handleQuranMap(surahsInPage,ele.name)}
                 {surah?.map((aya,idx)=>(
                     <span key={idx}>
