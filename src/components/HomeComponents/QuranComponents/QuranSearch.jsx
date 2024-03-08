@@ -36,8 +36,8 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
   }
   return (
     <>
-      <h1 className='font-bold pr-4 pt-8 pl-4'> ابحث باستخدام </h1>
-      <section className='flex flex-col pt-8 pl-4'>
+      <h1 className='font-bold pr-4 pt-8 pl-4 text-ayahColor'> ابحث باستخدام </h1>
+      <section className='flex flex-col pt-8 pl-4 text-ayahColor'>
         <div className='flex justify-center gap-5 mt-4 mb-2 pr-4'>
           <button onClick={()=>{handleTypeChanges('surah')}}
            className={`rounded-lg py-2 w-[110px] h-[40px] ${type==='surah'?"bg-primary text-white transition-colors duration-500":""}`}> السورة </button>

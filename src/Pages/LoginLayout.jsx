@@ -1,18 +1,21 @@
 import React from 'react'
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Login({children}) {
+  const navigate = useNavigate();
   return (
     <section className='mainPage pb-10 min-h-screen text-white flex flex-col'>
       <header className='ml-6 lg:ml-14 flex justify-between items-center'>
-        <div className='pr-8'>
+        <div className='sm:pr-6'>
           <Link to='/'>
             <img src="Logo.png" className='w-28 h-28' alt="Logo" />
           </Link>
         </div>
-        <div className='bg-[#CBA947] p-3 rounded-lg'>
+        <div onClick={()=>{navigate(-1)}} className='cursor-pointer bg-[#CBA947] p-3 rounded-lg'>
           <IoIosArrowBack color='black' size={30}/>
         </div>
       </header>

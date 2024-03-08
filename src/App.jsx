@@ -5,18 +5,26 @@ import Home from "./Pages/Home"
 import NotFound from "./Pages/NotFound"
 import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
+import NavBarCtxProvider from "./store/NavBarCtx"
+import Root from "./Pages/Root"
 
 
 function App() {
   return (
-    <AnimatePresence>
-      <Routes>
-        <Route index element={<Home />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/*" element={<NotFound />}/>
-      </Routes>
-    </AnimatePresence>
+    <>
+    <NavBarCtxProvider>
+      <AnimatePresence>
+        <Routes>
+          <Route path="/" element={<Root/>}>
+            <Route index element={<Home />}/>
+            <Route path="login" element={<Login />}/>
+            <Route path="signup" element={<Signup/>}/>
+          </Route>
+          <Route path="/*" element={<NotFound />}/>
+        </Routes>
+      </AnimatePresence>
+    </NavBarCtxProvider>
+    </>
   )
 }
 
