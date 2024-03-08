@@ -9,12 +9,13 @@ export default {
       colors:{
         'primary': '#304E64',
         'secondary': '#F4CE14',
-        'black':'#0E190F',
-        'white':'#F2F2F2',
+        'ayahColor':'black',
+        'quranColor':'white',
         'ayah':'#e4eedc',
       },
       screens:{
         'nav': '920px',
+        'nav2':'330px',
         'mobile': '450px',
         'fold':'300px',
         'fold2':'400px',

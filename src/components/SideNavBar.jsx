@@ -1,16 +1,12 @@
 import { useState, useContext } from "react";
-import { NavLink } from "react-router-dom"
-import { Link } from "react-router-dom"
-import Lites from "./Lites.svg"
+import { NavLink, Link } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi";
-import {NavBarctx} from "../../store/NavBarCtx"
 import { motion, AnimatePresence } from "framer-motion"
-import SideNavBar from "../SideNavBar";
+import {NavBarctx} from "../store/NavBarCtx"
 
-
-export default function TopNavBar() {
+export default function SideNavBar() {
   const {navBar, setNavBar} = useContext(NavBarctx)
-  const {url,setUrl} = useContext(NavBarctx)
+  const {url, setUrl} = useContext(NavBarctx)
 
   const handleMenuClicked = ()=>{
     setNavBar(prev=>!prev)
@@ -21,19 +17,21 @@ export default function TopNavBar() {
     }
   }
   return (
-    <>
-      <section>
-        <img className="brightness-75 select-none pointer-events-none absolute block -left-14 " src={Lites} alt="" />
-      </section>
-      <div className="text-white flex items-center justify-between">
-        <section className="z-10">
-          <Link to="/">
-            <img className="select-none pointer-events-none w-28 h-28 flex-grow sm:mr-6" src="Logo.png" alt="Logo" />
-          </Link>
-        </section>
-        <section className="nav:flex-grow z-20 font-bold">
-          <nav className="hidden nav:block">
-            <ul className="flex gap-x-12 justify-center text">
+    <AnimatePresence>
+      {navBar &&
+
+        <motion.nav
+          initial={{ opacity: 0, x: '-100%' }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: '-100%' }}
+          transition={{ duration: 0.2 }}
+          className="nav:hidden fixed bg-[#1E2820] font-bold text-white p-10 h-screen left-0 top-0 z-[100]  nav2:w-[300px] w-full">
+
+          <div onClick={handleMenuClicked} className="cursor-pointer mb-10">
+            <GiHamburgerMenu size={30} />
+          </div>
+          <nav className="text-center">
+            <ul className="flex flex-col gap-12 justify-center text">
             <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
               <li><Link className={url==='challenge'?'active':null} onClick={handleLink('challenge')} to="/challenge">تحدي رمضان</Link></li>
               <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="#leaderboard">ترتيب المتسابقين</Link></li>
@@ -42,11 +40,9 @@ export default function TopNavBar() {
               <li><Link className={url==='login'?'active':null} onClick={handleLink('login')} to="/login">تسجيل الدخول</Link></li>
             </ul>
           </nav>
-          <nav onClick={handleMenuClicked} className="nav:hidden block pl-6 cursor-pointer">
-            <GiHamburgerMenu size={30}/>
-          </nav>
-        </section>
-      </div>
-    </>
+
+        </motion.nav>
+      }
+    </AnimatePresence>
   )
 }

@@ -136,7 +136,7 @@ function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   if(surahName!==aya?.surah?.name)return null;
   return (
     <>
-      <span key={aya.number} className="hover:bg-ayah ayaText duration-500 ">
+      <span key={aya.number} className="hover:bg-ayah  ayaText duration-500 ">
         {aya.numberInSurah === 1 ?
           <>
             <span>
@@ -223,12 +223,12 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
 
         :
 
-        <div className="flex flex-col justify-center items-center">
-          <div className="w-full text-xl font-semibold flex justify-between flex-wrap px-10">
+        <div className="flex flex-col justify-center items-center text-ayahColor">
+          <div className="w-full text-xl font-semibold flex justify-between flex-wrap px-10 mb-5">
             <div>الجزء {convertToArabicNumbers(JozoaHolder)}</div>
             <div>{surahName}</div>
           </div>
-          <div className='max-w-[600px] h-fit min-h-[700px] surahbg p-10 '>
+          <div className='max-w-[600px] h-fit min-h-[700px] surahbg p-10 text-ayahColor'>
             <>
             {surahsInPage?.map((ele)=>(
               <div key={ele.name} className="pt-10 sm:pt-10 md:pt-0 pb-10" id="quranTextLoop">
