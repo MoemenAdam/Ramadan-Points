@@ -20,6 +20,7 @@ export default {
         'fold':'300px',
         'fold2':'400px',
         'fold3':'600px',
+        'sm':'820px',
       }
     },
   },

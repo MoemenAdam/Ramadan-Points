@@ -3,7 +3,7 @@ import RightNavBar from "./RightNavBar"
 
 export default function WelcomeSection() {
   return (
-    <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col">
+    <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col pb-10">
       <TopNavBar/>
       <section className="mainMargin2 flex-grow flex items-center">
         <div className="flex flex-col mobile:w-[400px] w-[350px] ">

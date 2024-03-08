@@ -36,6 +36,36 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+.duasTop{
+  background-image: url('assets/duas1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* width: 100%;
+  height: 300px; */
+}
+.duasLeft{
+  background-image: url('assets/duas2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* height: 100%;
+  width: 300px; */
+}
+.duasActive{
+  position: relative;
+  @apply loginColor;
+}
+.duasActive::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top:-10px;
+  width: 2px;
+  height: 200%;
+  background-image: radial-gradient(301.88% 50% at 100% 50%, #F0E600 0%, rgba(57, 91, 100, 0) 100%);
+}
 .loginColor{
   background: linear-gradient(90.16deg, #9B7D24 50%, #D7B550 100%);
   font-weight: bold;

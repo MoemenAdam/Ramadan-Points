@@ -9,8 +9,8 @@ export default function QuranSection() {
   const [surahClicked, setSurahClicked] = useState(1)
   const [type , setType] = useState('surah')
   return (
-    <main className="mainPage min-h-screen relative flex flex-col">
-      <main className="mainMargin2 flex-grow flex flex-wrap items-start justify-center gap-20 pt-10">
+    <main className="mainPage min-h-screen relative flex flex-col py-10">
+      <main className="mainMargin2 flex-grow flex flex-wrap items-start justify-center gap-20">
         <section className="flex-grow-[1] overflow-hidden bg-quranColor rounded-[32px]">
           <QuranSearch type={type} setType={setType} setJozoaClicked={setJozoaClicked} surahNumber={surahNumber} setSurahNumber={setSurahNumber} setSurahClicked={setSurahClicked} Jozoa={Jozoa} setJozoa={setJozoa}/>
         </section>
