@@ -5,11 +5,13 @@ import { NavBarctx } from "../store/NavBarCtx";
 import WelcomeSection from "../components/HomeComponents/WelcomeSection"
 import QuranSection from "../components/HomeComponents/QuranSection"
 import Duas from "../components/HomeComponents/Duas";
+import About from '../components/HomeComponents/About';
 export default function Home() {
   const {url} = useContext(NavBarctx)
   const Home = useRef(null);
   const quran = useRef(null);
   const duas = useRef(null);
+  const about = useRef(null);
   useEffect(()=>{
     const url = window.location.hash.substring(1);
     if(url===''){
@@ -45,6 +47,9 @@ export default function Home() {
       </div>
       <div ref={duas}>
         <Duas />
+      </div>
+      <div ref={about}>
+        <About />
       </div>
     </HelmetProvider>
   )

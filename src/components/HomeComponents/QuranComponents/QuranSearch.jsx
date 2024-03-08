@@ -134,15 +134,9 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
                 {readersLoading && <SurahLoader />}
                 {!readersLoading && 
                   <>
-                    {autoPlay && <audio onVolumeChange={handleVolumeChange} className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls>
-                          <source src={surahUrl} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                      </audio>}
+                    {autoPlay && <audio src={surahUrl}  className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls></audio>}
 
-                    {!autoPlay && <audio className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls>
-                          <source src={surahUrl} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                      </audio>}
+                    {!autoPlay && <audio src={surahUrl}  className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls></audio>}
                   </>
                 }
             </div>
