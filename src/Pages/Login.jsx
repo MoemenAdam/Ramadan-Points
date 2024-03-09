@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {useState} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -10,7 +10,10 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [save, setSave] = useState(false);
+  const [btn, setBtn] = useState('تسجيل الدخول');
+  const [statusBtn, setStatusBtn] = useState(' ');
 
+  // const 
   const handleEmail = (e) => {
     setEmail(e.target.value);
   }
@@ -19,12 +22,18 @@ export default function Login() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setBtn('جاري التحميل...');
+    setStatusBtn('pointer-events-none');
+
     if (email === '' || password === '') {
       alert('Please fill all the fields');
+      setBtn('تسجيل الدخول');
+      setStatusBtn(' ');
       return;
     } 
 
-    fetch('http://localhost:5000/login', {
+    fetch(`https://ramadan-points.onrender.com/api/v1/users/login?save=${save}`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json'
@@ -36,15 +45,20 @@ export default function Login() {
     }).then(response => response.json()).then(data => {
       if (data.status === 'success') {
         alert('Logged in successfully');
-        return;
+        console.log({data});
       } else {
         alert(data.message);
-        return;
       }
+      setBtn('تسجيل الدخول');
+      setStatusBtn(' ');
+      return;
     }).catch(err => {
+      setBtn('تسجيل الدخول');
+      setStatusBtn(' ');
       alert(err.message);
       return;
     });
+
 
 
 
@@ -85,8 +99,8 @@ export default function Login() {
             </div>
             <Link to='#forgotpass' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
-          <div onClick={handleSubmit} className='text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px]'>
-            <button>تسجيل الدخول</button>
+          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
+            <button> {btn} </button>
           </div>
           <div className='flex justify-center items-center mt-5'>
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
