@@ -24,7 +24,7 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
   }
   function handleJozaaChoose(number){
     setJozoa(number);
-    localStorage.setItem('Jozoa',Jozoa);
+    // localStorage.setItem('Jozoa',Jozoa);
     setJozoaClicked(prev=>prev+1)
   }
   function handleReaderChoose(e){

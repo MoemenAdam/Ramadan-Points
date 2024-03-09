@@ -12,7 +12,7 @@ export default function Login({children}) {
       <header className='ml-6 lg:ml-14 flex justify-between items-center'>
         <div className='sm:pr-6'>
           <Link to='/'>
-            <img src="Logo.png" className='w-28 h-28' alt="Logo" />
+            <img src="Logo.png" className='w-28 h-28 pointer-events-none' alt="Logo" />
           </Link>
         </div>
         <div onClick={()=>{navigate(-1)}} className='cursor-pointer bg-[#CBA947] p-3 rounded-lg'>

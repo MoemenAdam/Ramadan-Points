@@ -32,6 +32,12 @@ export default function Home() {
         behavior:'smooth'
       })
     }
+    if(url==='challenge'){
+      window.scrollTo({
+        top:about?.current?.offsetTop,
+        behavior:'smooth'
+      })
+    }
   },[url])
   return (
     <HelmetProvider>
@@ -42,14 +48,14 @@ export default function Home() {
       <div ref={Home}>
         <WelcomeSection />
       </div>
+      <div ref={about}>
+        <About />
+      </div>
       <div ref={quran}>
         <QuranSection />
       </div>
       <div ref={duas}>
         <Duas />
-      </div>
-      <div ref={about}>
-        <About />
       </div>
     </HelmetProvider>
   )

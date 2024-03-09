@@ -35,11 +35,11 @@ export default function TopNavBar() {
           <nav className="hidden nav:block big:ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url==='challenge'?'active':null} onClick={handleLink('challenge')} to="/challenge">تحدي رمضان</Link></li>
-              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="#leaderboard">ترتيب المتسابقين</Link></li>
-              <li><Link className={url==='duas'?'active':null} onClick={handleLink('duas')} to="#duas">أدعية</Link></li>
-              <li><Link className={url==='quran'?'active':null} onClick={handleLink('quran')} to="#quran">قرآن</Link></li>
-              <li><Link className={url==='login'?'active':null} onClick={handleLink('login')} to="/login">تسجيل الدخول</Link></li>
+              <li><Link className={url==='challenge'?'active':null} onClick={handleLink('challenge')} to="/#challenge">تحدي رمضان</Link></li>
+              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>
+              <li><Link className={url==='quran'?'active':null} onClick={handleLink('quran')} to="/#quran">قرآن</Link></li>
+              <li><Link className={url==='duas'?'active':null} onClick={handleLink('duas')} to="/#duas">أدعية</Link></li>
+              <li><Link to="/login">تسجيل الدخول</Link></li>
             </ul>
           </nav>
           <nav onClick={handleMenuClicked} className="nav:hidden block pl-6 cursor-pointer">
