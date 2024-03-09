@@ -1,10 +1,60 @@
-import React from 'react'
+import {React, useState} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
+
 export default function Login() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [save, setSave] = useState(false);
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email === '' || password === '') {
+      alert('Please fill all the fields');
+      return;
+    } 
+
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }).then(response => response.json()).then(data => {
+      if (data.status === 'success') {
+        alert('Logged in successfully');
+        return;
+      } else {
+        alert(data.message);
+        return;
+      }
+    }).catch(err => {
+      alert(err.message);
+      return;
+    });
+
+
+
+
+  }
+
+  const handleCheckBox = () => {
+    setSave(!save);
+  }
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -16,20 +66,26 @@ export default function Login() {
           <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>البريد الإلكتروني</label>
-            <input className='loginInput' type="text" />
+            <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
           </div>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>كلمة المرور</label>
-            <input className='loginInput' type="password" />
+            <input onChange={handlePassword} className='loginInput' type="password" value={password} placeholder='ادخل كلمه المرور' />
           </div>
           <div className='flex justify-between gap-20 mb-5'>
             <div className='flex justify-center items-center gap-3'>
-              <input className='w-4 h-4' type="checkbox" />
+              { 
+                  save
+                ? 
+                  <input onClick={handleCheckBox} checked className='w-4 h-4' type="checkbox" /> 
+                :
+                  <input onClick={handleCheckBox} className='w-4 h-4' type="checkbox" />
+              } 
               <label className='text-[#bababa]'>احفظ بياناتي</label>
             </div>
             <Link to='#forgotpass' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
-          <div className='text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px]'>
+          <div onClick={handleSubmit} className='text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px]'>
             <button>تسجيل الدخول</button>
           </div>
           <div className='flex justify-center items-center mt-5'>
