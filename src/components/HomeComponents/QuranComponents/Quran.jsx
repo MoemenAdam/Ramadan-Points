@@ -136,7 +136,7 @@ function QuranText({ ele,aya,surahNumber,surah,surahName }) {
   if(surahName!==aya?.surah?.name)return null;
   return (
     <>
-      <span key={aya.number} className="hover:bg-ayah  ayaText duration-500 ">
+      <span key={aya.number} className="hover:bg-ayah ayaText duration-500 ">
         {aya.numberInSurah === 1 ?
           <>
             <span>

@@ -46,9 +46,12 @@ const DuasPrint = ({arr,Turn,direction})=>{
 
               className='text-center flex flex-col justify-center items-center text-white w-[250px] h-[250px]  relative top-[370px] font-bold leading-8' key={e.id}
             >
+              {e.times && <p className='text-green-700 text-xl absolute -top-16'>
+              {e.times}
+              {e.times===1 ? ' مرة' : ' مرات'}  
+              </p>}
               {e.content}
             
-              {e.times && <p className='text-green-700 text-xl absolute -bottom-10'>{e.times}</p>}
             </motion.div>
           )
         })
@@ -121,7 +124,7 @@ export default function Duas() {
       </section>
       <div className='z-[300] duasLeft hidden nav:block h-[calc(100%-40px)] absolute left-0 top-10 w-[400px]'>
         <nav className='mt-[400px] flex justify-end ml-20 text-[#FFFFFF]'>
-          <ul className='flex flex-col gap-14'>
+          <ul className='w-[155px] flex flex-col gap-14'>
             <li onClick={() => { handleActiveChange(1) }} className={`cursor-pointer ${active === 1 ? 'duasActive' : ''}`}>أدعية عشوائية</li>
             <li onClick={() => { handleActiveChange(2) }} className={`cursor-pointer ${active === 2 ? 'duasActive' : ''}`}>اذكار الصباح</li>
             <li onClick={() => { handleActiveChange(3) }} className={`cursor-pointer ${active === 3 ? 'duasActive' : ''}`}>اذكار المساء</li>

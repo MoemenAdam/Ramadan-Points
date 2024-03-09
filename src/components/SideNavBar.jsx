@@ -32,9 +32,6 @@ export default function SideNavBar() {
           <nav className="text-center">
             <ul className="flex flex-col gap-12 justify-center text">
               <li><Link className={url === '' ? 'active' : null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url === 'duas' ? 'active' : null} onClick={handleLink('duas')} to="/#duas">أدعية</Link></li>
-              <li><Link className={url === 'quran' ? 'active' : null} onClick={handleLink('quran')} to="/#quran">قرآن</Link></li>
-              <li><Link className={url === 'challenge' ? 'active' : null} onClick={handleLink('challenge')} to="/#challenge">تحدي رمضان</Link></li>
               <li><Link className={url === 'leaderboard' ? 'active' : null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>
               <li><Link to="/login" onClick={handleLink('login')}>تسجيل الدخول</Link></li>
             </ul>
