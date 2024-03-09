@@ -9,6 +9,8 @@ import NavBarCtxProvider from "./store/NavBarCtx"
 import Root from "./Pages/Root"
 import ForgotPassword from "./Pages/ForgotPassword"
 import ResetPassword from "./Pages/ResetPassword"
+import ResetToken from "./Pages/ResetToken"
+
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
             <Route path="login" element={<Login />}/>
             <Route path="signup" element={<Signup/>}/>
             <Route path="forgot-password" element={<ForgotPassword />}/>
-            <Route path="reset-password/:token" element={<ResetPassword />}/>
+            <Route path="reset-token" element={<ResetToken />}/>
+            <Route path="reset-password" element={<ResetPassword />}/>
           </Route>
           <Route path="/*" element={<NotFound />}/>
         </Routes>

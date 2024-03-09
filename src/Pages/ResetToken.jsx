@@ -8,9 +8,9 @@ const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
-export default function ForgotPassword() {
+export default function ResetToken() {
 
-  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
   const [btn, setBtn] = useState(false);
   const [statusBtn, setStatusBtn] = useState(' ');
   const [Err, setErr] = useState('');
@@ -19,8 +19,8 @@ export default function ForgotPassword() {
 
 
   // const 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
+  const handleToken = (e) => {
+    setToken(e.target.value);
   }
 
   const handleSubmit = async (e) => {
@@ -30,27 +30,27 @@ export default function ForgotPassword() {
     setBtn(true);
     setStatusBtn('pointer-events-none select-none ');
 
-    if (email === '') {
+    if (token === '') {
       setErr('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
       setStatusBtn(' ');
       return;
     } 
 
-    fetch(`${url}v1/users/forgotPassword`, {
+    fetch(`${url}v1/users/resetToken`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: email,
+        token,
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setAccept('تم ارسال رابط استعادة كلمة المرور الى بريدك الالكتروني, الرجاء التحقق من بريدك الالكتروني')
+        setAccept('برجاء الانتظار')
         setTimeout(() => {
-            navigate('/reset-token');
-        }, 5000);
+            navigate('/reset-password');
+        }, 500);
       } else {
         setErr(res.message);
         setBtn(false);
@@ -75,13 +75,13 @@ export default function ForgotPassword() {
         <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
           <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
           <div className='flex flex-col'>
-            <label className='loginColor w-fit'>البريد الإلكتروني</label>
-            <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
+            <label className='loginColor w-fit'>رمز التحقق</label>
+            <input onChange={handleToken} className='loginInput' type="text" value={token} placeholder='ادخل الرمز المرسل في بريدك الالكتروني' />
           </div>
           <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
             <button> 
             {btn && <SurahLoader/>}
-            {!btn && 'ارسال رساله بريد'}  
+            {!btn && 'تحقق'}  
             </button>
           </div>
           <div className='text-green-600 text-center'>
