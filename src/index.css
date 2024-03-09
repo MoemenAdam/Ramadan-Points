@@ -2,14 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
   font-family: hafs;
   src: url('assets/HAFS.otf') format('opentype');
 }
 
 *{
+  font-family: 'Tajawal', sans-serif;
   direction: rtl;
 }
+
 .welcomePage{
   background-image: url('assets/background.jpg');
   background-position: center;
@@ -121,6 +124,19 @@
   height: 8px;
   margin: 10px 0;
   background: radial-gradient(50% 50% at 50% 50%, #343020 0%, rgba(234, 234, 234, 0) 100%);
+}
+
+.ChallengeBTN{
+  border-image-source: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
+  border-image-slice: 1;
+  border-top: 4px solid;
+  border-right: 4px solid;
+  background-color: rgba(16,16,16,0.5);
+  @apply font-bold text-white py-5 px-12;
+}
+.ChallengeBTN:hover{
+  background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
+  @apply text-black;
 }
 
 .mainMargin{

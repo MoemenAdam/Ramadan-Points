@@ -14,10 +14,9 @@ export default function WelcomeSection() {
             اغتنم شهر رمضان الكريم في العبادة والتقرب إلى الله وقراءة القرآن الكريم, احرص على صلاتك وختم القرآن خلال الشهر الكريم وتابع تقدمك واربح الجوائز!
             </p>
           </div>
-          <button className="Mainbtn px-14 py-2 mt-10"> إبدأ التحدي </button>
+          <button className="Mainbtn px-12 py-3 mt-10"> إبدأ التحدي </button>
         </div>
       </section>
-      <RightNavBar/>
     </main>
   )
 }

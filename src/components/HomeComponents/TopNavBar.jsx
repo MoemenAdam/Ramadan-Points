@@ -45,7 +45,7 @@ export default function TopNavBar() {
           </Link>
         </section>
         <section className="nav:flex-grow z-20 font-bold">
-          <nav className="hidden nav:block big:ml-[136px]">
+          <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
               <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>

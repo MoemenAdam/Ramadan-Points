@@ -6,6 +6,8 @@ import WelcomeSection from "../components/HomeComponents/WelcomeSection"
 import QuranSection from "../components/HomeComponents/QuranSection"
 import Duas from "../components/HomeComponents/Duas";
 import About from '../components/HomeComponents/About';
+import Challenges from '../components/ChallengesComponents/Challenges';
+import RightNavBar from '../components/HomeComponents/RightNavBar';
 export default function Home() {
   const {url} = useContext(NavBarctx)
   const Home = useRef(null);
@@ -41,6 +43,10 @@ export default function Home() {
   },[url])
   return (
     <HelmetProvider>
+      <RightNavBar Home={Home.current?.offsetTop} 
+        quran={quran.current?.offsetTop}
+        duas={duas.current?.offsetTop}
+        about={about.current?.offsetTop}/>
       <Helmet>
         <meta charSet="utf-8" />
         <title>Ramadan Points - Read Quran, Pray on Time, Earn Rewards</title>
@@ -57,6 +63,7 @@ export default function Home() {
       <div ref={about}>
         <About />
       </div>
+      <Challenges />
     </HelmetProvider>
   )
 }

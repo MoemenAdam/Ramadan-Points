@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { NavBarctx } from "../../store/NavBarCtx"
 const Home = ()=>{
   return(
     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,8 +70,10 @@ const Hand = ()=>{
   )
   
 }
+
 export default function RightNavBar() {
   const [Turn,setTurn] = useState(1)
+  const {url} = useContext(NavBarctx)
 
   const handleTurnChange =  (num) => {
     setTurn(num)
@@ -82,10 +85,10 @@ export default function RightNavBar() {
       gap-12 px-5 py-10
      bg-[#858975] z-50 rounded-full ">
       <div onClick={()=>{handleTurnChange(1)}} className="cursor-pointer flex flex-col items-center"> <Home /> <div className="h-0 w-12 text-center">{Turn===1 && 'الرئيسية'}</div> </div>
-      <div onClick={()=>{handleTurnChange(2)}} className="cursor-pointer flex flex-col items-center"> <Verifi /> <div className="h-0 w-12 text-center">{Turn===2 && 'التحدي'}</div></div>
-      <div onClick={()=>{handleTurnChange(3)}} className="cursor-pointer flex flex-col items-center"> <Book /> <div className="h-0 w-12 text-center">{Turn===3 && 'القرآن'}</div></div>
-      <div onClick={()=>{handleTurnChange(4)}} className="cursor-pointer flex flex-col items-center"> <Star /> <div className="h-0 w-12 text-center">{Turn===4 && 'الترتيب'}</div></div>
       <div onClick={()=>{handleTurnChange(7)}} className="cursor-pointer flex flex-col items-center"> <Hand /> <div className="h-0 w-12 text-center">{Turn===7 && 'أدعية'}</div></div>
+      <div onClick={()=>{handleTurnChange(3)}} className="cursor-pointer flex flex-col items-center"> <Book /> <div className="h-0 w-12 text-center">{Turn===3 && 'القرآن'}</div></div>
+      <div onClick={()=>{handleTurnChange(2)}} className="cursor-pointer flex flex-col items-center"> <Verifi /> <div className="h-0 w-12 text-center">{Turn===2 && 'التحدي'}</div></div>
+      <div onClick={()=>{handleTurnChange(4)}} className="cursor-pointer flex flex-col items-center"> <Star /> <div className="h-0 w-12 text-center">{Turn===4 && 'الترتيب'}</div></div>
     </aside>
   )
 }
