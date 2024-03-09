@@ -1,6 +1,5 @@
 import {useState} from 'react'
 import LoginLayout from './LoginLayout';
-import { useParams } from 'react-router';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
@@ -10,13 +9,13 @@ const url = 'https://ramadan-points.onrender.com/api/';
 
 export default function ResetPassword() {
 
+    const token = '';
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [btn, setBtn] = useState(false);
     const [statusBtn, setStatusBtn] = useState(' ');
     const [Err, setErr] = useState('');
     const [Accept, setAccept] = useState('');
-    const token = useParams().token;
     const navigate = useNavigate();
 
   const handlePassword = (e) => {
@@ -40,12 +39,13 @@ export default function ResetPassword() {
       return;
     } 
 
-    fetch(`${url}v1/users/resetPassword/${token}`, {
+    fetch(`${url}v1/users/resetPassword`, {
       method: 'PATCH',
       headers: { 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        token,
         password,
         passwordConfirm
       })
@@ -76,29 +76,36 @@ export default function ResetPassword() {
         <title>Ramadan Points - Reset Password</title>
       </Helmet>
       <LoginLayout>
-        <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
-          <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
-          <div className='flex flex-col'>
-            <label className='loginColor w-fit'>كلمه المرور الجديده</label>
-            <input onChange={handlePassword} className='loginInput' type="password" value={password} placeholder='ادخل كلمه مرورك الجديده' />
+        {
+          token ?
+          <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
+            <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
+            <div className='flex flex-col'>
+              <label className='loginColor w-fit'>كلمه المرور الجديده</label>
+              <input onChange={handlePassword} className='loginInput' type="password" value={password} placeholder='ادخل كلمه مرورك الجديده' />
+            </div>
+            <div className='flex flex-col'>
+              <label className='loginColor w-fit'>تأكيد كلمه المرور الجديده</label>
+              <input onChange={handlePasswordConfirm} className='loginInput' type="password" value={passwordConfirm} placeholder='اعد تأكيد كلمه مرورك الجديده' />
+            </div>
+            <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
+              <button> 
+              {btn && <SurahLoader/>} 
+              {!btn && 'تغيير كلمه المرور'}  
+              </button>
+            </div>
+            <div className='text-green-600 text-center'>
+              {Accept}
+            </div>
+            <div className='text-red-600 text-center'>
+              {Err}
+            </div>
+          </form>
+          :
+          <div className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
+            <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> لا يوجد رمز تحقق </h1>
           </div>
-          <div className='flex flex-col'>
-            <label className='loginColor w-fit'>تأكيد كلمه المرور الجديده</label>
-            <input onChange={handlePasswordConfirm} className='loginInput' type="password" value={passwordConfirm} placeholder='اعد تأكيد كلمه مرورك الجديده' />
-          </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-            <button> 
-            {btn && <SurahLoader/>} 
-            {!btn && 'تغيير كلمه المرور'}  
-            </button>
-          </div>
-          <div className='text-green-600 text-center'>
-            {Accept}
-          </div>
-          <div className='text-red-600 text-center'>
-            {Err}
-          </div>
-        </form>
+        }
       </LoginLayout>
     </HelmetProvider>
   )
