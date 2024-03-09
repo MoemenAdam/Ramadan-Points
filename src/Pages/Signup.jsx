@@ -2,6 +2,8 @@ import {useState} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
@@ -10,8 +12,11 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [btn, setBtn] = useState('إنشاء حساب');
+  const [btn, setBtn] = useState(false);
+  const [Err, setErr] = useState('');
+  const [Accpet, setAccpet] = useState('');
   const [statusBtn, setStatusBtn] = useState(' ');
+  const navigate = useNavigate();
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -28,12 +33,12 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setBtn('جاري التحميل...');
-    setStatusBtn('pointer-events-none');
+    setBtn(true);
+    setStatusBtn('pointer-events-none select-none ');
 
     if (name === '' || email === '' || password === '' || passwordConfirm === '') {
-      alert('Please fill all the fields');
-      setBtn('إنشاء حساب');
+      setErr('الرجاء ملء جميع الحقول');
+      setBtn(false);
       setStatusBtn(' ');
       return;
     } 
@@ -51,18 +56,21 @@ export default function Login() {
       })
     }).then(response => response.json()).then(data => {
       if (data.status === 'success') {
-        alert('Signed up successfully, a verification email has been sent to your email address. Please verify your email to login.');
-        console.log({data});
+        setAccpet('تم إنشاء الحساب بنجاح , تفقد بريدك الإلكتروني لتأكيد الحساب');
+        setTimeout(()=>{
+          navigate('/login');
+        },5000)
+
       } else {
-        alert(data.message);
+        setErr(data.message);
+        setBtn(false);
+        setStatusBtn(' ');
       }
-      setBtn('إنشاء حساب');
-      setStatusBtn(' ');
       return;
     }).catch(err => {
-      setBtn('إنشاء حساب');
+      setBtn(false);
       setStatusBtn(' ');
-      alert(err.message);
+      setErr(err.message);
       return;
     });
   }
@@ -93,7 +101,17 @@ export default function Login() {
             <input onChange={handlePasswordConfirm} value={passwordConfirm} className='loginInput' type="password" />
           </div>
           <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px]' + statusBtn}>
-            <button> {btn} </button>
+            <button> 
+            {btn && <SurahLoader/>}
+            {!btn && 'انشاء حساب'}  
+            </button>
+            
+          </div>
+          <div className='text-red-600 text-center'>
+            {Err}
+          </div>
+          <div className='text-green-600 text-center'>
+            {Accpet}
           </div>
           <div className='flex justify-center gap-5 items-center mt-5'>
             <p>لديك حساب؟<Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>

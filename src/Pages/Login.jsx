@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
@@ -13,8 +14,9 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [save, setSave] = useState(false);
-  const [btn, setBtn] = useState('تسجيل الدخول');
+  const [btn, setBtn] = useState(false);
   const [statusBtn, setStatusBtn] = useState(' ');
+  const [Err, setErr] = useState('');
   const navigate = useNavigate();
 
 
@@ -28,12 +30,13 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setBtn('جاري التحميل...');
-    setStatusBtn('pointer-events-none');
+
+    setBtn(true);
+    setStatusBtn('pointer-events-none select-none ');
 
     if (email === '' || password === '') {
-      alert('Please fill all the fields');
-      setBtn('تسجيل الدخول');
+      setErr('الرجاء ملء جميع الحقول');
+      setBtn(false);
       setStatusBtn(' ');
       return;
     } 
@@ -49,27 +52,20 @@ export default function Login() {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        alert('Logged in successfully');
-        console.log({res});
         Cookies.set('token', res.data.token);
         navigate('/');
       } else {
-        alert(res.message);
+        setErr(res.message);
       }
-      setBtn('تسجيل الدخول');
+      setBtn(false);
       setStatusBtn(' ');
       return;
     }).catch(err => {
-      setBtn('تسجيل الدخول');
+      setBtn(false);
       setStatusBtn(' ');
-      alert(err.message);
+      setErr(err.message);
       return;
     });
-
-
-
-
-
   }
 
   const handleCheckBox = () => {
@@ -101,7 +97,13 @@ export default function Login() {
             <Link to='#forgotpass' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
           <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-            <button> {btn} </button>
+            <button> 
+            {btn && <SurahLoader/>}
+            {!btn && 'تسجيل دخول'}  
+            </button>
+          </div>
+          <div className='text-red-600 text-center'>
+            {Err}
           </div>
           <div className='flex justify-center items-center mt-5'>
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
