@@ -79,7 +79,7 @@ export default function RightNavBar() {
     <aside className="
       hidden sm:flex flex-col items-center 
       fixed w-fit top-1/2 -translate-y-[40%] lg:right-[2.5rem] right-[2rem]
-      gap-10 px-5 py-10
+      gap-12 px-5 py-10
      bg-[#858975] z-50 rounded-full ">
       <div onClick={()=>{handleTurnChange(1)}} className="cursor-pointer flex flex-col items-center"> <Home /> <div className="h-0 text-center">{Turn===1 && 'الرئيسية'}</div> </div>
       <div onClick={()=>{handleTurnChange(2)}} className="cursor-pointer flex flex-col items-center"> <Verifi /> <div className="h-0 text-center">{Turn===2 && 'الرئيسية'}</div></div>
