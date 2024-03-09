@@ -7,7 +7,8 @@ import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
 import NavBarCtxProvider from "./store/NavBarCtx"
 import Root from "./Pages/Root"
-
+import ForgotPassword from "./Pages/ForgotPassword"
+import ResetPassword from "./Pages/ResetPassword"
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route index element={<Home />}/>
             <Route path="login" element={<Login />}/>
             <Route path="signup" element={<Signup/>}/>
+            <Route path="forgot-password" element={<ForgotPassword />}/>
+            <Route path="reset-password/:token" element={<ResetPassword />}/>
           </Route>
           <Route path="/*" element={<NotFound />}/>
         </Routes>
