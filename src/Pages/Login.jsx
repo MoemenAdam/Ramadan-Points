@@ -94,7 +94,7 @@ export default function Login() {
               <input onChange={handleCheckBox} checked={save} className='w-4 h-4' type="checkbox" /> 
               <label className='text-[#bababa]'>احفظ بياناتي</label>
             </div>
-            <Link to='#forgotpass' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
+            <Link to='/forgot-password' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
           <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
             <button> 
