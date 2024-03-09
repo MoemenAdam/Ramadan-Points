@@ -225,7 +225,7 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
       {(surahsPerPageLoading || JozoaLoading) ?
       <>
       
-      <div className='w-[600px] min-h-[1200px] surahbg flex justify-center items-center text-ayahColor'>
+      <div className='w-[600px] min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
         <SurahLoader />
         </div>
       </>
