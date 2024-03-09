@@ -169,7 +169,7 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
   const [surahName, setSurahName] = useState(PagePerSurah[surahNumber-1]?.name || localStorage.getItem('SurahName') || 'سُورَةُ ٱلْفَاتِحَةِ');
   localStorage.setItem('PageNumber', pageNumber);
   localStorage.setItem('SurahName', surahName);
-  localStorage.setItem('Jozoa',Jozoa);
+  // localStorage.setItem('Jozoa',Jozoa);
   
   useEffect(() => {
     setSurah(surahsPerPage?.data?.ayahs || surah);
@@ -187,12 +187,16 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
   useEffect(()=>{
     const holder = Object.values(surahsPerPage?.data?.surahs||[]);
     if(holder.length===0)return;
+    console.log(holder[0]);
+    setSurahName( holder[1]?holder[1].name:holder[0].name );
+    // console.log({test,holder});
+
     setJozoaHolder(surahsPerPage?.data?.ayahs[0]?.juz);
-    if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){
-      localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0]?.number);
-      setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ))
-    }
-  },[pageNumber,surahsPerPage])
+    // if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){
+    //   localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0]?.number);
+    //   setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ))
+    // }
+  },[pageNumber,surahsPerPage,surahsPerPageLoading])
   useEffect(()=>{
     if(type!=='jozoa')return;
     setPageNumber(JozoaData?.data?.ayahs[0]?.page || pageNumber);
@@ -218,8 +222,13 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
   }
   return (
     <>
-      {(surahsPerPageLoading) ?
+      {(surahsPerPageLoading || JozoaLoading) ?
+      <>
+      
+      <div className='w-[600px] min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
         <SurahLoader />
+        </div>
+      </>
 
         :
 

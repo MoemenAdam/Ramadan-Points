@@ -5,6 +5,7 @@ export const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     try{
+      setLoading(true);
       const fetchData = async (url) => {
         const response = await fetch(url);
         const data = await response.json();

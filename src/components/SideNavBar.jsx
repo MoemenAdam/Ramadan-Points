@@ -2,24 +2,23 @@ import { useState, useContext } from "react";
 import { NavLink, Link } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion"
-import {NavBarctx} from "../store/NavBarCtx"
+import { NavBarctx } from "../store/NavBarCtx"
 
 export default function SideNavBar() {
-  const {navBar, setNavBar} = useContext(NavBarctx)
-  const {url, setUrl} = useContext(NavBarctx)
+  const { navBar, setNavBar } = useContext(NavBarctx)
+  const { url, setUrl } = useContext(NavBarctx)
 
-  const handleMenuClicked = ()=>{
-    setNavBar(prev=>!prev)
+  const handleMenuClicked = () => {
+    setNavBar(prev => !prev)
   }
-  const handleLink = (url)=>{
-    return ()=>{
+  const handleLink = (url) => {
+    return () => {
       setUrl(url)
     }
   }
   return (
     <AnimatePresence>
-      {navBar &&
-
+      {(navBar && url !== 'login') &&
         <motion.nav
           initial={{ opacity: 0, x: '-100%' }}
           animate={{ opacity: 1, x: 0 }}
@@ -32,12 +31,12 @@ export default function SideNavBar() {
           </div>
           <nav className="text-center">
             <ul className="flex flex-col gap-12 justify-center text">
-            <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url==='challenge'?'active':null} onClick={handleLink('challenge')} to="/challenge">تحدي رمضان</Link></li>
-              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="#leaderboard">ترتيب المتسابقين</Link></li>
-              <li><Link className={url==='duas'?'active':null} onClick={handleLink('duas')} to="#duas">أدعية</Link></li>
-              <li><Link className={url==='quran'?'active':null} onClick={handleLink('quran')} to="#quran">قرآن</Link></li>
-              <li><Link className={url==='login'?'active':null} onClick={handleLink('login')} to="/login">تسجيل الدخول</Link></li>
+              <li><Link className={url === '' ? 'active' : null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
+              <li><Link className={url === 'duas' ? 'active' : null} onClick={handleLink('duas')} to="/#duas">أدعية</Link></li>
+              <li><Link className={url === 'quran' ? 'active' : null} onClick={handleLink('quran')} to="/#quran">قرآن</Link></li>
+              <li><Link className={url === 'challenge' ? 'active' : null} onClick={handleLink('challenge')} to="/#challenge">تحدي رمضان</Link></li>
+              <li><Link className={url === 'leaderboard' ? 'active' : null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>
+              <li><Link to="/login" onClick={handleLink('login')}>تسجيل الدخول</Link></li>
             </ul>
           </nav>
 

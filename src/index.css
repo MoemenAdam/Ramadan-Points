@@ -36,6 +36,53 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+.duasTop{
+  background-image: url('assets/duas1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.duasLeft{
+  background-image: url('assets/duas2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.Fanoos{
+  background-image: url('assets/Lantern.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Aboutbg{
+  position: relative;
+}
+.Aboutbg::after{
+  content: '';
+  position: absolute;
+  background: linear-gradient(90.16deg, #9B7D24 50%, #D7B550 100%);
+  width: 100%;
+  height: 100%;
+  scale: 1.2;
+  top: 0;
+  left: 0;
+}
+.duasActive{
+  position: relative;
+  @apply loginColor;
+}
+.duasActive::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top:-10px;
+  width: 2px;
+  height: 200%;
+  background-image: radial-gradient(301.88% 50% at 100% 50%, #F0E600 0%, rgba(57, 91, 100, 0) 100%);
+}
+
 .loginColor{
   background: linear-gradient(90.16deg, #9B7D24 50%, #D7B550 100%);
   font-weight: bold;
@@ -85,7 +132,7 @@
 }
 
 .Mainbtn{
-  @apply px-14 py-2 w-fit text-center rounded-lg bg-secondary ;
+  @apply w-fit text-center loginColor2 text-black rounded-lg;
 }
 
 .qFrameTop {

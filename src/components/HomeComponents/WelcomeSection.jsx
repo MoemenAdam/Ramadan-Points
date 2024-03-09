@@ -3,7 +3,7 @@ import RightNavBar from "./RightNavBar"
 
 export default function WelcomeSection() {
   return (
-    <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col">
+    <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col pb-10">
       <TopNavBar/>
       <section className="mainMargin2 flex-grow flex items-center">
         <div className="flex flex-col mobile:w-[400px] w-[350px] ">
@@ -14,7 +14,7 @@ export default function WelcomeSection() {
             اغتنم شهر رمضان الكريم في العبادة والتقرب إلى الله وقراءة القرآن الكريم, احرص على صلاتك وختم القرآن خلال الشهر الكريم وتابع تقدمك واربح الجوائز!
             </p>
           </div>
-          <button className="Mainbtn mt-10"> إبدأ التحدي </button>
+          <button className="Mainbtn px-14 py-2 mt-10"> إبدأ التحدي </button>
         </div>
       </section>
       <RightNavBar/>

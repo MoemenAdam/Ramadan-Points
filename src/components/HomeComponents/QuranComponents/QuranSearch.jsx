@@ -11,10 +11,8 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
   const [autoPlay, setAutoPlay] = useState(false);
   const {data: surahsData, loading: surahsLoading} = useFetch('https://api.alquran.cloud/v1/surah')
   const {data: readers, loading: readersLoading} = useFetch('https://mp3quran.net/api/v3/reciters')
-  
-  
   const urlHolder = readers.reciters?.filter(e=>e.name===ReaderName)[0]?.moshaf?.filter(e=>e.name==='حفص عن عاصم - مرتل')[0]?.server
-  let surahUrl= `${urlHolder}${String(surahNumber).padStart(3, '0')}.mp3`;
+  let surahUrl = `${urlHolder}${String(surahNumber).padStart(3, '0')}.mp3`;
 
   function handleTypeChanges(type){
     setType(type)
@@ -26,7 +24,7 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
   }
   function handleJozaaChoose(number){
     setJozoa(number);
-    localStorage.setItem('Jozoa',Jozoa);
+    // localStorage.setItem('Jozoa',Jozoa);
     setJozoaClicked(prev=>prev+1)
   }
   function handleReaderChoose(e){
@@ -136,9 +134,9 @@ export default function QuranSearch({type , setType,surahNumber, setSurahNumber,
                 {readersLoading && <SurahLoader />}
                 {!readersLoading && 
                   <>
-                    {autoPlay && <audio className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls src={surahUrl}/>}
+                    {autoPlay && <audio src={surahUrl}  className='outline-none' autoPlay onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls></audio>}
 
-                    {!autoPlay && <audio className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls src={surahUrl}/>}
+                    {!autoPlay && <audio src={surahUrl}  className='outline-none' onEnded={()=>{setAutoPlay(true) ;setSurahNumber(prev=>(prev%114+1))}} controls></audio>}
                   </>
                 }
             </div>

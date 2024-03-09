@@ -1,12 +1,17 @@
-import WelcomeSection from "../components/HomeComponents/WelcomeSection"
-import QuranSection from "../components/HomeComponents/QuranSection"
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useRef, useContext, useEffect } from "react"
 import { NavBarctx } from "../store/NavBarCtx";
+
+import WelcomeSection from "../components/HomeComponents/WelcomeSection"
+import QuranSection from "../components/HomeComponents/QuranSection"
+import Duas from "../components/HomeComponents/Duas";
+import About from '../components/HomeComponents/About';
 export default function Home() {
-  const {url, setUrl} = useContext(NavBarctx)
+  const {url} = useContext(NavBarctx)
   const Home = useRef(null);
   const quran = useRef(null);
+  const duas = useRef(null);
+  const about = useRef(null);
   useEffect(()=>{
     const url = window.location.hash.substring(1);
     if(url===''){
@@ -21,6 +26,18 @@ export default function Home() {
         behavior:'smooth'
       })
     }
+    if(url==='duas'){
+      window.scrollTo({
+        top:duas?.current?.offsetTop,
+        behavior:'smooth'
+      })
+    }
+    if(url==='challenge'){
+      window.scrollTo({
+        top:about?.current?.offsetTop,
+        behavior:'smooth'
+      })
+    }
   },[url])
   return (
     <HelmetProvider>
@@ -31,8 +48,14 @@ export default function Home() {
       <div ref={Home}>
         <WelcomeSection />
       </div>
+      <div ref={duas}>
+        <Duas />
+      </div>
       <div ref={quran}>
         <QuranSection />
+      </div>
+      <div ref={about}>
+        <About />
       </div>
     </HelmetProvider>
   )

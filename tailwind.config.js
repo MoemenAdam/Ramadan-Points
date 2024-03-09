@@ -12,14 +12,18 @@ export default {
         'ayahColor':'black',
         'quranColor':'white',
         'ayah':'#e4eedc',
+        'white':'#EAEAEA',
+        'black':'#101010'
       },
       screens:{
+        'big': '1200px',
         'nav': '920px',
         'nav2':'330px',
         'mobile': '450px',
         'fold':'300px',
         'fold2':'400px',
         'fold3':'600px',
+        'sm':'820px',
       }
     },
   },
