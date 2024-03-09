@@ -1,16 +1,29 @@
-import { useState, useContext } from "react";
-import { NavLink } from "react-router-dom"
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom"
 import Lites from "./Lites.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import {NavBarctx} from "../../store/NavBarCtx"
-import { motion, AnimatePresence } from "framer-motion"
-import SideNavBar from "../SideNavBar";
+import Cookies from "js-cookie";
+import { useAuth } from "../../CustomHooks/useAuth"
+
 
 
 export default function TopNavBar() {
   const {navBar, setNavBar} = useContext(NavBarctx)
   const {url,setUrl} = useContext(NavBarctx)
+  const [userLoggedin, setUserLoggedin] = useState(false)
+  const [userName, setUserName] = useState('')
+  const Token = Cookies.get('token');
+
+  const {data:userData,loading:userDataLoading} = useAuth('https://ramadan-points.onrender.com/api/v1/users/me',Token,'GET',null);
+
+  useEffect(()=>{
+    if(userDataLoading)return;
+    if(userData.status!=='success')return;
+    setUserLoggedin(true);
+    console.log(userData);
+    setUserName(userData.data.user.name.split(' ')[0]);
+  },[userDataLoading])
 
   const handleMenuClicked = ()=>{
     setNavBar(prev=>!prev)
@@ -35,11 +48,14 @@ export default function TopNavBar() {
           <nav className="hidden nav:block big:ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url==='duas'?'active':null} onClick={handleLink('duas')} to="/#duas">أدعية</Link></li>
-              <li><Link className={url==='quran'?'active':null} onClick={handleLink('quran')} to="/#quran">قرآن</Link></li>
-              <li><Link className={url==='challenge'?'active':null} onClick={handleLink('challenge')} to="/#challenge">تحدي رمضان</Link></li>
               <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>
-              <li><Link to="/login">تسجيل الدخول</Link></li>
+
+              <li className="loginColor">
+                {!userLoggedin && <Link to="/login">تسجيل الدخول</Link>}
+                {userLoggedin && 
+                  <Link to="/profile">مرحبا {userName}</Link>
+                }
+              </li>
             </ul>
           </nav>
           <nav onClick={handleMenuClicked} className="nav:hidden block pl-6 cursor-pointer">

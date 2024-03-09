@@ -13,7 +13,7 @@ export default function Root() {
     <>
       <SideNavBar/>
       <div onClick={handleBackDropClicked}>
-        <div className={navBar?'pointer-events-none select-none':null}>
+        <div className={navBar?'pointer-events-none select-none bg-black opacity-50':null}>
           <Outlet/>
         </div>
       </div>

@@ -2,6 +2,9 @@ import {useState} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
@@ -12,6 +15,8 @@ export default function Login() {
   const [save, setSave] = useState(false);
   const [btn, setBtn] = useState('تسجيل الدخول');
   const [statusBtn, setStatusBtn] = useState(' ');
+  const navigate = useNavigate();
+
 
   // const 
   const handleEmail = (e) => {
@@ -33,7 +38,7 @@ export default function Login() {
       return;
     } 
 
-    fetch(`https://ramadan-points.onrender.com/api/v1/users/login?save=${save}`, {
+    fetch(`${url}v1/users/login?save=${save}`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json'
@@ -42,12 +47,14 @@ export default function Login() {
         email: email,
         password: password
       })
-    }).then(response => response.json()).then(data => {
-      if (data.status === 'success') {
+    }).then(response => response.json()).then(res => {
+      if (res.status === 'success') {
         alert('Logged in successfully');
-        console.log({data});
+        console.log({res});
+        Cookies.set('token', res.data.token);
+        navigate('/');
       } else {
-        alert(data.message);
+        alert(res.message);
       }
       setBtn('تسجيل الدخول');
       setStatusBtn(' ');
@@ -66,7 +73,7 @@ export default function Login() {
   }
 
   const handleCheckBox = () => {
-    setSave(!save);
+    setSave(prev=>!prev);
   }
 
   return (
@@ -88,13 +95,7 @@ export default function Login() {
           </div>
           <div className='flex justify-between gap-20 mb-5'>
             <div className='flex justify-center items-center gap-3'>
-              { 
-                  save
-                ? 
-                  <input onClick={handleCheckBox} checked className='w-4 h-4' type="checkbox" /> 
-                :
-                  <input onClick={handleCheckBox} className='w-4 h-4' type="checkbox" />
-              } 
+              <input onChange={handleCheckBox} checked={save} className='w-4 h-4' type="checkbox" /> 
               <label className='text-[#bababa]'>احفظ بياناتي</label>
             </div>
             <Link to='#forgotpass' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>

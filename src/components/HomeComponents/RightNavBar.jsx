@@ -81,13 +81,11 @@ export default function RightNavBar() {
       fixed w-fit top-1/2 -translate-y-[40%] lg:right-[2.5rem] right-[2rem]
       gap-12 px-5 py-10
      bg-[#858975] z-50 rounded-full ">
-      <div onClick={()=>{handleTurnChange(1)}} className="cursor-pointer flex flex-col items-center"> <Home /> <div className="h-0 text-center">{Turn===1 && 'الرئيسية'}</div> </div>
-      <div onClick={()=>{handleTurnChange(2)}} className="cursor-pointer flex flex-col items-center"> <Verifi /> <div className="h-0 text-center">{Turn===2 && 'الرئيسية'}</div></div>
-      <div onClick={()=>{handleTurnChange(3)}} className="cursor-pointer flex flex-col items-center"> <Book /> <div className="h-0 text-center">{Turn===3 && 'الرئيسية'}</div></div>
-      <div onClick={()=>{handleTurnChange(4)}} className="cursor-pointer flex flex-col items-center"> <Star /> <div className="h-0 text-center">{Turn===4 && 'الرئيسية'}</div></div>
-      <div onClick={()=>{handleTurnChange(5)}} className="cursor-pointer flex flex-col items-center"> <Clock /> <div className="h-0 text-center">{Turn===5 && 'الرئيسية'}</div></div>
-      <div onClick={()=>{handleTurnChange(6)}} className="cursor-pointer flex flex-col items-center"> <Notes /> <div className="h-0 text-center">{Turn===6 && 'الرئيسية'}</div></div>
-      <div onClick={()=>{handleTurnChange(7)}} className="cursor-pointer flex flex-col items-center"> <Hand /> <div className="h-0 text-center">{Turn===7 && 'الرئيسية'}</div></div>
+      <div onClick={()=>{handleTurnChange(1)}} className="cursor-pointer flex flex-col items-center"> <Home /> <div className="h-0 w-12 text-center">{Turn===1 && 'الرئيسية'}</div> </div>
+      <div onClick={()=>{handleTurnChange(2)}} className="cursor-pointer flex flex-col items-center"> <Verifi /> <div className="h-0 w-12 text-center">{Turn===2 && 'التحدي'}</div></div>
+      <div onClick={()=>{handleTurnChange(3)}} className="cursor-pointer flex flex-col items-center"> <Book /> <div className="h-0 w-12 text-center">{Turn===3 && 'القرآن'}</div></div>
+      <div onClick={()=>{handleTurnChange(4)}} className="cursor-pointer flex flex-col items-center"> <Star /> <div className="h-0 w-12 text-center">{Turn===4 && 'الترتيب'}</div></div>
+      <div onClick={()=>{handleTurnChange(7)}} className="cursor-pointer flex flex-col items-center"> <Hand /> <div className="h-0 w-12 text-center">{Turn===7 && 'أدعية'}</div></div>
     </aside>
   )
 }

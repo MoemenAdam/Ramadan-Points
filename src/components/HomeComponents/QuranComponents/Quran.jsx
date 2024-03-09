@@ -187,7 +187,6 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
   useEffect(()=>{
     const holder = Object.values(surahsPerPage?.data?.surahs||[]);
     if(holder.length===0)return;
-    console.log(holder[0]);
     setSurahName( holder[1]?holder[1].name:holder[0].name );
     // console.log({test,holder});
 
