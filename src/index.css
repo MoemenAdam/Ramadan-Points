@@ -48,6 +48,12 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
 }
+.Topbg{
+  background-image: url('assets/TopUser.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .surahbg{
   background-image: url('assets/surahbg2.png');
@@ -293,4 +299,8 @@ body{
 
 .surahSearchText{
   font-family: hafs,"Times New Roman";
+}
+
+img{
+  pointer-events: none;
 }

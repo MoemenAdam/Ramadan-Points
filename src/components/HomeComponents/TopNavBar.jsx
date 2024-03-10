@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import Lites from "./Lites.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import {NavBarctx} from "../../store/NavBarCtx"
@@ -14,6 +14,7 @@ export default function TopNavBar() {
   const [userLoggedin, setUserLoggedin] = useState(false)
   const [userName, setUserName] = useState('')
   const Token = Cookies.get('token');
+  const location = useLocation().pathname.split('/')[1];
 
   const {data:userData,loading:userDataLoading} = useAuth('https://ramadan-points.onrender.com/api/v1/users/me',Token,'GET',null);
 
@@ -34,9 +35,9 @@ export default function TopNavBar() {
   }
   return (
     <>
-      <section>
+      {location!=='leaderboard' && <section>
         <img className="brightness-75 select-none pointer-events-none absolute block -left-14 " src={Lites} alt="" />
-      </section>
+      </section>}
       <div className="text-white flex items-center justify-between">
         <section className="z-10">
           <Link to="/">
@@ -47,7 +48,7 @@ export default function TopNavBar() {
           <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/#leaderboard">ترتيب المتسابقين</Link></li>
+              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/leaderboard">ترتيب المتسابقين</Link></li>
 
               <li className="loginColor">
                 {!userLoggedin && <Link to="/login">تسجيل الدخول</Link>}
