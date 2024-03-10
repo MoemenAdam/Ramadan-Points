@@ -25,7 +25,7 @@ export default function SideNavBar() {
   },[navBar])
   return (
     <AnimatePresence>
-      {(navBar && url !== 'login') &&
+      {(navBar ) &&
         <motion.nav
           initial={{ opacity: 0, x: '-100%' }}
           animate={{ opacity: 1, x: 0 }}

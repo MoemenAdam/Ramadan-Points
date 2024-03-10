@@ -188,7 +188,6 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
     const holder = Object.values(surahsPerPage?.data?.surahs||[]);
     if(holder.length===0)return;
     setSurahName( holder[1]?holder[1].name:holder[0].name );
-    // console.log({test,holder});
 
     setJozoaHolder(surahsPerPage?.data?.ayahs[0]?.juz);
     // if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){

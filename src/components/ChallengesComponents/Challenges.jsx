@@ -14,83 +14,121 @@ const convertSeconds = (seconds) => {
   return [hours, minutes, remainingSeconds];
 }
 
-const ChallengeDesign = ({ name,  time, points }) => {
+const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
   const [hours, minutes, seconds] = convertSeconds(parseInt(time));
   const [MyTime, setMyTime] = useState({ hours, minutes, seconds });
+  const [data, setData] = useState({});
+  const [Loading, setLoading] = useState(false);
 
   const Prays = {
-    Fajr:'الفجر',
-    Dhuhr:'الظهر',
-    Asr:'العصر',
-    Maghrib:'المغرب',
-    Isha:'العشاء',
+    Fajr: 'الفجر',
+    Dhuhr: 'الظهر',
+    Asr: 'العصر',
+    Maghrib: 'المغرب',
+    Isha: 'العشاء',
   };
   let title = Prays[name] || name.split(' ')[1];
   let imgSrc = title === Prays[name] ? pray : quran;
 
-  if(title === Prays[name]){
-    title = 'بعد إتمام صلاة '+ Prays[name] +' اضغط على إنهاء المهمة.';
-    name = 'صلاة '+Prays[name];
-  }else{
-    name = 'قراءة الجزء '+name.split(' ')[1]+' من القرآن';
+  if (title === Prays[name]) {
+    title = 'بعد إتمام صلاة ' + Prays[name] + ' اضغط على إنهاء المهمة.';
+    name = 'صلاة ' + Prays[name];
+  } else {
+    name = 'قراءة الجزء ' + name.split(' ')[1] + ' من القرآن';
     title = 'بعد إتمام قراءة الجزء اضغط على إنهاء المهمة.'
   }
 
 
+  const handleSubmit = async () => {
+    setLoading(true);
+    // const {data} = useAuth(`${url}v1/schedules/${scheduleID}/finish`, (Cookies.get('token'), 'POST', null));
+    try {
+      setLoading(true);
+      const fetchData = async (url) => {
+        const response = await fetch(url, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Cookies.get('token')}`
+          }
+        });
+        const data = await response.json();
+        setData(data);
+        setLoading(false);
+
+      }
+      fetchData(`${url}v1/schedules/acceptSchedule/${scheduleID}`);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (MyTime.seconds > 0) {
-        setMyTime(prev => ({ hours:prev.hours, minutes: prev.minutes, seconds: prev.seconds - 1 }))
+        setMyTime(prev => ({ hours: prev.hours, minutes: prev.minutes, seconds: prev.seconds - 1 }))
       } else if (MyTime.minutes > 0) {
-        setMyTime(prev => ({ hours:prev.hours, minutes: prev.minutes-1, seconds: 59 }))
-      }else if (MyTime.hours > 0) {
-        setMyTime(prev => ({ hours:prev.hours-1, minutes: 59, seconds: 59 }))
+        setMyTime(prev => ({ hours: prev.hours, minutes: prev.minutes - 1, seconds: 59 }))
+      } else if (MyTime.hours > 0) {
+        setMyTime(prev => ({ hours: prev.hours - 1, minutes: 59, seconds: 59 }))
       }
     }, 1000);
     return () => clearInterval(interval);
-  },[MyTime]);
+  }, [MyTime]);
 
   return (
-    <div style={{ borderBottom: '1px solid #6D6D6E', borderTop: '1px solid #6D6D6E' }} className='p-4 flex flex-col gap-y-4'>
-      <div className='flex fold:flex-row-reverse flex-col gap-2'>
-        <div className='flex flex-col justify-between flex-grow'>
-          <p className='font-normal'>
-            <span className='text-white'>{name}: </span>
-            <span className='text-white opacity-40'>{title}</span>
-          </p>
-          <div className='self-end'>
-            <p style={{direction:'ltr'}} className='loginColor text-lg'>{MyTime.hours}:{MyTime.minutes}:{MyTime.seconds}</p>
+    <AnimatePresence mode='wait'>
+      {
+        !data.status &&
+        <motion.div
+          initial={{ y: '100%' }}
+          animate={{ y: 0 }}
+          exit={{ x: '100%' }}
+          style={{ borderBottom: '1px solid #6D6D6E', borderTop: '1px solid #6D6D6E' }} className='p-4 flex flex-col gap-y-4'>
+          <div className='flex fold:flex-row-reverse flex-col gap-2'>
+            <div className='flex flex-col justify-between flex-grow'>
+              <p className='font-normal'>
+                <span className='text-white'>{name}: </span>
+                {type === 'running' && <span className='text-white opacity-40'>{title}</span>}
+              </p>
+              <div className='self-end'>
+                <p style={{ direction: 'ltr' }} className='loginColor text-lg'>{MyTime.hours}:{MyTime.minutes}:{MyTime.seconds}</p>
+              </div>
+            </div>
+            <div className='self-center'>
+              <img className='min-w-20 min-h-20 pointer-events-none select-none' src={imgSrc} alt="" />
+            </div>
           </div>
-        </div>
-        <div className='self-center'>
-          <img className='min-w-20 min-h-20 pointer-events-none select-none' src={imgSrc} alt="" />
-        </div>
-      </div>
-      <div className='flex justify-center fold:justify-between fold:flex-row flex-col flex-wrap gap-y-5'>
-        <div className='loginColor self-center fold:self-end font-normal'>{points} نقطة</div>
-        <div className='flex flex-wrap gap-5 font-medium'>
-          <button className='loginColor2 py-2 px-4 rounded-[4px] w-full fold:w-fit'>إنهاء المهمة</button>
-        </div>
-      </div>
-    </div>
+          <div className='flex justify-center fold:justify-between fold:flex-row flex-col flex-wrap gap-y-5'>
+            <div className='loginColor self-center fold:self-end font-normal'>{points} نقطة</div>
+            <div className='flex flex-wrap gap-5 font-medium'>
+              {type === 'running' && <button onClick={handleSubmit} className={`loginColor2 py-2 px-4 rounded-[4px] h-10 w-full fold:w-[120px] ${Loading ? 'cursor-default pointer-events-none' : ''}`}>
+                {Loading ? <SurahLoader /> : 'إنهاء المهمة'}
+              </button>}
+            </div>
+          </div>
+        </motion.div>
+      }
+    </AnimatePresence>
   )
 }
 
-const AllChallenges = ({type}) => {
+const AllChallenges = ({ type }) => {
   // v1/schedules/comming
-  const { data, loading } = useAuth(`${url}v1/schedules/${type}`, Cookies.get('token'), 'GET', null);
-  if (loading) return <SurahLoader/>;
-  
+  const { data, loading } = useAuth(`${url}v1/schedules/${type}`, (Cookies.get('token') || 'noToken'), 'GET', null);
+  if (loading) return (<SurahLoader />);
+  if (!data.data.schedules.length) return (<h1 className='loginColor text-center'>لا يوجد مهام</h1>);
   return (
     <>
-      {
-        data.data.schedules.map(e=>{
-          return (
-            <ChallengeDesign key={e._id} name={e.name} time={e.remaining} points={e.points} />
-          )
-        })
-      }
+      <motion.div layout>
+        {
+          data.data.schedules.map(e => {
+            return (
+              <ChallengeDesign key={e._id} scheduleID={e._id} type={type} name={e.name} time={e.remaining} points={e.points} />
+            )
+          })
+        }
+      </motion.div>
     </>
   )
 }
@@ -137,7 +175,7 @@ export default function Challenges() {
               </section>
             </div>
             <section style={{ direction: 'ltr' }} className='h-[402px] overflow-hidden overflow-y-scroll'>
-              <AllChallenges type={Challenge===2?'comming':'running'}/>
+              <AllChallenges type={Challenge === 2 ? 'comming' : 'running'} />
             </section>
           </motion.div>
         }

@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
 export const useAuth = (url, token, method, body) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  }
+  if(token!=='noToken')headers.Authorization = `Bearer ${token}`;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -10,10 +14,7 @@ export const useAuth = (url, token, method, body) => {
         const response = await fetch(url,{
           method,
           body,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
+          headers
         });
         const data = await response.json();
         setData(data);
@@ -21,7 +22,6 @@ export const useAuth = (url, token, method, body) => {
       }
       if(token)fetchData(url);
     }catch(e){
-      console.log(1);
       console.log(e);
     }
   }, [url]);

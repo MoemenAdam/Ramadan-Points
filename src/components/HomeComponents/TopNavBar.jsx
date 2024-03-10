@@ -21,7 +21,6 @@ export default function TopNavBar() {
     if(userDataLoading)return;
     if(userData.status!=='success')return;
     setUserLoggedin(true);
-    console.log(userData);
     setUserName(userData.data.user.name.split(' ')[0]);
   },[userDataLoading])
 
