@@ -78,7 +78,7 @@ export default function ResetPassword(params) {
   }
 
   return (
-          <motion.form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
+          <motion.form className='flex flex-col w-[220px] nav2:w-[330px] fold3:w-[440px] justify-center py-40 px-5 fold2:px-10 fold3:px-10 gap-5'
             initial={{ opacity: 0, x: '50%' }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: .5 }}
@@ -86,7 +86,7 @@ export default function ResetPassword(params) {
           >
 
             {/* div to return back */}
-            <div onClick={handleBackTo2} className='cursor-pointer w-fit  self-end bg-[#CBA947] p-3 rounded-lg'>
+            <div onClick={handleBackTo2} className='cursor-pointer self-end p-3 bg-[#CBA947] rounded-lg'>
                 <IoIosArrowBack color='black' size={30}/> 
             </div>
             <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>

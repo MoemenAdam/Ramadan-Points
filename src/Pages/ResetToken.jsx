@@ -50,6 +50,8 @@ export default function ResetToken(params) {
       if (res.status === 'success') {
         setErr('');
         params.setPage(3);
+        setBtn(false);
+        setStatusBtn(' ');
       } else {
         setAccept('');
         setErr(res.message);
@@ -71,7 +73,7 @@ export default function ResetToken(params) {
             initial={{ opacity: 0, x: '50%' }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: .5 }}
-            exit={{ opacity: 0, x: '-50%' }}
+            exit={{ opacity: 0, x: '50%' }}
           >
             {/* div to return back */}
             <div onClick={handleBackTo1} className='cursor-pointer w-fit  self-end bg-[#CBA947] p-3 rounded-lg'>

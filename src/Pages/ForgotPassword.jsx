@@ -47,7 +47,10 @@ export default function ForgotPassword() {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
+        setErr('');
         setPage(2);
+        setBtn(false);
+        setStatusBtn(' ');
       } else {
         setAccept('');
         setErr(res.message);
@@ -70,15 +73,15 @@ export default function ForgotPassword() {
         <meta charSet="utf-8" />
         <title>Ramadan Points - Forgot Password </title>
       </Helmet>
-      <AnimatePresence>
         <LoginLayout>
+      <AnimatePresence>
           {
             page === 1 ? 
             <motion.form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
             initial={{ opacity: 0, x: '50%' }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: .5 }}
-            exit={{ opacity: 0, x: '-50%' }}
+            exit={{ opacity: 0, x: '50%' }}
             >
               <h1 className='loginColor w-fit text-3xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
               <div className='flex flex-col'>
@@ -107,8 +110,8 @@ export default function ForgotPassword() {
             :
             <ResetPassword token={token} setPage={setPage} />
           }
-        </LoginLayout>
       </AnimatePresence>
+        </LoginLayout>
     </HelmetProvider>
   )
 }
