@@ -11,7 +11,7 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import ResetPassword from "./Pages/ResetPassword"
 import ResetToken from "./Pages/ResetToken"
 import LeaderBoard from "./Pages/LeaderBoard"
-
+import Profile from "./Pages/Profile"
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
             <Route path="reset-token" element={<ResetToken />}/>
             <Route path="reset-password" element={<ResetPassword />}/>
             <Route path="leaderboard" element={<LeaderBoard/>}/>
+            <Route path="profile" element={<Profile/>}/>
           </Route>
           <Route path="/*" element={<NotFound />}/>
         </Routes>
