@@ -18,23 +18,49 @@ export default function LeaderBoard() {
 
   useEffect(()=>{
     if(loading)return;
-    const holder = {
+    let tot = 3;
+    // let holder = {};
+    let holder = {
       first:{
-        name: data.data.users[0].img,
-        score: data.data.users[0].points,
-        id: data.data.users[0]._id
+        name: '',
+        score: 0,
+        id: ''
       },
       second:{
-        name: data.data.users[1].img,
-        score: data.data.users[1].points,
-        id: data.data.users[1]._id
+        name: '',
+        score: 0,
+        id: ''
       },
       third:{
-        name: data.data.users[2].img,
-        score: data.data.users[2].points,
-        id: data.data.users[2]._id
+        name:  '',
+        score:  0,
+        id:  ''
       }
     };
+    let first = {};
+    let second = {};
+    let third = {};
+    if(tot > data.data.users.length) tot = data.data.users.length;
+    for(let i = 0; i < tot; i++){
+      if(i === 0)
+      {
+        first.name = data.data.users[i].img;
+        first.score = data.data.users[i].points;
+        first.id = data.data.users[i]._id;
+        holder.first = first;
+      } else if(i === 1)
+      {
+        second.name = data.data.users[i].img;
+        second.score = data.data.users[i].points;
+        second.id = data.data.users[i]._id;
+        holder.second = second;
+      } else {
+        third.name = data.data.users[i].img;
+        third.score = data.data.users[i].points;
+        third.id = data.data.users[i]._id;
+        holder.third = third;
+      }
+    }
     const users = [...data.data.users];
     const rank = data.data.users.filter(e=>e._id===data.data?.currentUser?._id);
     setCurrentUser(rank[0]?._id);

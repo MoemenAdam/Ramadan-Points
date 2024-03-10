@@ -20,7 +20,7 @@ export default function Login({children}) {
       </header>
       <main className='loginbg max-w-[500px] self-center flex-grow h-full mainMargin  flex justify-center items-center'>
         {children}
-      </main>
+      </main> 
     </section>
   )
 }

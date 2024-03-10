@@ -23,7 +23,7 @@ export default function Footer() {
             <Link to={"https://mustafa-elsharawy.vercel.app"} target="_blank">
               <CgMail className="w-[28px] h-[28px] text-white2" />
             </Link>
-            <Link to={"https://mustafa-elsharawy.vercel.app"} target="_blank">
+            <Link to={"https://www.facebook.com/profile.php?id=61557429622952&mibextid=JRoKGi"} target="_blank">
               <CiFacebook className="w-[28px] h-[28px] text-white2" />
             </Link>
             <Link to={"https://mustafa-elsharawy.vercel.app"} target="_blank">
