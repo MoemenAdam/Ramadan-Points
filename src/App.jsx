@@ -26,7 +26,7 @@ function App() {
             <Route path="forgot-password" element={<ForgotPassword />}/>
             <Route path="reset-token" element={<ResetToken />}/>
             <Route path="reset-password" element={<ResetPassword />}/>
-            <Route path="leaderboard" element={<LeaderBoard/>}/>
+            <Route path="Top" element={<LeaderBoard/>}/>
           </Route>
           <Route path="/*" element={<NotFound />}/>
         </Routes>

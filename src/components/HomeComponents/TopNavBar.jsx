@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, NavLink } from "react-router-dom"
 import Lites from "./Lites.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
 import {NavBarctx} from "../../store/NavBarCtx"
@@ -35,7 +35,7 @@ export default function TopNavBar() {
   }
   return (
     <>
-      {location!=='leaderboard' && <section>
+      {location!=='Top' && <section>
         <img className="brightness-75 select-none pointer-events-none absolute block -left-14 " src={Lites} alt="" />
       </section>}
       <div className="text-white flex items-center justify-between">
@@ -47,8 +47,8 @@ export default function TopNavBar() {
         <section className="nav:flex-grow z-20 font-bold">
           <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
-            <li><Link className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url==='leaderboard'?'active':null} onClick={handleLink('leaderboard')} to="/leaderboard">ترتيب المتسابقين</Link></li>
+            <li><NavLink className={url===''?'active':null} onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
+              <li><NavLink className={url==='Top'?'active':null} onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
 
               <li className="loginColor">
                 {!userLoggedin && <Link to="/login">تسجيل الدخول</Link>}
