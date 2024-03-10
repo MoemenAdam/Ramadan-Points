@@ -34,7 +34,7 @@ export default function Login() {
     e.preventDefault();
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none ');
+    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (name === '' || email === '' || password === '' || passwordConfirm === '') {
       setErr('الرجاء ملء جميع الحقول');
@@ -82,7 +82,7 @@ export default function Login() {
         <title>Ramadan Points - Signup</title>
       </Helmet>
       <LoginLayout>
-        <form className='flex flex-col justify-center py-40 px-8 fold2:px-16 fold3:px-20 gap-5'>
+        <form className='flex flex-col justify-center py-40 px-8 fold2:px-12 gap-5'>
           <h1 className='loginColor w-fit text-4xl text-center font-bold pb-5 self-center px-5 fold2:px-10 fold3:px-20'> إنشاء حساب </h1>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>الاسم ثلاثي</label>
@@ -100,8 +100,8 @@ export default function Login() {
             <label className='loginColor w-fit'>تأكيد كلمة السر</label>
             <input onChange={handlePasswordConfirm} value={passwordConfirm} className='loginInput' type="password" />
           </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px]' + statusBtn}>
-            <button> 
+          <div onClick={handleSubmit} className={'cursor-pointer text-center w-full text-2xl font-bold  loginColor2 text-black rounded-[4px]' + statusBtn}>
+            <button className={`h-[56px] ` + statusBtn}> 
             {btn && <SurahLoader/>}
             {!btn && 'انشاء حساب'}  
             </button>

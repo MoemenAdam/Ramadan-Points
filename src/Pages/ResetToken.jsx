@@ -1,16 +1,17 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
+import { NavBarctx } from '../store/NavBarCtx';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
 export default function ResetToken() {
 
-  const [token, setToken] = useState('');
+  const {token, setToken} = useContext(NavBarctx);
   const [btn, setBtn] = useState(false);
   const [statusBtn, setStatusBtn] = useState(' ');
   const [Err, setErr] = useState('');
@@ -28,7 +29,7 @@ export default function ResetToken() {
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none ');
+    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (token === '') {
       setErr('الرجاء ادخال البريد الالكتروني');
@@ -73,13 +74,12 @@ export default function ResetToken() {
       </Helmet>
       <LoginLayout>
         <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
-          <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>رمز التحقق</label>
             <input onChange={handleToken} className='loginInput' type="text" value={token} placeholder='ادخل الرمز المرسل في بريدك الالكتروني' />
           </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-            <button> 
+          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ' + statusBtn}>
+            <button className={`h-[56px] ` + statusBtn}> 
             {btn && <SurahLoader/>}
             {!btn && 'تحقق'}  
             </button>

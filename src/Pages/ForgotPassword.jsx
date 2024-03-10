@@ -28,7 +28,7 @@ export default function ForgotPassword() {
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none ');
+    setStatusBtn('pointer-events-none select-none  cursor-default');
 
     if (email === '') {
       setErr('الرجاء ادخال البريد الالكتروني');
@@ -47,10 +47,7 @@ export default function ForgotPassword() {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setAccept('تم ارسال رابط استعادة كلمة المرور الى بريدك الالكتروني, الرجاء التحقق من بريدك الالكتروني')
-        setTimeout(() => {
-            navigate('/reset-token');
-        }, 5000);
+        navigate('/reset-token');
       } else {
         setErr(res.message);
         setBtn(false);
@@ -73,15 +70,15 @@ export default function ForgotPassword() {
       </Helmet>
       <LoginLayout>
         <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
-          <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
+          <h1 className='loginColor w-fit text-3xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>البريد الإلكتروني</label>
             <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
           </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-            <button> 
+          <div onClick={handleSubmit} className={'cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] ' + statusBtn}>
+            <button className={`h-[56px] ` + statusBtn}> 
             {btn && <SurahLoader/>}
-            {!btn && 'ارسال رساله بريد'}  
+            {!btn && 'ارسال'}  
             </button>
           </div>
           <div className='text-green-600 text-center'>

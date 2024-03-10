@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 export const useAuth = (url, token, method, body) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  if(!token)return { data, loading };
   useEffect(() => {
     try{
       setLoading(true);
@@ -20,7 +19,7 @@ export const useAuth = (url, token, method, body) => {
         setData(data);
         setLoading(false);
       }
-      fetchData(url);
+      if(token)fetchData(url);
     }catch(e){
       console.log(1);
       console.log(e);

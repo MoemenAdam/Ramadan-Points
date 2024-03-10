@@ -1,15 +1,16 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import LoginLayout from './LoginLayout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
+import { NavBarctx } from '../store/NavBarCtx';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
 export default function ResetPassword() {
 
-    const token = '';
+    const {token} = useContext(NavBarctx);
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [btn, setBtn] = useState(false);
@@ -30,7 +31,7 @@ export default function ResetPassword() {
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none ');
+    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (password === '' || passwordConfirm === '') {
       setErr('الرجاء ملء جميع الحقول');
@@ -88,8 +89,8 @@ export default function ResetPassword() {
               <label className='loginColor w-fit'>تأكيد كلمه المرور الجديده</label>
               <input onChange={handlePasswordConfirm} className='loginInput' type="password" value={passwordConfirm} placeholder='اعد تأكيد كلمه مرورك الجديده' />
             </div>
-            <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-              <button> 
+            <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ' + statusBtn}>
+            <button className={`h-[56px] ` + statusBtn}> 
               {btn && <SurahLoader/>} 
               {!btn && 'تغيير كلمه المرور'}  
               </button>

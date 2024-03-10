@@ -32,7 +32,7 @@ export default function Login() {
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none ');
+    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (email === '' || password === '') {
       setErr('الرجاء ملء جميع الحقول');
@@ -89,15 +89,15 @@ export default function Login() {
             <label className='loginColor w-fit'>كلمة المرور</label>
             <input onChange={handlePassword} className='loginInput' type="password" value={password} placeholder='ادخل كلمه المرور' />
           </div>
-          <div className='flex justify-between gap-20 mb-5'>
+          <div className='flex flex-wrap justify-center gap-y-5 gap-x-20 mb-5'>
             <div className='flex justify-center items-center gap-3'>
               <input onChange={handleCheckBox} checked={save} className='w-4 h-4' type="checkbox" /> 
               <label className='text-[#bababa]'>احفظ بياناتي</label>
             </div>
-            <Link to='/forgot-password' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
+            <Link to='/forgot-password' className='text-[#9B7D24] text-center border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold py-3 loginColor2 text-black rounded-[4px] ' + statusBtn}>
-            <button> 
+          <div onClick={handleSubmit} className={'cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px]' + statusBtn}>
+            <button className={`h-[56px] ` + statusBtn}> 
             {btn && <SurahLoader/>}
             {!btn && 'تسجيل دخول'}  
             </button>
@@ -105,7 +105,7 @@ export default function Login() {
           <div className='text-red-600 text-center'>
             {Err}
           </div>
-          <div className='flex justify-center items-center mt-5'>
+          <div className='flex justify-center text-center items-center mt-5'>
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
           </div>
         </form>
