@@ -66,11 +66,11 @@ export default function Home() {
       <div ref={duas}>
         <Duas />
       </div>
-      <div ref={quran}>
-        <QuranSection />
-      </div>
       <div ref={about}>
         <About />
+      </div>
+      <div ref={quran}>
+        <QuranSection />
       </div>
       <div ref={footer}>
         <Footer />

@@ -14,8 +14,8 @@ export default function Footer() {
             alt="logo"
           />
         </div>
-        <div className="ChallengeActiveFooter h-[6px] w-full "></div>
-        <div className="flex fold3:justify-around justify-center flex-wrap items-cdenter   w-full   mt-5 h-[28px]">
+        <div className="ChallengeActiveFooter h-[6px] w-full fold3:m-0 m-5 "></div>
+        <div className="flex fold3:justify-around fold3:flex-row gap-y-10 flex-col items-cdenter   w-full   fold3:mt-5 h-[28px]">
           <p className="text-white2 text-center">
             © 2024 جميع الحقوق محفوظة لدى موقع رمضان بوينتس
           </p>
