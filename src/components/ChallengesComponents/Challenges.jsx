@@ -154,7 +154,7 @@ export default function Challenges({Show, setShow}) {
             transition={{ duration: 0.1 }}
             className='ChallengesContent'
           >
-            <div className=' sticky top-0 z-[500] bg-black p-2'>
+            <div className='rounded-lg sticky top-0 z-[500] bg-black p-2'>
               <div className='cursor-pointer' onClick={() => { setShow(prev => !prev) }} >
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="35" width="35" xmlns="http://www.w3.org/2000/svg">
                   <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="50.28%" stopColor="#9B7D24"></stop><stop offset="100%" stopColor="#D7B550"></stop></linearGradient></defs>

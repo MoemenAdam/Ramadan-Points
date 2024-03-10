@@ -1,16 +1,17 @@
-import {useState} from 'react'
+import {useEffect, useState, useContext} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import {NavBarctx} from '../store/NavBarCtx';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
 export default function Login() {
-
+  const {setNavBar} = useContext(NavBarctx);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [save, setSave] = useState(false);
@@ -19,6 +20,9 @@ export default function Login() {
   const [Err, setErr] = useState('');
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    setNavBar(false);
+  },[])
 
   // const 
   const handleEmail = (e) => {
@@ -54,6 +58,7 @@ export default function Login() {
       const res = await response.json();
       if (res.status === 'success') {
         Cookies.set('token', res.data.token);
+        console.log(res.data.token);
         navigate('/');
       } else {
         setErr(res.message);

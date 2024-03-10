@@ -38,7 +38,6 @@ export default function AllUsers({data,currentUser}) {
           )
         })
       }
-      {/* .LeaderBoardCurrentBg */}
     </main>
   )
 }

@@ -40,28 +40,36 @@ export default memo(function LeaderBoard() {
     let first = {};
     let second = {};
     let third = {};
-    console.log(data);
     if(tot > data.data.users.length) tot = data.data.users.length;
     for(let i = 0; i < tot; i++){
+      let img ='';
+      if(data.data.users[i].img.split(' ')[0] === 'جيلي')  img = 'assets/jelly.png';
+      if(data.data.users[i].img.split(' ')[0] === 'سمبوسه')  img = 'assets/sambosa.png';
+      if(data.data.users[i].img.split(' ')[0] === 'بسبوسه')  img = 'assets/basbousa.png';
+      if(data.data.users[i].img.split(' ')[0] === 'صوبيا')  img = 'assets/gozhend.png';
       if(i === 0)
       {
         first.name = data.data.users[i].img;
         first.score = data.data.users[i].points;
         first.id = data.data.users[i]._id;
+        first.img = img;
         holder.first = first;
       } else if(i === 1)
       {
         second.name = data.data.users[i].img;
         second.score = data.data.users[i].points;
         second.id = data.data.users[i]._id;
+        second.img = img;
         holder.second = second;
       } else {
         third.name = data.data.users[i].img;
         third.score = data.data.users[i].points;
         third.id = data.data.users[i]._id;
+        third.img = img;
         holder.third = third;
       }
     }
+    
     const users = [...data.data.users];
     const rank = data.data.users.filter(e=>e._id===data.data?.currentUser?._id);
     setCurrentUser(rank[0]?._id);

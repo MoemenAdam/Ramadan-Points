@@ -46,7 +46,7 @@ export default function TopNavBar() {
             <img className="select-none pointer-events-none w-28 h-28 flex-grow sm:mr-6" src="Logo.png" alt="Logo" />
           </Link>
         </section>
-        <section className="nav:flex-grow z-20 font-bold">
+        <section className="nav:flex-grow z-20 font-normal">
           <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
@@ -55,7 +55,9 @@ export default function TopNavBar() {
               <li className="loginColor">
                 {!isLoggedin && <Link to="/login">تسجيل الدخول</Link>}
                 {isLoggedin && 
-                  <Link to="/profile">مرحبا {userName}</Link>
+                  <Link to="/profile">
+                    الملف الشخصي
+                  </Link>
                 }
               </li>
             </ul>
