@@ -79,7 +79,7 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
   return (
     <AnimatePresence mode='wait'>
       {
-        !data.status &&
+        data.status !== 'success' &&
         <motion.div
           initial={{ y: '100%' }}
           animate={{ y: 0 }}

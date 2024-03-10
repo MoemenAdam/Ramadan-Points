@@ -13,7 +13,11 @@ export default {
         'quranColor':'white',
         'ayah':'#e4eedc',
         'white':'#EAEAEA',
-        'black':'#101010'
+        'white2': '#EAEAEA99',
+        'black':'#101010',
+        'black2':'#171717',
+
+
       },
       screens:{
         'big': '1200px',
