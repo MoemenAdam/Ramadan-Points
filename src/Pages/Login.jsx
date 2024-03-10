@@ -15,7 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [save, setSave] = useState(false);
   const [btn, setBtn] = useState(false);
-  const [statusBtn, setStatusBtn] = useState(' ');
+  const statusBtn = 'pointer-events-none select-none cursor-default';
   const [Err, setErr] = useState('');
   const navigate = useNavigate();
 
@@ -27,45 +27,46 @@ export default function Login() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (email === '' || password === '') {
       setErr('الرجاء ملء جميع الحقول');
       setBtn(false);
-      setStatusBtn(' ');
       return;
     } 
 
-    fetch(`${url}v1/users/login?save=${save}`, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    }).then(response => response.json()).then(res => {
+    try {
+      const response = await fetch(`${url}v1/users/login?save=${save}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+    
+      const res = await response.json();
+      console.log(res);
       if (res.status === 'success') {
         Cookies.set('token', res.data.token);
+        Cookies.set('name', res.data.name);
         navigate('/');
       } else {
         setErr(res.message);
       }
+    
       setBtn(false);
-      setStatusBtn(' ');
-      return;
-    }).catch(err => {
+    } catch (err) {
       setBtn(false);
-      setStatusBtn(' ');
       setErr(err.message);
-      return;
-    });
+      console.error(err);
+    }
   }
 
   const handleCheckBox = () => {
@@ -96,8 +97,8 @@ export default function Login() {
             </div>
             <Link to='/forgot-password' className='text-[#9B7D24] text-center border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
           </div>
-          <div onClick={handleSubmit} className={'cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px]' + statusBtn}>
-            <button className={`h-[56px] ` + statusBtn}> 
+          <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] ${btn&&statusBtn}`}>
+            <button className={`h-[56px] ${btn&&statusBtn}`}> 
             {btn && <SurahLoader/>}
             {!btn && 'تسجيل دخول'}  
             </button>

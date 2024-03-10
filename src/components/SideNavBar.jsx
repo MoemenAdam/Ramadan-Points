@@ -38,8 +38,8 @@ export default function SideNavBar() {
           </div>
           <nav className="text-center">
             <ul className="flex flex-col gap-12 justify-center text">
-              <li><Link className={url === '' ? 'active' : null} onClick={handleLink('')} to="/">الرئيسية</Link></li>
-              <li><Link className={url === 'Top' ? 'active' : null} onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</Link></li>
+              <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
+              <li><NavLink onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
               <li><Link to="/login" onClick={handleLink('login')}>تسجيل الدخول</Link></li>
             </ul>
           </nav>

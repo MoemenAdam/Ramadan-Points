@@ -13,7 +13,7 @@ export default function ResetPassword(params) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [btn, setBtn] = useState(false);
-    const [statusBtn, setStatusBtn] = useState(' ');
+    const statusBtn = 'pointer-events-none select-none cursor-default';
     const [Err, setErr] = useState('');
     const [Accept, setAccept] = useState('');
     const navigate = useNavigate();
@@ -34,13 +34,11 @@ export default function ResetPassword(params) {
 
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (password === '' || passwordConfirm === '') {
       setAccept('');
       setErr('الرجاء ملء جميع الحقول');
       setBtn(false);
-      setStatusBtn(' ');
       return;
     } 
 
@@ -65,12 +63,10 @@ export default function ResetPassword(params) {
         setAccept('');
         setErr(res.message);
         setBtn(false);
-        setStatusBtn(' ');
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setStatusBtn(' ');
       setAccept('');
       setErr(err.message);
       return;
@@ -78,11 +74,7 @@ export default function ResetPassword(params) {
   }
 
   return (
-          <motion.form className='flex flex-col w-[220px] nav2:w-[330px] fold3:w-[440px] justify-center py-40 px-5 fold2:px-10 fold3:px-10 gap-5'
-            initial={{ opacity: 0, x: '50%' }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: .5 }}
-            exit={{ opacity: 0, x: '-50%' }}
+          <form className='flex flex-col w-[220px] nav2:w-[330px] fold3:w-[440px] justify-center py-40 px-5 fold2:px-10 fold3:px-10 gap-5'
           >
 
             {/* div to return back */}
@@ -98,8 +90,8 @@ export default function ResetPassword(params) {
               <label className='loginColor w-fit'>تأكيد كلمه المرور الجديده</label>
               <input onChange={handlePasswordConfirm} className='loginInput' type="password" value={passwordConfirm} placeholder='اعد تأكيد كلمه مرورك الجديده' />
             </div>
-            <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ' + statusBtn}>
-            <button className={`h-[56px] ` + statusBtn}> 
+            <div onClick={handleSubmit} className={`text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ${btn&&statusBtn}`}>
+            <button className={`h-[56px] ${btn&&statusBtn}`}> 
               {btn && <SurahLoader/>} 
               {!btn && 'تغيير كلمه المرور'}  
               </button>
@@ -110,6 +102,6 @@ export default function ResetPassword(params) {
             <div className='text-red-600 text-center'>
               {Err}
             </div>
-          </motion.form>
+          </form>
   )
 }

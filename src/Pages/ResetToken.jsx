@@ -10,7 +10,7 @@ const url = 'https://ramadan-points.onrender.com/api/';
 export default function ResetToken(params) {
 
   const [btn, setBtn] = useState(false);
-  const [statusBtn, setStatusBtn] = useState(' ');
+  const statusBtn = 'pointer-events-none select-none cursor-default';
   const [Err, setErr] = useState('');
   const [Accept, setAccept] = useState('');
   
@@ -28,13 +28,11 @@ export default function ResetToken(params) {
     e.preventDefault();
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (params.token === '') {
       setAccept('');
       setErr('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
-      setStatusBtn(' ');
       return;
     } 
 
@@ -51,17 +49,14 @@ export default function ResetToken(params) {
         setErr('');
         params.setPage(3);
         setBtn(false);
-        setStatusBtn(' ');
       } else {
         setAccept('');
         setErr(res.message);
         setBtn(false);
-        setStatusBtn(' ');
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setStatusBtn(' ');
       setAccept('');
       setErr(err.message);
       return;
@@ -69,11 +64,7 @@ export default function ResetToken(params) {
   }
 
   return (
-        <motion.form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
-            initial={{ opacity: 0, x: '50%' }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: .5 }}
-            exit={{ opacity: 0, x: '50%' }}
+        <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
           >
             {/* div to return back */}
             <div onClick={handleBackTo1} className='cursor-pointer w-fit  self-end bg-[#CBA947] p-3 rounded-lg'>
@@ -85,8 +76,8 @@ export default function ResetToken(params) {
             <label className='loginColor w-fit'>رمز التحقق</label>
             <input onChange={handleToken} className='loginInput' type="text" value={params.token} placeholder='ادخل الرمز المرسل في بريدك الالكتروني' />
           </div>
-          <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ' + statusBtn}>
-            <button className={`h-[56px] ` + statusBtn}> 
+          <div onClick={handleSubmit} className={`text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ${btn&&statusBtn}`}>
+            <button className={`h-[56px] ${btn&&statusBtn}`}> 
             {btn && <SurahLoader/>}
             {!btn && 'تحقق'}  
             </button>
@@ -101,6 +92,6 @@ export default function ResetToken(params) {
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
             <p>هل تريد تسجيل الدخول؟ <Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
           </div>
-        </motion.form>
+        </form>
   )
 }

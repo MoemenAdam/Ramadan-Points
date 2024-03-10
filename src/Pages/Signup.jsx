@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -15,8 +15,8 @@ export default function Login() {
   const [btn, setBtn] = useState(false);
   const [Err, setErr] = useState('');
   const [Accpet, setAccpet] = useState('');
-  const [statusBtn, setStatusBtn] = useState(' ');
   const navigate = useNavigate();
+  const statusBtn = 'pointer-events-none select-none cursor-default';
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -34,12 +34,10 @@ export default function Login() {
     e.preventDefault();
 
     setBtn(true);
-    setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (name === '' || email === '' || password === '' || passwordConfirm === '') {
       setErr('الرجاء ملء جميع الحقول');
       setBtn(false);
-      setStatusBtn(' ');
       return;
     } 
 
@@ -64,12 +62,10 @@ export default function Login() {
       } else {
         setErr(data.message);
         setBtn(false);
-        setStatusBtn(' ');
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setStatusBtn(' ');
       setErr(err.message);
       return;
     });
@@ -100,8 +96,8 @@ export default function Login() {
             <label className='loginColor w-fit'>تأكيد كلمة السر</label>
             <input onChange={handlePasswordConfirm} value={passwordConfirm} className='loginInput' type="password" />
           </div>
-          <div onClick={handleSubmit} className={'cursor-pointer text-center w-full text-2xl font-bold  loginColor2 text-black rounded-[4px]' + statusBtn}>
-            <button className={`h-[56px] ` + statusBtn}> 
+          <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold  loginColor2 text-black rounded-[4px] ${btn&&statusBtn}`}>
+            <button className={`h-[56px] ${btn&&statusBtn}`}> 
             {btn && <SurahLoader/>}
             {!btn && 'انشاء حساب'}  
             </button>
