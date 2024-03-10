@@ -1,37 +1,37 @@
-import {useState, useContext} from 'react'
-import LoginLayout from './LoginLayout';
+import {useState} from 'react'
 import { Link } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
-import { NavBarctx } from '../store/NavBarCtx';
+import { motion } from 'framer-motion';
+import { IoIosArrowBack } from "react-icons/io";
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
-export default function ResetToken() {
+export default function ResetToken(params) {
 
-  const {token, setToken} = useContext(NavBarctx);
   const [btn, setBtn] = useState(false);
   const [statusBtn, setStatusBtn] = useState(' ');
   const [Err, setErr] = useState('');
   const [Accept, setAccept] = useState('');
-  const navigate = useNavigate();
+  
 
+  const handleBackTo1 = () => {
+    params.setPage(1);
+  }
 
   // const 
   const handleToken = (e) => {
-    setToken(e.target.value);
+    params.setToken(e.target.value);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     setBtn(true);
     setStatusBtn('pointer-events-none select-none cursor-default');
 
-    if (token === '') {
+    if (params.token === '') {
+      setAccept('');
       setErr('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
       setStatusBtn(' ');
@@ -44,15 +44,14 @@ export default function ResetToken() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        token,
+        token: params.token,
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setAccept('برجاء الانتظار')
-        setTimeout(() => {
-            navigate('/reset-password');
-        }, 500);
+        setErr('');
+        params.setPage(3);
       } else {
+        setAccept('');
         setErr(res.message);
         setBtn(false);
         setStatusBtn(' ');
@@ -61,22 +60,28 @@ export default function ResetToken() {
     }).catch(err => {
       setBtn(false);
       setStatusBtn(' ');
+      setAccept('');
       setErr(err.message);
       return;
     });
   }
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Ramadan Points - Forgot Password </title>
-      </Helmet>
-      <LoginLayout>
-        <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
+        <motion.form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
+            initial={{ opacity: 0, x: '50%' }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .5 }}
+            exit={{ opacity: 0, x: '-50%' }}
+          >
+            {/* div to return back */}
+            <div onClick={handleBackTo1} className='cursor-pointer w-fit  self-end bg-[#CBA947] p-3 rounded-lg'>
+                <IoIosArrowBack color='black' size={30}/> 
+            </div>
+
+
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>رمز التحقق</label>
-            <input onChange={handleToken} className='loginInput' type="text" value={token} placeholder='ادخل الرمز المرسل في بريدك الالكتروني' />
+            <input onChange={handleToken} className='loginInput' type="text" value={params.token} placeholder='ادخل الرمز المرسل في بريدك الالكتروني' />
           </div>
           <div onClick={handleSubmit} className={'text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] cursor-pointer ' + statusBtn}>
             <button className={`h-[56px] ` + statusBtn}> 
@@ -94,8 +99,6 @@ export default function ResetToken() {
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
             <p>هل تريد تسجيل الدخول؟ <Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
           </div>
-        </form>
-      </LoginLayout>
-    </HelmetProvider>
+        </motion.form>
   )
 }

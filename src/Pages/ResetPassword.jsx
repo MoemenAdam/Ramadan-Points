@@ -1,16 +1,15 @@
-import {useState, useContext} from 'react'
-import LoginLayout from './LoginLayout';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
-import { NavBarctx } from '../store/NavBarCtx';
+import { motion } from 'framer-motion';
+import { IoIosArrowBack } from "react-icons/io";
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
 
-export default function ResetPassword() {
+export default function ResetPassword(params) {
 
-    const {token} = useContext(NavBarctx);
+    const {token} = params;
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [btn, setBtn] = useState(false);
@@ -18,6 +17,10 @@ export default function ResetPassword() {
     const [Err, setErr] = useState('');
     const [Accept, setAccept] = useState('');
     const navigate = useNavigate();
+
+  const handleBackTo2 = () => {
+    params.setPage(2);
+  }
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -34,6 +37,7 @@ export default function ResetPassword() {
     setStatusBtn('pointer-events-none select-none cursor-default');
 
     if (password === '' || passwordConfirm === '') {
+      setAccept('');
       setErr('الرجاء ملء جميع الحقول');
       setBtn(false);
       setStatusBtn(' ');
@@ -52,11 +56,13 @@ export default function ResetPassword() {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
+        setErr('');
         setAccept(`تم تغيير كلمة المرور بنجاح, سيتم تحويلك الى صفحة تسجيل الدخول`)
         setTimeout(() => {
             navigate('/login');
         }, 5000);
       } else {
+        setAccept('');
         setErr(res.message);
         setBtn(false);
         setStatusBtn(' ');
@@ -65,21 +71,24 @@ export default function ResetPassword() {
     }).catch(err => {
       setBtn(false);
       setStatusBtn(' ');
+      setAccept('');
       setErr(err.message);
       return;
     });
   }
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Ramadan Points - Reset Password</title>
-      </Helmet>
-      <LoginLayout>
-        {
-          token ?
-          <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
+          <motion.form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
+            initial={{ opacity: 0, x: '50%' }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .5 }}
+            exit={{ opacity: 0, x: '-50%' }}
+          >
+
+            {/* div to return back */}
+            <div onClick={handleBackTo2} className='cursor-pointer w-fit  self-end bg-[#CBA947] p-3 rounded-lg'>
+                <IoIosArrowBack color='black' size={30}/> 
+            </div>
             <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
             <div className='flex flex-col'>
               <label className='loginColor w-fit'>كلمه المرور الجديده</label>
@@ -101,13 +110,6 @@ export default function ResetPassword() {
             <div className='text-red-600 text-center'>
               {Err}
             </div>
-          </form>
-          :
-          <div className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
-            <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> لا يوجد رمز تحقق </h1>
-          </div>
-        }
-      </LoginLayout>
-    </HelmetProvider>
+          </motion.form>
   )
 }
