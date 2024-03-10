@@ -199,6 +199,9 @@ body{
   margin: 10px 0;
   background: radial-gradient(50% 50% at 50% 50%, #343020 0%, rgba(234, 234, 234, 0) 100%);
 }
+.LeaderBoardBg{
+  background: linear-gradient(90deg, #26303B 50%, #3A4857 100%);
+}
 .Aozr{
   border: 1px solid #9B7D24;
   border-radius: 4px;
