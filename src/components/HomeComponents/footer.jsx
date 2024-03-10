@@ -2,8 +2,9 @@ import { CiFacebook } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import {memo} from 'react'
 
-export default function Footer() {
+export default memo(function Footer() {
   return (
     <footer className="h-[276px]  bg-black2 flex justify-center items-center">
       <div className="h-fit w-full  mainMargin fold3:gap-4 fold3:mb-8 fold2:mb-16 mb-32 flex-col flex justify-center items-center">
@@ -20,13 +21,13 @@ export default function Footer() {
             © 2024 جميع الحقوق محفوظة لدى موقع رمضان بوينتس
           </p>
           <div className="flex flex-row gap-3 justify-center items-center">
-            <Link to={"https://mustafa-elsharawy.vercel.app"} target="_blank">
+            <Link to={"mailto:RamadanPoints@gmail.com"} target="_blank">
               <CgMail className="w-[28px] h-[28px] text-white2" />
             </Link>
             <Link to={"https://www.facebook.com/profile.php?id=61557429622952&mibextid=JRoKGi"} target="_blank">
               <CiFacebook className="w-[28px] h-[28px] text-white2" />
             </Link>
-            <Link to={"https://mustafa-elsharawy.vercel.app"} target="_blank">
+            <Link to={"https://www.instagram.com/ramadan_points/"} target="_blank">
               <FaInstagram className="w-[28px] h-[28px] text-white2" />
             </Link>
           </div>
@@ -34,4 +35,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+})

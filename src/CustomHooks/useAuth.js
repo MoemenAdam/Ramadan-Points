@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import Cookies from 'js-cookie';
 export const useAuth = (url, token, method, body) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -19,6 +19,14 @@ export const useAuth = (url, token, method, body) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
+        if(url==='https://ramadan-points.onrender.com/api/v1/users/me'){
+          if(data.status!=='success'){
+            Cookies.remove('token');
+            Cookies.remove('name');
+          }else{
+            Cookies.set('name',data.data.user.name.split(' ')[0]);
+          }
+        }
       }
       if(token)fetchData(url);
     }catch(e){

@@ -52,10 +52,8 @@ export default function Login() {
       });
     
       const res = await response.json();
-      console.log(res);
       if (res.status === 'success') {
         Cookies.set('token', res.data.token);
-        Cookies.set('name', res.data.name);
         navigate('/');
       } else {
         setErr(res.message);

@@ -1,5 +1,5 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useRef, useContext, useEffect } from "react"
+import { useRef, useContext, useEffect, useState } from "react"
 import { NavBarctx } from "../store/NavBarCtx";
 
 import WelcomeSection from "../components/HomeComponents/WelcomeSection"
@@ -19,6 +19,7 @@ export default function Home() {
   const about = useRef(null);
   const footer = useRef(null);
   const leaderboard = useRef(null);
+  const [Show, setShow] = useState(false)
   useEffect(()=>{
     const url = window.location.hash.substring(1);
     if(url===''){
@@ -75,7 +76,7 @@ export default function Home() {
         <Duas />
       </div>
       <div ref={about}>
-        <About />
+        <About  setShow={setShow}/>
       </div>
       <div ref={quran}>
         <QuranSection />
@@ -86,7 +87,7 @@ export default function Home() {
       <div ref={footer}>
         <Footer />
       </div>
-      <Challenges />
+      <Challenges Show={Show} setShow={setShow}/>
     </HelmetProvider>
   )
 }

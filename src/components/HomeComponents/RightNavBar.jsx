@@ -89,7 +89,6 @@ export default function RightNavBar() {
       return 7;
     return 1;
   });
-  console.log(Turn);
   const {setUrl} = useContext(NavBarctx)
   const navigate = useNavigate()
 

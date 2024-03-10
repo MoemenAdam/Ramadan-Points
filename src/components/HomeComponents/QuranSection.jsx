@@ -1,8 +1,8 @@
 import Quran from './QuranComponents/Quran'
 import QuranSearch from './QuranComponents/QuranSearch'
-import { useState } from 'react'
+import { useState,memo } from 'react'
 
-export default function QuranSection() {
+export default memo(function QuranSection() {
   const [surahNumber,setSurahNumber] = useState(parseInt(localStorage.getItem('SurahNumber')) || 1);
   const [Jozoa, setJozoa] = useState(1)
   const [JozoaClicked, setJozoaClicked] = useState(1)
@@ -20,4 +20,4 @@ export default function QuranSection() {
       </main>
     </main>
   )
-}
+})

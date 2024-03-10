@@ -1,14 +1,13 @@
 import TopUsers from "../components/LeaderBoardComponents/TopUsers"
 import AllUsers from "../components/LeaderBoardComponents/AllUsers"
-import { useLocation } from "react-router-dom"
+import { useLocation,useNavigate } from "react-router-dom"
 import TopNavBar from "../components/HomeComponents/TopNavBar";
-import { useNavigate } from "react-router-dom";
 import Footer from "../components/HomeComponents/footer";
 import {useAuth} from '../CustomHooks/useAuth'
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import Cookies from "js-cookie";
 const url = 'https://ramadan-points.onrender.com/api/';
-export default function LeaderBoard() {
+export default memo(function LeaderBoard() {
   const location = useLocation().pathname.split('/')[1];
   const [Top3Data, setTop3Data] = useState(false);
   const [AllData, setAllData] = useState(false);
@@ -91,4 +90,4 @@ export default function LeaderBoard() {
       }
     </div>
   )
-}
+})

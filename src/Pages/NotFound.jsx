@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TopNavBar from "../components/HomeComponents/TopNavBar";
+import FooterText from "../components/FooterText";
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function NotFound() {
           <img src="assets/404Image.png" alt="" />
         </div>
       </div>
+      <FooterText />
     </section>
   )
 }

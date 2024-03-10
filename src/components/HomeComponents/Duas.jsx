@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import Lantern from '/assets/Lantern.svg'
@@ -61,7 +61,7 @@ const DuasPrint = ({arr,Turn,direction})=>{
 }
 
 
-export default function Duas() {
+export default memo(function Duas() {
   const [active, setActive] = useState(1);
   const [direction, setDirection] = useState(1);
   const [can, setCan] = useState([false, true]);
@@ -161,4 +161,4 @@ export default function Duas() {
       </section>
     </main>
   )
-}
+})

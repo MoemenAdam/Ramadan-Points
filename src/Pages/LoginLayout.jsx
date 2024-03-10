@@ -1,13 +1,14 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import FooterText from "../components/FooterText";
 
 
 
 export default function Login({children}) {
   const navigate = useNavigate();
   return (
-    <section className='mainPage pb-10 min-h-screen text-white flex flex-col'>
+    <section className='mainPage min-h-screen text-white flex flex-col'>
       <header className='ml-6 lg:ml-14 flex justify-between items-center'>
         <div className='sm:pr-6'>
           <Link to='/'>
@@ -21,6 +22,7 @@ export default function Login({children}) {
       <main className='loginbg max-w-[500px] self-center flex-grow h-full mainMargin  flex justify-center items-center'>
         {children}
       </main> 
+        <FooterText/>
     </section>
   )
 }

@@ -133,8 +133,7 @@ const AllChallenges = ({ type }) => {
   )
 }
 
-export default function Challenges() {
-  const [Show, setShow] = useState(false)
+export default function Challenges({Show, setShow}) {
   const [Challenge, setChallenge] = useState(1);
 
   useEffect(() => {

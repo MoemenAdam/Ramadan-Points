@@ -1,8 +1,24 @@
 import TopNavBar from "./TopNavBar"
 import RightNavBar from "./RightNavBar"
+import {useNavigate} from "react-router-dom"
 import {motion} from "framer-motion"
+import { useContext } from "react"
+import { NavBarctx } from "../../store/NavBarCtx"
+import Cookies from "js-cookie"
+import { memo } from "react"
 
-export default function WelcomeSection() {
+export default memo(function WelcomeSection() {
+  const {setUrl} = useContext(NavBarctx);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if(Cookies.get('token')){
+      navigate('/#challenge');
+      setUrl('challenge');
+    }else{
+      setUrl('login');
+      navigate('/login');
+    }
+  }
   return (
     <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col pb-10">
       <TopNavBar/>
@@ -16,9 +32,10 @@ export default function WelcomeSection() {
             </p>
           </div>
           <button
+          onClick={handleClick}
             className="Mainbtn mt-10 "> إبدأ التحدي </button>
         </div>
       </section>
     </main>
   )
-}
+})
