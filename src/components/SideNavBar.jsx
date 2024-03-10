@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NavLink, Link } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion"
@@ -16,6 +16,13 @@ export default function SideNavBar() {
       setUrl(url)
     }
   }
+  useEffect(()=>{
+    if(navBar){
+      document.body.style.overflow = 'hidden';
+    }else{
+      document.body.style.overflow = 'auto';
+    }
+  },[navBar])
   return (
     <AnimatePresence>
       {(navBar && url !== 'login') &&

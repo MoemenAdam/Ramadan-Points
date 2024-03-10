@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 
+/* Width */
+::-webkit-scrollbar {
+  width: 8px; /* Change width as needed */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1E2820 /* Change background color as needed */
+  
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
+  border-radius: 99px;
+  
+}
+
 @font-face {
   font-family: hafs;
   src: url('assets/HAFS.otf') format('opentype');
@@ -157,7 +175,10 @@ body{
   margin: 10px 0;
   background: radial-gradient(50% 50% at 50% 50%, #343020 0%, rgba(234, 234, 234, 0) 100%);
 }
-
+.Aozr{
+  border: 1px solid #9B7D24;
+  border-radius: 4px;
+}
 .ChallengeBTN{
   border-top: 4px solid #9B7D24;
   border-right: 4px solid #9B7D24;
@@ -177,7 +198,7 @@ body{
   border-bottom: 0;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  @apply bg-black fixed bottom-0 left-0 fold3:left-[210px] z-[600] w-full  fold3:w-[400px] h-[600px] p-4;
+  @apply bg-black fixed bottom-0 left-0 fold3:left-[210px] z-[600] w-full  fold3:w-[400px] h-[600px] ;
 }
 .mainMargin{
   @apply mx-6 lg:mx-14;
