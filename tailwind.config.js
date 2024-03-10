@@ -16,8 +16,9 @@ export default {
         'white2': '#EAEAEA99',
         'black':'#101010',
         'black2':'#171717',
-
-
+        'profile': '#343020',
+        'profile2': '#9B7D24',
+        
       },
       screens:{
         'big': '1200px',
