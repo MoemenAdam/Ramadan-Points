@@ -17,6 +17,7 @@ export default memo(function LeaderBoard() {
 
   useEffect(()=>{
     if(loading)return;
+    if(data.status === 'fail')return;
     let tot = 3;
     // let holder = {};
     let holder = {
@@ -39,6 +40,7 @@ export default memo(function LeaderBoard() {
     let first = {};
     let second = {};
     let third = {};
+    console.log(data);
     if(tot > data.data.users.length) tot = data.data.users.length;
     for(let i = 0; i < tot; i++){
       if(i === 0)

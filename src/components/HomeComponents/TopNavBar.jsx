@@ -5,15 +5,16 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {NavBarctx} from "../../store/NavBarCtx"
 import Cookies from "js-cookie";
 import { useAuth } from "../../CustomHooks/useAuth"
+import { AuthContext } from "../../store/AuthContext";
+
 
 
 
 export default function TopNavBar() {
-  const Name = Cookies.get('name');
   const {navBar, setNavBar} = useContext(NavBarctx)
   const {url,setUrl} = useContext(NavBarctx)
-  const [userLoggedin, setUserLoggedin] = useState((Name)?true:false)
-  const [userName, setUserName] = useState(Name)
+  const {isLoggedin, setIsLoggedin} = useContext(AuthContext);
+  const {userName, setUserName} = useContext(AuthContext);
   const Token = Cookies.get('token');
   const location = useLocation().pathname.split('/')[1];
 
@@ -22,7 +23,7 @@ export default function TopNavBar() {
   useEffect(()=>{
     if(userDataLoading)return;
     if(userData.status!=='success')return;
-    setUserLoggedin(true);
+    setIsLoggedin(true);
     setUserName(userData.data.user.name.split(' ')[0]);
   },[userDataLoading])
 
@@ -52,8 +53,8 @@ export default function TopNavBar() {
               <li><NavLink onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
 
               <li className="loginColor">
-                {!userLoggedin && <Link to="/login">تسجيل الدخول</Link>}
-                {userLoggedin && 
+                {!isLoggedin && <Link to="/login">تسجيل الدخول</Link>}
+                {isLoggedin && 
                   <Link to="/profile">مرحبا {userName}</Link>
                 }
               </li>

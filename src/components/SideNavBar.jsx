@@ -3,10 +3,13 @@ import { NavLink, Link } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion"
 import { NavBarctx } from "../store/NavBarCtx"
+import {AuthContext} from "../store/AuthContext"
 
 export default function SideNavBar() {
   const { navBar, setNavBar } = useContext(NavBarctx)
   const { url, setUrl } = useContext(NavBarctx)
+  const {isLoggedin, setIsLoggedin} = useContext(AuthContext);
+  const {userName, setUserName} = useContext(AuthContext);
 
   const handleMenuClicked = () => {
     setNavBar(prev => !prev)
@@ -38,9 +41,14 @@ export default function SideNavBar() {
           </div>
           <nav className="text-center">
             <ul className="flex flex-col gap-12 justify-center text">
+              <li className="loginColor">
+                {isLoggedin && <p>مرحبا {userName}</p>}
+              </li>
               <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
               <li><NavLink onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
-              <li><Link to="/login" onClick={handleLink('login')}>تسجيل الدخول</Link></li>
+              <li className="loginColor">
+                {!isLoggedin && <Link to="/login">تسجيل الدخول</Link>}
+              </li>
             </ul>
           </nav>
 

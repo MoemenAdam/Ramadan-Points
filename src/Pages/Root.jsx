@@ -15,14 +15,14 @@ export default function Root() {
   },[url])
 
   const styles = {
-    backdrop: 'pointer-events-none select-none bg-black opacity-50',
-    backdropReverse: 'nav:pointer-events-auto nav:select-auto nav:bg-black nav:opacity-100'
+    backdrop: 'pointer-events-none select-none bg-black opacity-50 overflow-hidden',
+    backdropReverse: 'nav:pointer-events-auto nav:select-auto nav:bg-black nav:opacity-100 nav:overflow-auto'
   }
   return (
     <>
       <SideNavBar/>
       <div onClick={handleBackDropClicked}>
-        <div className={navBar?`${styles.backdrop} ${styles.backdropReverse}`:null}>
+        <div className={navBar?`${styles.backdrop} ${styles.backdropReverse} BackDrop`:null}>
           <Outlet/>
         </div>
       </div>
