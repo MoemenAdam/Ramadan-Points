@@ -143,6 +143,24 @@ body{
   height: 5px;
   background-image: radial-gradient(50% 301.88% at 50% 100%, #9B7D24 0%, rgba(57, 91, 100, 0) 100%);
 }
+
+.ChallengeActiveFooter{
+  position: relative;
+}
+
+.ChallengeActiveFooter::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -12px;
+  width: 50%;
+  height: 4px;
+  /* background-image: radial-gradient(50% 301.88% at 50% 100%, #9B7D24 0%, rgba(57, 91, 100, 0) 100%); */
+  background-image: radial-gradient(50.14% 50.14% at 49.86% 75%, #2F2F2F 0%, rgba(23, 23, 23, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+}
+
 .ChallengeActive,.ChallengesActive,.rightBorder{
   position: relative;
   transition: all 0.3s;

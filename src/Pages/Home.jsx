@@ -8,12 +8,15 @@ import Duas from "../components/HomeComponents/Duas";
 import About from '../components/HomeComponents/About';
 import Challenges from '../components/ChallengesComponents/Challenges';
 import RightNavBar from '../components/HomeComponents/RightNavBar';
+import Footer from '../components/HomeComponents/footer';
+
 export default function Home() {
   const {url} = useContext(NavBarctx)
   const Home = useRef(null);
   const quran = useRef(null);
   const duas = useRef(null);
   const about = useRef(null);
+  const footer = useRef(null);
   useEffect(()=>{
     const url = window.location.hash.substring(1);
     if(url===''){
@@ -40,6 +43,12 @@ export default function Home() {
         behavior:'smooth'
       })
     }
+    if(url === 'about'){
+      window.scrollTo({
+        top:footer?.current?.offsetTop,
+        behavior:'smooth'
+      })
+    }
   },[url])
   return (
     <HelmetProvider>
@@ -62,6 +71,9 @@ export default function Home() {
       </div>
       <div ref={about}>
         <About />
+      </div>
+      <div ref={footer}>
+        <Footer />
       </div>
       <Challenges />
     </HelmetProvider>
