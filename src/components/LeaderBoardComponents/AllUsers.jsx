@@ -1,5 +1,6 @@
+import { useEffect } from "react"
 
-export default function AllUsers() {
+export default function AllUsers({data,currentUser}) {
 
   const GridDiv = ({data,styles})=>{
     return(
@@ -19,23 +20,25 @@ export default function AllUsers() {
     )
   }
 
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
+
+  if(!data) return;
+
   return (
     <main className="text-white w-full text-center mb-20">
       <GridDiv styles='bg-black' data={{right:'الترتيب',mid:'المتسابق',left:'النقاط'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
-      <GridDiv styles='LeaderBoardBg' data={{right:'4',mid:'سمبوسة 15',left:'700'}}/>
+      {
+        data.map((e,idx)=>{
+          return(
+            <GridDiv key={e._id} 
+            styles={`${e._id===currentUser?'LeaderBoardCurrentBg':'LeaderBoardBg'}`}
+             data={{right:idx+4,mid:e.img,left:e.points}}/>
+          )
+        })
+      }
+      {/* .LeaderBoardCurrentBg */}
     </main>
   )
 }

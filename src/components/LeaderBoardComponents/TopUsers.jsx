@@ -1,24 +1,11 @@
 import Top1 from './Top1.svg'
 import Top2 from './Top2.svg'
 import Top3 from './Top3.svg'
-export default function TopUsers({data}) {
-  // {
-  //   first:{
-  //     name: 'سوبيا 15',
-  //     score: 1900
-  //   },
-  //   second:{
-  //     name: 'سمبوسة 93',
-  //     score: 993
-  //   },
-  //   third:{
-  //     name: 'سمبوسة 4',
-  //     score: 752
-  //   }
-  // }
+export default function TopUsers({data,currentUser}) {
+  if(!data)return
   return (
     <div className="flex nav:flex-row flex-col gap-5 gap-y-32 nav:mt-60 mt-32 h-full">
-      <div className="relative Topbg w-[300px] h-[230px] nav:order-1 order-3 flex justify-center items-center">
+      <div className={`relative ${data.third.id!==currentUser?'Topbg':'TopbgCurrent'} w-[300px] h-[230px] nav:order-1 order-3 flex justify-center items-center`}>
         <img style={{boxShadow:'0px 14px 100px 0px #C47A31'}} className='w-24 rounded-2xl absolute -top-32' src="assets/sambosa1.jpg" alt="" />
         <p className='absolute -top-6 text-white font-medium text-lg'>{data.third.name}</p>
         
@@ -30,7 +17,7 @@ export default function TopUsers({data}) {
           </div>
         </div>
       </div>
-      <div className="relative Topbg w-[300px] h-[230px] nav:order-1 order-1 nav:-top-20 flex justify-center items-center">
+      <div className={`relative ${data.first.id!==currentUser?'Topbg':'TopbgCurrent'} w-[300px] h-[230px] nav:order-1 order-1 nav:-top-20 flex justify-center items-center`}>
         <img style={{boxShadow:'0px 14px 100px 0px #F6CB01'}} className='w-24 rounded-2xl absolute -top-32' src="assets/gozhend1.png" alt="" />
         <p className='absolute -top-6 text-white font-medium text-lg'>{data.first.name}</p>
         
@@ -43,7 +30,7 @@ export default function TopUsers({data}) {
         </div>
 
       </div>
-      <div className="relative Topbg w-[300px] h-[230px] nav:order-1 order-2 flex justify-center items-center">
+      <div className={`relative ${data.second.id!==currentUser?'Topbg':'TopbgCurrent'} w-[300px] h-[230px] nav:order-1 order-2 flex justify-center items-center`}>
         <img style={{boxShadow:'0px 14px 100px 0px #B6B5B5'}} className='w-24 rounded-2xl absolute -top-32' src="assets/sambosa2.png" alt="" />
         <p className='absolute -top-6 text-white font-medium text-lg'>{data.second.name}</p>
         

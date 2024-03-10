@@ -55,6 +55,13 @@ body{
   background-size: cover;
 }
 
+.TopbgCurrent{
+  background-image: url('assets/TopUserCurrent.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .surahbg{
   background-image: url('assets/surahbg2.png');
   background-position: center;
@@ -201,6 +208,9 @@ body{
 }
 .LeaderBoardBg{
   background: linear-gradient(90deg, #26303B 50%, #3A4857 100%);
+}
+.LeaderBoardCurrentBg{
+  background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
 }
 .Aozr{
   border: 1px solid #9B7D24;
