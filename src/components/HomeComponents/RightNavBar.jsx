@@ -1,5 +1,6 @@
 import { useState, useContext } from "react"
 import { NavBarctx } from "../../store/NavBarCtx"
+import { useNavigate } from "react-router-dom"
 const Home = ()=>{
   return(
     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,10 +75,49 @@ const Hand = ()=>{
 }
 
 export default function RightNavBar() {
-  const [Turn,setTurn] = useState(1)
-  const {url} = useContext(NavBarctx)
+  const [Turn,setTurn] = useState(()=>{
+    const url = window.location.hash.substring(1);
+    if(url==='')
+      return 1;
+    if(url==='challenge')
+      return 2;
+    if(url==='quran')
+      return 3;
+    if(url==='leaderboard')
+      return 4;
+    if(url==='duas')
+      return 7;
+    return 1;
+  });
+  console.log(Turn);
+  const {setUrl} = useContext(NavBarctx)
+  const navigate = useNavigate()
 
   const handleTurnChange =  (num) => {
+    switch(num){
+      case 1:
+        navigate('/')
+        setUrl('')
+        break;
+      case 2:
+        navigate('#challenge')
+        setUrl('challenge')
+        break;
+      case 3:
+        navigate('#quran')
+        setUrl('quran')
+        break;
+      case 4:
+        navigate('#leaderboard')
+        setUrl('leaderboard')
+        break;
+      case 7:
+        navigate('#duas')
+        setUrl('duas')
+        break;
+      default:
+        break;
+    }
     setTurn(num)
   }
   return (

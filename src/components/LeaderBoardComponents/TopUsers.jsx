@@ -55,7 +55,6 @@ export default function TopUsers({data}) {
           </div>
         </div>
       </div>
-
     </div>
   )
 }
