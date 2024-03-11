@@ -57,7 +57,6 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
-        console.log(data);
         if(data.status !== 'success'){
           navigate('/login');
           document.body.style.overflow = 'auto';
