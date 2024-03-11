@@ -23,7 +23,7 @@
 
 @font-face {
   font-family: hafs;
-  src: url('assets/HAFS.otf') format('opentype');
+  src: url('../assets/HAFS.otf') format('opentype');
 }
 *{
   direction: rtl;
@@ -37,60 +37,60 @@ body{
 }
 
 .welcomePage{
-  background-image: url('assets/background.jpg');
+  background-image: url('../assets/background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .mainPage{
-  background-image: url('assets/texture.svg');
+  background-image: url('../assets/texture.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .Topbg{
-  background-image: url('assets/TopUser.png');
+  background-image: url('../assets/TopUser.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .TopbgCurrent{
-  background-image: url('assets/TopUserCurrent.png');
+  background-image: url('../assets/TopUserCurrent.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .surahbg{
-  background-image: url('assets/surahbg2.png');
+  background-image: url('../assets/surahbg2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .loginbg{
-  background-image: url('assets/Loginbg.png');
+  background-image: url('../assets/Loginbg.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .duasTop{
-  background-image: url('assets/duas1.png');
+  background-image: url('../assets/duas1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .duasLeft{
-  background-image: url('assets/duas2.png');
+  background-image: url('../assets/duas2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .Fanoos{
-  background-image: url('assets/Lantern.svg');
+  background-image: url('../assets/Lantern.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
