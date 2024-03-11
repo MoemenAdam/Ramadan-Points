@@ -3,6 +3,8 @@ import LoginLayout from '../Pages/LoginLayout'
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const url = 'https://ramadan-points.onrender.com/api/v1/';
 
 
@@ -10,23 +12,44 @@ export default function ChangePassword() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
-  const [Err, setErr] = useState('');
-  const [Accept, setAccept] = useState('');
   const [checkData, setCheckData] = useState(false);
   const [btn, setBtn] = useState(false);
   const navigate = useNavigate();
   const statusBtn = 'pointer-events-none select-none cursor-default';
 
+  const ToastERR = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+  const ToastAcc = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
   useEffect(()=>{
     if(passwordConfirm === ''){
       return;
     }
 
     if (passwordConfirm !== '' && password !== passwordConfirm) {
-      setErr('كلمة المرور غير متطابقة');
+      ToastERR('كلمة المرور غير متطابقة');
       setCheckData(false);
     }else{
-      setErr('');
       setCheckData(true);
     }
   },[passwordConfirm,password])
@@ -35,8 +58,7 @@ export default function ChangePassword() {
     e.preventDefault();
     setBtn(true);
     if (password === '' || passwordConfirm === '' || currentPassword==='') {
-      setAccept('');
-      setErr('الرجاء ملء جميع الحقول');
+      ToastERR('الرجاء ملء جميع الحقول');
       setBtn(false);
       return;
     }
@@ -55,22 +77,19 @@ export default function ChangePassword() {
       })
     }).then(response => response.json()).then(data => {
       if (data.status === 'success') {
-        setErr('');
-        setAccept('تم تغيير كلمه المرور بنجاح')
+        ToastAcc('تم تغيير كلمه المرور بنجاح');
         setTimeout(()=>{
           navigate('/profile');
         },2000)
 
       } else {
-        setAccept('');
-        setErr(data.message);
+        ToastERR(data.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setAccept('');
-      setErr(err.message);
+      ToastERR(err.message);
       return;
     });
   }
@@ -110,13 +129,8 @@ export default function ChangePassword() {
             {!btn && 'تغيير كلمه المرور'}
           </button>
         </div>
-        <div className='text-green-600 text-center'>
-          {Accept}
-        </div>
-        <div className='text-red-600 text-center'>
-          {Err}
-        </div>
       </form>
+      <ToastContainer />
     </LoginLayout>
   )
 }

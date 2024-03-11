@@ -5,6 +5,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 import { useNavigate } from 'react-router-dom';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const reducer = (state,action)=>{
   switch(action.type){
@@ -31,25 +34,42 @@ export default function Login() {
   const [userData, dispatch] = useReducer(reducer,init);
   const [btn, setBtn] = useState(false);
   const [checkData, setCheckData] = useState(false);
-  const [Err, setErr] = useState('');
-  const [Accpet, setAccpet] = useState('');
   const navigate = useNavigate();
   const statusBtn = 'pointer-events-none select-none cursor-default';
 
 
+  const ToastERR = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+  const ToastAcc = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+
 
   useEffect(()=>{
     if(userData.name.length>=26){
-      setErr('الاسم لا يجب ان يتجاوز 26 حرف');
+      ToastERR('الاسم لا يجب ان يتجاوز 26 حرف');
       setCheckData(false);
     }else{
-      setErr('');
       setCheckData(true);
-    }
-
-    if(userData.passwordConfirm !== '' && userData.password !== userData.passwordConfirm){
-      setErr('كلمة المرور غير متطابقة');
-      setCheckData(false);
     }
   },[userData]);
 
@@ -70,15 +90,15 @@ export default function Login() {
     e.preventDefault();
     setBtn(true);
 
-
+    
     if (userData.name === '' || userData.email === '' || userData.password === '' || userData.passwordConfirm === '') {
-      setErr('الرجاء ملء جميع الحقول');
+      ToastERR('الرجاء ملء جميع الحقول');
       setBtn(false);
       return;
     } 
 
     if (userData.password !== userData.passwordConfirm) {
-      setErr('كلمة المرور غير متطابقة');
+      ToastERR('كلمة المرور غير متطابقة')
       setBtn(false);
       return;
     }
@@ -96,22 +116,19 @@ export default function Login() {
       })
     }).then(response => response.json()).then(data => {
       if (data.status === 'success') {
-        setErr('');
-        setAccpet('تم إنشاء الحساب بنجاح , تفقد بريدك الإلكتروني لتأكيد الحساب');
+        ToastAcc('تم إنشاء الحساب بنجاح , تفقد بريدك الإلكتروني لتأكيد الحساب');
         setTimeout(()=>{
           navigate('/login');
         },5000)
 
       } else {
-        setAccpet('');
-        setErr(data.message);
+        ToastERR(data.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setAccpet('');
-      setErr(err.message);
+      ToastERR(err.message);
       return;
     });
   }
@@ -148,17 +165,12 @@ export default function Login() {
             </button>
             
           </div>
-          <div className='text-red-600 text-center'>
-            {Err}
-          </div>
-          <div className='text-green-600 text-center'>
-            {Accpet}
-          </div>
           <div className='flex justify-center gap-5 items-center mt-5'>
             <p>لديك حساب؟<Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
           </div>
         </form>
       </LoginLayout>
+      <ToastContainer />
     </HelmetProvider>
   )
 }

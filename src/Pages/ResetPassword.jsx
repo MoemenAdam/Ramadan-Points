@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 import { motion } from 'framer-motion';
 import { IoIosArrowBack } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
@@ -14,8 +16,6 @@ export default function ResetPassword(params) {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [btn, setBtn] = useState(false);
   const statusBtn = 'pointer-events-none select-none cursor-default';
-  const [Err, setErr] = useState('');
-  const [Accept, setAccept] = useState('');
   const navigate = useNavigate();
 
   const handleBackTo2 = () => {
@@ -28,7 +28,30 @@ export default function ResetPassword(params) {
   const handlePasswordConfirm = (e) => {
     setPasswordConfirm(e.target.value);
   }
-
+  const ToastERR = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+  const ToastAcc = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,8 +59,7 @@ export default function ResetPassword(params) {
     setBtn(true);
 
     if (password === '' || passwordConfirm === '') {
-      setAccept('');
-      setErr('الرجاء ملء جميع الحقول');
+      ToastERR('الرجاء ملء جميع الحقول');
       setBtn(false);
       return;
     }
@@ -54,21 +76,18 @@ export default function ResetPassword(params) {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setErr('');
-        setAccept(`تم تغيير كلمة المرور بنجاح, سيتم تحويلك الى صفحة تسجيل الدخول`)
+        ToastAcc('تم تغيير كلمة المرور بنجاح, سيتم تحويلك الى صفحة تسجيل الدخول');
         setTimeout(() => {
           navigate('/login');
         }, 5000);
       } else {
-        setAccept('');
-        setErr(res.message);
+        ToastERR(res.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setAccept('');
-      setErr(err.message);
+      ToastERR(err.message);
       return;
     });
   }
@@ -95,12 +114,7 @@ export default function ResetPassword(params) {
           {!btn && 'تغيير كلمه المرور'}
         </button>
       </div>
-      <div className='text-green-600 text-center'>
-        {Accept}
-      </div>
-      <div className='text-red-600 text-center'>
-        {Err}
-      </div>
+      <ToastContainer />
     </form>
   )
 }

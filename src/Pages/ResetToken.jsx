@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 import { motion } from 'framer-motion';
 import { IoIosArrowBack } from "react-icons/io";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 
@@ -11,9 +14,31 @@ export default function ResetToken(params) {
 
   const [btn, setBtn] = useState(false);
   const statusBtn = 'pointer-events-none select-none cursor-default';
-  const [Err, setErr] = useState('');
-  const [Accept, setAccept] = useState('');
   
+  const ToastERR = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+  const ToastAcc = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
 
   const handleBackTo1 = () => {
     params.setPage(1);
@@ -30,8 +55,7 @@ export default function ResetToken(params) {
     setBtn(true);
 
     if (params.token === '') {
-      setAccept('');
-      setErr('الرجاء ادخال البريد الالكتروني');
+      ToastERR('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
       return;
     } 
@@ -46,24 +70,23 @@ export default function ResetToken(params) {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setErr('');
         params.setPage(3);
+        ToastAcc(res.message);
         setBtn(false);
       } else {
-        setAccept('');
-        setErr(res.message);
+        ToastERR(res.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setAccept('');
-      setErr(err.message);
+      ToastERR(err.message);
       return;
     });
   }
 
   return (
+    <>
         <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
           >
             {/* div to return back */}
@@ -82,16 +105,12 @@ export default function ResetToken(params) {
             {!btn && 'تحقق'}  
             </button>
           </div>
-          <div className='text-green-600 text-center'>
-            {Accept}
-          </div>
-          <div className='text-red-600 text-center'>
-            {Err}
-          </div>
           <div className='flex flex-col justify-center gap-3  text-justify '>
             <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
             <p>هل تريد تسجيل الدخول؟ <Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
           </div>
         </form>
+        <ToastContainer />
+        </>
   )
 }

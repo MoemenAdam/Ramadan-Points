@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 const url = 'https://ramadan-points.onrender.com/api/';
-import { AnimatePresence, motion } from 'framer-motion';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ResetPassword from './ResetPassword';
 import ResetToken from './ResetToken';
-
+import { AnimatePresence } from 'framer-motion';
 export default function ForgotPassword() {
 
   const [page, setPage] = useState(1);
   const [email, setEmail] = useState('');
   const [btn, setBtn] = useState(false);
   const statusBtn = 'pointer-events-none select-none cursor-default';
-  const [Err, setErr] = useState('');
-  const [Accept, setAccept] = useState('');
   const [token, setToken] = useState('');  
 
   // page1
@@ -23,14 +23,37 @@ export default function ForgotPassword() {
     setEmail(e.target.value);
   }
 
+  const ToastERR = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
+  const ToastAcc = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      })
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setBtn(true);
 
     if (email === '') {
-      setAccept('');
-      setErr('الرجاء ادخال البريد الالكتروني');
+      ToastERR('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
       return;
     } 
@@ -45,19 +68,16 @@ export default function ForgotPassword() {
       })
     }).then(response => response.json()).then(res => {
       if (res.status === 'success') {
-        setErr('');
         setPage(2);
         setBtn(false);
       } else {
-        setAccept('');
-        setErr(res.message);
+        ToastERR(res.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
-      setAccept('');
-      setErr(err.message);
+      ToastERR(err.message);
       return;
     });
   }
@@ -87,12 +107,6 @@ export default function ForgotPassword() {
                 {!btn && 'ارسال'}  
                 </button>
               </div>
-              <div className='text-green-600 text-center'>
-                {Accept}
-              </div>
-              <div className='text-red-600 text-center'>
-                {Err}
-              </div>
             </form>
             : page === 2 ? 
               <ResetToken token={token} setToken={setToken} setPage={setPage} />
@@ -101,6 +115,7 @@ export default function ForgotPassword() {
           }
       </AnimatePresence>
         </LoginLayout>
+      <ToastContainer />
     </HelmetProvider>
   )
 }

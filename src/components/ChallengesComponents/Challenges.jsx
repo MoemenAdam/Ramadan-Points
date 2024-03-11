@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
 import {useNavigate} from 'react-router-dom';
 import { ChallngeCtx } from '../../store/ChallngeCtx';
+import { ToastContainer,toast } from 'react-toastify';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 const convertSeconds = (seconds) => {
@@ -59,8 +60,17 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
         setData(data);
         setLoading(false);
         if(data.status !== 'success'){
-          navigate('/login');
-          document.body.style.overflow = 'auto';
+          const message = (Cookies.get('token')?data.message:'يجب تسجيل الدخول أولاً') || 'حدث خطأ ما';
+          toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            })
         }
 
       }
@@ -192,6 +202,7 @@ export default function Challenges({Show, setShow}) {
       <div className='fixed bottom-0 left-0 z-[500] overflow-hidden' style={{ borderRadius: '0 8px 0 0' }}>
         <button onClick={() => { setShowChallnge(prev => !prev) }} className='ChallengeBTN'>قائمة المهام</button>
       </div>
+      <ToastContainer />
     </main>
   )
 }
