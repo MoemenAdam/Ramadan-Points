@@ -12,6 +12,7 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import ResetPassword from "./Pages/ResetPassword"
 import ResetToken from "./Pages/ResetToken"
 import LeaderBoard from "./Pages/LeaderBoard"
+import ChangePassword from "./components/ChangePassword"
 import Profile from "./Pages/Profile"
 import ChallngeCtxProvider from "./store/ChallngeCtx"
 
@@ -28,10 +29,11 @@ function App() {
                 <Route path="login" element={<Login />}/>
                 <Route path="signup" element={<Signup/>}/>
                 <Route path="forgot-password" element={<ForgotPassword />}/>
+                <Route path="change-password" element={<ChangePassword />}/>
                 <Route path="top" element={<LeaderBoard/>}/>
                 <Route path="profile" element={<Profile/>}/>
+                <Route path="*" element={<NotFound />}/>
               </Route>
-              <Route path="/*" element={<NotFound />}/>
             </Routes>
           </AnimatePresence>
         </NavBarCtxProvider>

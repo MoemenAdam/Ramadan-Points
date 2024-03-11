@@ -138,7 +138,7 @@ export default function Login() {
             <input  onChange={handlePassword} value={userData.password} className='loginInput' type="password" />
           </div>
           <div className='flex flex-col'>
-            <label className='loginColor w-fit'>تأكيد كلمة السر</label>
+            <label className='loginColor w-fit'>تأكيد كلمة المرور</label>
             <input onChange={handlePasswordConfirm} value={userData.passwordConfirm} className='loginInput' type="password" />
           </div>
           <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold  loginColor2 text-black rounded-[4px] ${!checkData && 'pointer-events-none cursor-default'} ${btn&&statusBtn}`}>
