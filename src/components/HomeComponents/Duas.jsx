@@ -121,8 +121,8 @@ export default memo(function Duas() {
           </section>
         </div>
       </section>
-      <div className='z-[300] duasLeft hidden nav:block h-[calc(100%-40px)] absolute left-0 top-[150px] w-[400px]'>
-        <nav className='mt-[280px] flex justify-end ml-20 text-[#FFFFFF]'>
+      <div className='z-[300] duasLeft hidden nav:block h-[calc(100%-40px)] absolute left-0 top-[40px] w-[400px]'>
+        <nav className='mt-[350px] flex justify-end ml-20 text-[#FFFFFF]'>
           <ul className='w-[155px] flex flex-col gap-14'>
             <li onClick={() => { handleActiveChange(1) }} className={`cursor-pointer ${active === 1 ? 'duasActive' : ''}`}>أدعية عشوائية</li>
             <li onClick={() => { handleActiveChange(2) }} className={`cursor-pointer ${active === 2 ? 'duasActive' : ''}`}>اذكار الصباح</li>
