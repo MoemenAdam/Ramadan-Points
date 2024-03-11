@@ -81,22 +81,22 @@ export default memo(function LeaderBoard() {
 
   return (
     <div style={{direction:'ltr'}} className="mainPage bg-black min-h-screen overflow-x-hidden">
-      {location==='Top' && <TopNavBar/>}
+      {location==='top' && <TopNavBar/>}
       <div className=" mainMargin">
 
-      {location!=='Top' && <p className="loginColor text-center mt-10 mb-10 font-bold text-4xl">ترتيب المتسابقين</p>}
+      {location!=='top' && <p className="loginColor text-center mt-10 mb-10 font-bold text-4xl">ترتيب المتسابقين</p>}
       <div className="flex flex-col items-center h-full">
         <TopUsers currentUser={currentUser} data={Top3Data} />
-        {location==='Top' && <AllUsers currentUser={currentUser} data={AllData} />}
+        {location==='top' && <AllUsers currentUser={currentUser} data={AllData} />}
       </div>
-      {location!=='Top' && 
+      {location!=='top' && 
         <div className="flex justify-center items-center">
-          <button onClick={()=>navigate('/Top')} className="text-center mb-20 font-bold text-black bg-[#5E758F] rounded-lg px-10 py-4 hover:scale-105 duration-300">
+          <button onClick={()=>navigate('/top')} className="text-center mb-20 font-bold text-black bg-[#5E758F] rounded-lg px-10 py-4 hover:scale-105 duration-300">
           ترتيب جميع المتسابقين
         </button>
       </div>}
       </div>
-      {location==='Top' &&
+      {location==='top' &&
         <Footer/>
       }
       <Challenges/>

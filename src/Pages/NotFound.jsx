@@ -16,7 +16,7 @@ export default function NotFound() {
           <button className="loginColor2 Mainbt w-fit py-3 px-5 rounded-md font-normal text-xl text-black hover:scale-105 duration-300" onClick={() => { navigate('/') }}>العودة إلى الرئيسية</button>
         </div>
         <div className="order-1">
-          <img src="assets/404Image.png" alt="" />
+          <img src="../assets/404Image.png" alt="" />
         </div>
       </div>
       <FooterText />

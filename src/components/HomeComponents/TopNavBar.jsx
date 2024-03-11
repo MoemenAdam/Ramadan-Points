@@ -43,14 +43,14 @@ export default function TopNavBar() {
       <div className="text-white flex items-center justify-between">
         <section className="z-10">
           <Link to="/">
-            <img className="select-none pointer-events-none w-28 h-28 flex-grow sm:mr-6" src="Logo.png" alt="Logo" />
+            <img className="select-none pointer-events-none w-28 h-28 flex-grow sm:mr-6" src="../../Logo.png" alt="Logo" />
           </Link>
         </section>
         <section className="nav:flex-grow z-20 font-normal">
           <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
-              <li><NavLink onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
+              <li><NavLink onClick={handleLink('top')} to="/top">ترتيب المتسابقين</NavLink></li>
 
               <li className="loginColor">
                 {!isLoggedin && <Link to="/login">تسجيل الدخول</Link>}

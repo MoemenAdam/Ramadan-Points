@@ -52,7 +52,7 @@ export default function SideNavBar() {
                 {isLoggedin && <p>مرحبا {userName}</p>}
               </li>
               <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
-              <li><NavLink onClick={handleLink('Top')} to="/Top">ترتيب المتسابقين</NavLink></li>
+              <li><NavLink onClick={handleLink('top')} to="/top">ترتيب المتسابقين</NavLink></li>
               {!isLoggedin &&<li className="loginColor">
                  <Link to="/login">تسجيل الدخول</Link>
               </li>}
