@@ -20,7 +20,7 @@ export default function About() {
           </div>
           <div className='col-span-2 order-2 nav:order-2'></div>
           <div className='col-span-5 flex Aboutbg order-1 nav:order-3'>
-            <img className='z-[2]' src="/assets/about.png" alt="" />
+            <img className='z-[2] w-full h-full' src="/assets/about.png" alt="" />
           </div>
         </section>
       </div>
