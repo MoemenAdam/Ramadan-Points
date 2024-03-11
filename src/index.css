@@ -289,10 +289,6 @@ body{
     line-height: 45px;
     height: 49px;
 }
-.qFrame {
-  background: url('../assets/frame.png') repeat-y;
-}
-
 .select-dropdown,
 .select-dropdown * {
   margin: 0;
