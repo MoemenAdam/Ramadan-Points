@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 export const useAuth = (url, token, method, body) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const headers = {
     'Content-Type': 'application/json',
   }

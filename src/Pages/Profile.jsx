@@ -29,6 +29,7 @@ export default function Login() {
       const data = await res.json();
       Cookies.remove('token');
       Cookies.remove('name');
+      window.location.reload();
       navigate('/login');
     } catch (err) {
       console.log(err);
