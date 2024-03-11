@@ -45,14 +45,16 @@ export default function Login() {
         });
         const data = await response.json();
         setData(data);
-        if (data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
-        if (data.data.user.img.split(' ')[0] === 'سمبوسه') setMyImg('assets/sambosa.png');
-        if (data.data.user.img.split(' ')[0] === 'بسبوسه') setMyImg('assets/basbousa.png');
-        if (data.data.user.img.split(' ')[0] === 'صوبيا') setMyImg('assets/gozhend.png');
 
+        
         setLoading(false);
         if (data.status !== 'success') {
           handleLogOut();
+        }else{
+          if (data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
+          if (data.data.user.img.split(' ')[0] === 'سمبوسه') setMyImg('assets/sambosa.png');
+          if (data.data.user.img.split(' ')[0] === 'بسبوسه') setMyImg('assets/basbousa.png');
+          if (data.data.user.img.split(' ')[0] === 'صوبيا') setMyImg('assets/gozhend.png');
         }
       }
       fetchData();
@@ -65,7 +67,6 @@ export default function Login() {
   }
 
   if (loading || !data || data.status !== 'success') {
-    console.log(1);
     return
   }
   // جيلي - سمبوسة - بسبوسة - سوبيا

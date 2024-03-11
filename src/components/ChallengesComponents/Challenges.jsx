@@ -5,6 +5,7 @@ import quran from './quran.svg'
 import { useAuth } from '../../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
+import {useNavigate} from 'react-router-dom';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 const convertSeconds = (seconds) => {
@@ -19,6 +20,7 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
   const [MyTime, setMyTime] = useState({ hours, minutes, seconds });
   const [data, setData] = useState({});
   const [Loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const Prays = {
     Fajr: 'الفجر',
@@ -55,6 +57,11 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
+        console.log(data);
+        if(data.status !== 'success'){
+          navigate('/login');
+          document.body.style.overflow = 'auto';
+        }
 
       }
       fetchData(`${url}v1/schedules/acceptSchedule/${scheduleID}`);

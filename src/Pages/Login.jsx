@@ -58,7 +58,6 @@ export default function Login() {
       const res = await response.json();
       if (res.status === 'success') {
         Cookies.set('token', res.data.token);
-        console.log(res.data.token);
         navigate('/');
       } else {
         setErr(res.message);
