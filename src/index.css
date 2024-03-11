@@ -281,7 +281,7 @@ body{
     font-family: hafs,"Times New Roman";
 }
 .suraHeaderFrame{
-  background: url(assets/sura-frame.png) no-repeat center center;
+  background: url('../assets/sura-frame.png') no-repeat center center;
   background-size: contain;
     margin: 5px 0px;
     text-align: center;
@@ -291,7 +291,7 @@ body{
     height: 49px;
 }
 .qFrame {
-  background: url(assets/frame.png) repeat-y;
+  background: url('../assets/frame.png') repeat-y;
 }
 
 .select-dropdown,
