@@ -44,9 +44,9 @@ export default memo(function LeaderBoard() {
     for(let i = 0; i < tot; i++){
       let img ='';
       if(data.data.users[i].img.split(' ')[0] === 'جيلي')  img = 'assets/jelly.png';
-      if(data.data.users[i].img.split(' ')[0] === 'سمبوسه')  img = 'assets/sambosa.png';
-      if(data.data.users[i].img.split(' ')[0] === 'بسبوسه')  img = 'assets/basbousa.png';
-      if(data.data.users[i].img.split(' ')[0] === 'صوبيا')  img = 'assets/gozhend.png';
+      if(data.data.users[i].img.split(' ')[0] === 'سمبوسة')  img = 'assets/sambosa.png';
+      if(data.data.users[i].img.split(' ')[0] === 'بسبوسة')  img = 'assets/basbousa.png';
+      if(data.data.users[i].img.split(' ')[0] === 'سوبيا')  img = 'assets/gozhend.png';
       if(i === 0)
       {
         first.name = data.data.users[i].img;
