@@ -94,7 +94,7 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
           <div className='flex fold:flex-row-reverse flex-col gap-2'>
             <div className='flex flex-col justify-between flex-grow'>
               <p className='font-normal'>
-                <span className='text-white'>{name}: </span>
+                <span className='text-white'>{name}{type === 'running' && ':'} </span>
                 {type === 'running' && <span className='text-white opacity-40'>{title}</span>}
               </p>
               <div className='self-end'>
