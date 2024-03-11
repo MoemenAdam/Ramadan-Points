@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router"
+import { Routes, Route } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 
 import Home from "./Pages/Home"

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
+import { useAuth } from '../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
+const url = 'https://ramadan-points.onrender.com/api/v1/';
 import FooterText from '../components/FooterText';
 import Challenges from '../components/ChallengesComponents/Challenges';
-const url = 'https://ramadan-points.onrender.com/api/v1/';
+import ChangePassword from '../components/ChangePassword';
 
 
 export default function Login() {
@@ -26,8 +29,7 @@ export default function Login() {
       const data = await res.json();
       Cookies.remove('token');
       Cookies.remove('name');
-      navigate('/');
-      window.location.reload();
+      navigate('/login');
     } catch (err) {
       console.log(err);
     }
