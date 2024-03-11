@@ -52,9 +52,9 @@ export default function Login() {
           handleLogOut();
         }else{
           if (data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
-          if (data.data.user.img.split(' ')[0] === 'سمبوسه') setMyImg('assets/sambosa.png');
-          if (data.data.user.img.split(' ')[0] === 'بسبوسه') setMyImg('assets/basbousa.png');
-          if (data.data.user.img.split(' ')[0] === 'صوبيا') setMyImg('assets/gozhend.png');
+          if (data.data.user.img.split(' ')[0] === 'سمبوسة') setMyImg('assets/sambosa.png');
+          if (data.data.user.img.split(' ')[0] === 'بسبوسة') setMyImg('assets/basbousa.png');
+          if (data.data.user.img.split(' ')[0] === 'سوبيا') setMyImg('assets/gozhend.png');
         }
       }
       fetchData();
