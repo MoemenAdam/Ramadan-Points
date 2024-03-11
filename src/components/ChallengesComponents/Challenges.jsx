@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import pray from './pray.svg'
 import quran from './quran.svg'
@@ -6,6 +6,7 @@ import { useAuth } from '../../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
 import {useNavigate} from 'react-router-dom';
+import { ChallngeCtx } from '../../store/ChallngeCtx';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 const convertSeconds = (seconds) => {
@@ -141,18 +142,20 @@ const AllChallenges = ({ type }) => {
 
 export default function Challenges({Show, setShow}) {
   const [Challenge, setChallenge] = useState(1);
+  const {ShowChallnge, setShowChallnge} = useContext(ChallngeCtx);
+
 
   useEffect(() => {
-    if (Show) {
+    if (ShowChallnge) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [Show])
+  }, [ShowChallnge])
   return (
     <main>
       <AnimatePresence>
-        {Show &&
+        {ShowChallnge &&
           <motion.div
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -161,7 +164,7 @@ export default function Challenges({Show, setShow}) {
             className='ChallengesContent'
           >
             <div className='rounded-lg sticky top-0 z-[500] bg-black p-2'>
-              <div className='cursor-pointer' onClick={() => { setShow(prev => !prev) }} >
+              <div className='cursor-pointer' onClick={() => { setShowChallnge(prev => !prev) }} >
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="35" width="35" xmlns="http://www.w3.org/2000/svg">
                   <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="50.28%" stopColor="#9B7D24"></stop><stop offset="100%" stopColor="#D7B550"></stop></linearGradient></defs>
                   <path fill="url(#gradient)" d="m289.94 256 95-95A24 24 0 0 0 351 127l-95 95-95-95a24 24 0 0 0-34 34l95 95-95 95a24 24 0 1 0 34 34l95-95 95 95a24 24 0 0 0 34-34z">
@@ -187,7 +190,7 @@ export default function Challenges({Show, setShow}) {
 
       </AnimatePresence>
       <div className='fixed bottom-0 left-0 z-[500] overflow-hidden' style={{ borderRadius: '0 8px 0 0' }}>
-        <button onClick={() => { setShow(prev => !prev) }} className='ChallengeBTN'>قائمة المهام</button>
+        <button onClick={() => { setShowChallnge(prev => !prev) }} className='ChallengeBTN'>قائمة المهام</button>
       </div>
     </main>
   )

@@ -1,9 +1,11 @@
-import React from 'react'
+import {useContext} from 'react'
+import { ChallngeCtx } from '../../store/ChallngeCtx';
 
-export default function About({setShow}) {
+export default function About() {
+  const {setShowChallnge} = useContext(ChallngeCtx);
 
   const handleClick = () => {
-    setShow(prev=>!prev);
+    setShowChallnge(prev=>!prev);
   }
   return (
     <main className='mainPage min-h-screen bg-black flex justify-center'>

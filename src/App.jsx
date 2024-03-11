@@ -13,27 +13,30 @@ import ResetPassword from "./Pages/ResetPassword"
 import ResetToken from "./Pages/ResetToken"
 import LeaderBoard from "./Pages/LeaderBoard"
 import Profile from "./Pages/Profile"
+import ChallngeCtxProvider from "./store/ChallngeCtx"
 
 function App() {
   return (
     <>
-    <AuthContextProvider>
-      <NavBarCtxProvider>
-        <AnimatePresence>
-          <Routes>
-            <Route path="/" element={<Root/>}>
-              <Route path="" element={<Home />}/>
-              <Route path="login" element={<Login />}/>
-              <Route path="signup" element={<Signup/>}/>
-              <Route path="forgot-password" element={<ForgotPassword />}/>
-              <Route path="top" element={<LeaderBoard/>}/>
-              <Route path="profile" element={<Profile/>}/>
-            </Route>
-            <Route path="/*" element={<NotFound />}/>
-          </Routes>
-        </AnimatePresence>
-      </NavBarCtxProvider>
-    </AuthContextProvider>
+    <ChallngeCtxProvider>
+      <AuthContextProvider>
+        <NavBarCtxProvider>
+          <AnimatePresence>
+            <Routes>
+              <Route path="/" element={<Root/>}>
+                <Route path="" element={<Home />}/>
+                <Route path="login" element={<Login />}/>
+                <Route path="signup" element={<Signup/>}/>
+                <Route path="forgot-password" element={<ForgotPassword />}/>
+                <Route path="top" element={<LeaderBoard/>}/>
+                <Route path="profile" element={<Profile/>}/>
+              </Route>
+              <Route path="/*" element={<NotFound />}/>
+            </Routes>
+          </AnimatePresence>
+        </NavBarCtxProvider>
+      </AuthContextProvider>
+    </ChallngeCtxProvider>
     </>
   )
 }

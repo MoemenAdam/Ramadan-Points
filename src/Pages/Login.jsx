@@ -83,7 +83,7 @@ export default function Login() {
       </Helmet>
       <LoginLayout>
         <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'>
-          <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
+          <h1 className='loginColor w-fit mobile:text-4xl font-bold pb-5 self-center text-center text-2xl'> تسجيل الدخول </h1>
           <div className='flex flex-col'>
             <label className='loginColor w-fit'>البريد الإلكتروني</label>
             <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />

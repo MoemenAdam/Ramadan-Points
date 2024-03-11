@@ -76,18 +76,18 @@ export default function Home() {
         <Duas />
       </div>
       <div ref={about}>
-        <About  setShow={setShow}/>
+        <About/>
       </div>
       <div ref={quran}>
         <QuranSection />
       </div>
-      <div className=' min-h-screen' ref={leaderboard}>
-        <LeaderBoard />
+      <div className='min-h-screen' ref={leaderboard}>
+        <LeaderBoard/>
       </div>
       <div ref={footer}>
         <Footer />
       </div>
-      <Challenges Show={Show} setShow={setShow}/>
+      <Challenges/>
     </HelmetProvider>
   )
 }

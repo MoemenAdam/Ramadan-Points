@@ -7,6 +7,7 @@ import { useAuth } from '../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 const url = 'https://ramadan-points.onrender.com/api/v1/';
 import FooterText from '../components/FooterText';
+import Challenges from '../components/ChallengesComponents/Challenges';
 
 
 export default function Login() {
@@ -148,6 +149,7 @@ export default function Login() {
             <FooterText class />
           </div>
         </main>
+        <Challenges/>
       </HelmetProvider>
     </div>
   )

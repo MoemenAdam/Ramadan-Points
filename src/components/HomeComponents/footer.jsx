@@ -6,7 +6,7 @@ import {memo} from 'react'
 
 export default memo(function Footer() {
   return (
-    <footer className="h-[276px]  bg-black2 flex justify-center items-center">
+    <footer className="fold3:h-[276px] h-[386px]  bg-black2 flex justify-center items-center">
       <div className="h-fit w-full  mainMargin fold3:gap-4 fold3:mb-8 fold2:mb-16 mb-32 flex-col flex justify-center items-center">
         <div className="h-[66px] w[80px] overflow-hidden flex justify-center items-center">
           <img

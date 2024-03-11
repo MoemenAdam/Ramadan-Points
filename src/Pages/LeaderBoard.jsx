@@ -6,6 +6,7 @@ import Footer from "../components/HomeComponents/footer";
 import {useAuth} from '../CustomHooks/useAuth'
 import { useEffect, useState, memo } from "react";
 import Cookies from "js-cookie";
+import Challenges from "../components/ChallengesComponents/Challenges";
 const url = 'https://ramadan-points.onrender.com/api/';
 export default memo(function LeaderBoard() {
   const location = useLocation().pathname.split('/')[1];
@@ -98,6 +99,7 @@ export default memo(function LeaderBoard() {
       {location==='Top' &&
         <Footer/>
       }
+      <Challenges/>
     </div>
   )
 })

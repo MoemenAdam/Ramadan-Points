@@ -63,7 +63,6 @@ body{
 }
 
 .surahbg{
-  background-image: url('../assets/surahbg2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -339,8 +338,7 @@ body{
 
 .ayaText{
   font-family: hafs,"Times New Roman";
-  font-size: 30px;
-  line-height: 50px;
+  @apply text-xl mobile:text-[30px] mobile:leading-[50px] leading-[30px];
 }
 
 .surahSearchText{
