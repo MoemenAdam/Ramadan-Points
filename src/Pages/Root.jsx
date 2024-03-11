@@ -9,12 +9,8 @@ export default function Root() {
   const {url, setUrl} = useContext(NavBarctx)
   const handleBackDropClicked = ()=>{
     if(!navBar)return;
-    console.log(1);
     setNavBar(prev=>!prev)
   }
-  useEffect(()=>{
-    console.log(navBar);
-  },[navBar])
   useEffect(()=>{
     if(url!=='')setNavBar(false)
   },[url])

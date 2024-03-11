@@ -83,8 +83,6 @@ export default function ChangePassword() {
   const handleCurrentPassword = (e) => {
     setCurrentPassword(e.target.value);
   }
-  // console.log(Cookies.get('token'));
-  // if(!Cookies.get('token'))navigate('/notfound');
   useEffect(()=>{
     if(!Cookies.get('token'))navigate('/notfound');
   },[])
