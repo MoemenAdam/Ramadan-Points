@@ -47,8 +47,7 @@ const DuasPrint = ({arr,Turn,direction})=>{
               className='text-center flex flex-col justify-center items-center text-white w-[250px] h-[250px]  relative top-[370px] font-bold leading-8' key={e.id}
             >
               {e.times && <p className='text-green-700 text-xl absolute -top-16'>
-              {e.times}
-              {e.times===1 ? ' مرة' : ' مرات'}  
+              تكرار : {e.times}
               </p>}
               {e.content}
             
