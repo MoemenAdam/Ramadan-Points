@@ -72,9 +72,11 @@ export default function ForgotPassword() {
       <AnimatePresence>
           {
             page === 1 ? 
-            <form className='flex flex-col justify-center py-40 px-5 fold2:px-10 fold3:px-20 gap-5'
+            <form className='flex flex-col justify-center pb-20 pt-32 px-5 fold2:px-10 fold3:px-24 gap-5'
             >
-              <h1 className='loginColor w-fit text-3xl font-bold pb-5 self-center'> هل نسيت كلمه المرور </h1>
+              <h1 className='loginColor w-fit text-3xl font-bold pb-5 self-center'> 
+                تغيير كلمة المرور   
+              </h1>
               <div className='flex flex-col'>
                 <label className='loginColor w-fit'>البريد الإلكتروني</label>
                 <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
@@ -90,10 +92,6 @@ export default function ForgotPassword() {
               </div>
               <div className='text-red-600 text-center'>
                 {Err}
-              </div>
-              <div className='flex flex-col justify-center gap-3  text-justify '>
-                <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
-                <p>هل تريد تسجيل الدخول؟ <Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
               </div>
             </form>
             : page === 2 ? 

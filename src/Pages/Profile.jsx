@@ -10,19 +10,64 @@ import FooterText from '../components/FooterText';
 
 
 export default function Login() {
-  const { data, loading } = useAuth(`${url}users/me`, Cookies.get('token'), 'GET', null);
+  const [data, setData] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [myImg, setMyImg] = useState('');
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if (loading) return;
-    if(data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
-    if(data.data.user.img.split(' ')[0] === 'سمبوسه') setMyImg('assets/sambosa.png');
-    if(data.data.user.img.split(' ')[0] === 'بسبوسه') setMyImg('assets/basbousa.png');
-    if(data.data.user.img.split(' ')[0] === 'صوبيا') setMyImg('assets/gozhend.png');
-  },[data])
-  
-  if (loading) return;
+  const handleLogOut = async () => {
+    try {
+      const res = await fetch(`${url}users/logout`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
+        }
+      })
+      const data = await res.json();
+      Cookies.remove('token');
+      Cookies.remove('name');
+      navigate('/login');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    try {
+      setLoading(true);
+      const fetchData = async () => {
+        const response = await fetch(`${url}users/me`, {
+          method:'GET',
+          headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Cookies.get('token')}`
+          }
+        });
+        const data = await response.json();
+        setData(data);
+        if (data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
+        if (data.data.user.img.split(' ')[0] === 'سمبوسه') setMyImg('assets/sambosa.png');
+        if (data.data.user.img.split(' ')[0] === 'بسبوسه') setMyImg('assets/basbousa.png');
+        if (data.data.user.img.split(' ')[0] === 'صوبيا') setMyImg('assets/gozhend.png');
+
+        setLoading(false);
+        if (data.status !== 'success') {
+          handleLogOut();
+        }
+      }
+      fetchData();
+    } catch (e) {
+      console.log(e);
+    }
+  }, [])
+  const handlePassChange = () => {
+    navigate('/forgot-password');
+  }
+
+  if (loading || !data || data.status !== 'success') {
+    console.log(1);
+    return
+  }
   // جيلي - سمبوسة - بسبوسة - سوبيا
 
   return (
@@ -50,14 +95,14 @@ export default function Login() {
                 <div className='pb-10 gap-y-10 h-fit bottom-0 flex flex-col bg-profile2  w-full  justify-evenly items-center pt-24 rounded-2xl'>
                   <div className='flex flex-col justify-center items-center text-center gap-1 mx-10'>
                     {/* <FaRegEdit className='w-[19px] h-[19px] justify-self-center text-center mb-2' /> */}
-                    <h1 className={`font-bold text-3xl break-all ${data.data.user.name.length>=24?"break-all":""}`}>
+                    <h1 className={`font-bold text-3xl break-all ${data.data.user.name.length >= 24 ? "break-all" : ""}`}>
                       {data.data.user.name}
                     </h1>
                     <p>
                       {data.data.user.img}
                     </p>
                   </div>
-                  
+
                   <div className='flex'>
                     <div className='ProfileLine w-32'></div>
                     <p className='font-bold  text-4xl'>#{data.data.user.rank}</p>
@@ -65,16 +110,16 @@ export default function Login() {
                   </div>
 
                   <div className=' w-[80%] rounded-md overflow-hidden border-2 border-black  hover:scale-105 duration-300'>
-                    <button className='text-black w-full h-full px-5 py-4'>
-                    تغيير كلمة المرور
+                    <button onClick={handlePassChange} className='text-black w-full h-full px-5 py-4'>
+                      تغيير كلمة المرور
                     </button>
                   </div>
                   <div className='bg-black w-[80%] rounded-md  overflow-hidden hover:scale-105 duration-300'>
-                    <button className='loginColor w-full h-full px-5 py-4'>
+                    <button onClick={handleLogOut} className='loginColor w-full h-full px-5 py-4'>
                       تسجيل الخروج
                     </button>
                   </div>
-                
+
                 </div>
               </div>
             </div>

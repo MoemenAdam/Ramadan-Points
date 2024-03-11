@@ -26,8 +26,6 @@ function App() {
               <Route path="login" element={<Login />}/>
               <Route path="signup" element={<Signup/>}/>
               <Route path="forgot-password" element={<ForgotPassword />}/>
-              <Route path="reset-token" element={<ResetToken />}/>
-              <Route path="reset-password" element={<ResetPassword />}/>
               <Route path="top" element={<LeaderBoard/>}/>
               <Route path="profile" element={<Profile/>}/>
             </Route>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 export const useAuth = (url, token, method, body) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const headers = {
     'Content-Type': 'application/json',
   }
   if(token!=='noToken')headers.Authorization = `Bearer ${token}`;
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     try{
       setLoading(true);
@@ -19,6 +19,7 @@ export const useAuth = (url, token, method, body) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
+        console.log({url,data});
         if(url==='https://ramadan-points.onrender.com/api/v1/users/me'){
           if(data.status!=='success'){
             Cookies.remove('name');
@@ -28,7 +29,7 @@ export const useAuth = (url, token, method, body) => {
           }
         }
       }
-      if(token)fetchData(url);
+      fetchData(url);
     }catch(e){
       console.log(e);
     }
