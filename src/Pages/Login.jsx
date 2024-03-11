@@ -110,10 +110,10 @@ return (
           </div>
           <Link to='/forgot-password' className='text-[#9B7D24] text-center border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
         </div>
-        <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] ${btn && statusBtn}`}>
+        <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-xl font-medium loginColor2 text-black rounded-[4px] ${btn && statusBtn}`}>
           <button className={`h-[56px] ${btn && statusBtn}`}>
             {btn && <SurahLoader />}
-            {!btn && 'تسجيل دخول'}
+            {!btn && 'تسجيل الدخول'}
           </button>
         </div>
         <div className='flex justify-center text-center items-center mt-5'>

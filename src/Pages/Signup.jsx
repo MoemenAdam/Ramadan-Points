@@ -158,10 +158,10 @@ export default function Login() {
             <label className='loginColor w-fit'>تأكيد كلمة المرور</label>
             <input onChange={handlePasswordConfirm} value={userData.passwordConfirm} className='loginInput' type="password" />
           </div>
-          <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold  loginColor2 text-black rounded-[4px] ${!checkData && 'pointer-events-none cursor-default'} ${btn&&statusBtn}`}>
+          <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-xl font-medium  loginColor2 text-black rounded-[4px] ${!checkData && 'pointer-events-none cursor-default'} ${btn&&statusBtn}`}>
             <button className={`h-[56px] ${!checkData && 'pointer-events-none cursor-default'} ${btn&&statusBtn}`}> 
             {btn && <SurahLoader/>}
-            {!btn && 'انشاء حساب'}  
+            {!btn && 'إنشاء حساب'}  
             </button>
             
           </div>
