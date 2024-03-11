@@ -54,18 +54,21 @@ export default function Login() {
       })
     }).then(response => response.json()).then(data => {
       if (data.status === 'success') {
+        setErr('');
         setAccpet('تم إنشاء الحساب بنجاح , تفقد بريدك الإلكتروني لتأكيد الحساب');
         setTimeout(()=>{
           navigate('/login');
         },5000)
 
       } else {
+        setAccpet('');
         setErr(data.message);
         setBtn(false);
       }
       return;
     }).catch(err => {
       setBtn(false);
+      setAccpet('');
       setErr(err.message);
       return;
     });
