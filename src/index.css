@@ -23,17 +23,25 @@
 
 @font-face {
   font-family: hafs;
-  src: url('../assets/HAFS.otf') format('opentype');
+  src: url('../assets/HAFS.otf');
+}
+@font-face {
+  font-family: Tajawal;
+  src: url('../assets/Tajawal-Regular.ttf');
+}
+@font-face {
+  font-family: Noto;
+  src: url('../assets/NotoNaskhArabic-Regular.ttf');
 }
 *{
   direction: rtl;
 }
 body{
-  font-family: 'Tajawal', sans-serif;
+  font-family: Tajawal;
 }
 
 .TitleFont{
-  font-family: "Noto Naskh Arabic", serif;
+  font-family: Noto;
 }
 
 .welcomePage{

@@ -115,7 +115,7 @@ export default memo(function Duas() {
                 <li onClick={() => { handleActiveChange(2) }} className={`cursor-pointer ${active === 2 ? 'active loginColor' : ''}`}>ادعية الصباح</li>
                 <li onClick={() => { handleActiveChange(3) }} className={`cursor-pointer ${active === 3 ? 'active loginColor' : ''}`}>أدعية المساء</li>
                 <li onClick={() => { handleActiveChange(4) }} className={`cursor-pointer ${active === 4 ? 'active loginColor' : ''}`}>أدعية قبل الإفطار</li>
-                <li onClick={() => { handleActiveChange(5) }} className={`cursor-pointer ${active === 5 ? 'duasActive' : ''}`}>دعاء ختم القرآن الكريم</li>
+                <li onClick={() => { handleActiveChange(5) }} className={`cursor-pointer ${active === 5 ? 'active loginColor' : ''}`}>دعاء ختم القرآن الكريم</li>
               </ul>
             </nav>
           </section>
