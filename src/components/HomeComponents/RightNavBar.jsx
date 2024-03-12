@@ -95,23 +95,18 @@ export default function RightNavBar() {
   const handleTurnChange =  (num) => {
     switch(num){
       case 1:
-        navigate('/')
         setUrl('')
         break;
       case 2:
-        navigate('#challenge')
         setUrl('challenge')
         break;
       case 3:
-        navigate('#quran')
         setUrl('quran')
         break;
       case 4:
-        navigate('#leaderboard')
         setUrl('leaderboard')
         break;
       case 7:
-        navigate('#duas')
         setUrl('duas')
         break;
       default:

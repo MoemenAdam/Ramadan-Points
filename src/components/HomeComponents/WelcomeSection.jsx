@@ -12,7 +12,6 @@ export default memo(function WelcomeSection() {
   const navigate = useNavigate();
   const handleClick = () => {
     if(Cookies.get('token')){
-      navigate('/#challenge');
       setUrl('challenge');
     }else{
       setUrl('login');

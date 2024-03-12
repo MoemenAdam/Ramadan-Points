@@ -21,7 +21,6 @@ export default function Home() {
   const leaderboard = useRef(null);
   const [Show, setShow] = useState(false)
   useEffect(()=>{
-    const url = window.location.hash.substring(1);
     if(url===''){
       window.scrollTo({
         top:Home?.current?.offsetTop,
