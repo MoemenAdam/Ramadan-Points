@@ -28,7 +28,7 @@ export default function Root() {
         progress: undefined,
         theme: "dark",
       });
-    }, 3*60*100)
+    }, 180000)
 
     return () => {
       clearInterval(Slah3laAlRasool)
