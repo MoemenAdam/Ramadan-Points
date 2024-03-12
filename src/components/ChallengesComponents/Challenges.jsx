@@ -5,9 +5,9 @@ import quran from './quran.svg'
 import { useAuth } from '../../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ChallngeCtx } from '../../store/ChallngeCtx';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 const url = 'https://ramadan-points.onrender.com/api/';
 
 const convertSeconds = (seconds) => {
@@ -59,8 +59,8 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
-        if(data.status !== 'success'){
-          const message = (Cookies.get('token')?data.message:'يجب تسجيل الدخول أولاً') || 'حدث خطأ ما';
+        if (data.status !== 'success') {
+          const message = (Cookies.get('token') ? data.message : 'يجب تسجيل الدخول أولاً') || 'حدث خطأ ما';
           toast.error(message, {
             position: "top-right",
             autoClose: 5000,
@@ -70,12 +70,22 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            })
+          })
         }
 
       }
       fetchData(`${url}v1/schedules/acceptSchedule/${scheduleID}`);
     } catch (e) {
+      toast.error(e, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
       console.log(e);
     }
   }
@@ -150,9 +160,9 @@ const AllChallenges = ({ type }) => {
   )
 }
 
-export default function Challenges({Show, setShow}) {
+export default function Challenges({ Show, setShow }) {
   const [Challenge, setChallenge] = useState(1);
-  const {ShowChallnge, setShowChallnge} = useContext(ChallngeCtx);
+  const { ShowChallnge, setShowChallnge } = useContext(ChallngeCtx);
 
 
   useEffect(() => {

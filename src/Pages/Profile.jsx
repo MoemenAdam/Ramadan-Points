@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
-import { useAuth } from '../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 const url = 'https://ramadan-points.onrender.com/api/v1/';
 import FooterText from '../components/FooterText';
 import Challenges from '../components/ChallengesComponents/Challenges';
-import ChangePassword from '../components/ChangePassword';
+import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Login() {
@@ -32,6 +33,16 @@ export default function Login() {
       navigate('/');
       window.location.reload();
     } catch (err) {
+      toast.error(err, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
       console.log(err);
     }
   }
@@ -40,8 +51,8 @@ export default function Login() {
       setLoading(true);
       const fetchData = async () => {
         const response = await fetch(`${url}users/me`, {
-          method:'GET',
-          headers:{
+          method: 'GET',
+          headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${Cookies.get('token')}`
           }
@@ -49,11 +60,11 @@ export default function Login() {
         const data = await response.json();
         setData(data);
 
-        
+
         setLoading(false);
         if (data.status !== 'success') {
           handleLogOut();
-        }else{
+        } else {
           if (data.data.user.img.split(' ')[0] === 'جيلي') setMyImg('assets/jelly.png');
           if (data.data.user.img.split(' ')[0] === 'سمبوسة') setMyImg('assets/sambosa.png');
           if (data.data.user.img.split(' ')[0] === 'بسبوسة') setMyImg('assets/basbousa.png');
@@ -62,7 +73,16 @@ export default function Login() {
       }
       fetchData();
     } catch (e) {
-      console.log(e);
+      toast.error(e, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
     }
   }, [])
   const handlePassChange = () => {
@@ -70,7 +90,24 @@ export default function Login() {
   }
 
   if (loading || !data || data.status !== 'success') {
-    return null;
+    return (
+      <div className='bg-black flex flex-col mainPage min-h-screen overflow-x-hidden'>
+        <header className=' ml-6 lg:ml-14 flex justify-between items-center'>
+          <div className='sm:pr-6'>
+            <Link to='/'>
+              <img src="Logo.png" className='w-28 h-28 pointer-events-none' alt="Logo" />
+            </Link>
+          </div>
+          <div onClick={() => { navigate(-1) }} className='cursor-pointer bg-[#CBA947] p-3 rounded-lg'>
+            <IoIosArrowBack color='black' size={30} />
+          </div>
+        </header>
+        <div className='flex-grow flex justify-center items-center'>
+          <SurahLoader />
+        </div>
+        <ToastContainer />
+      </div>
+    );
   }
   // جيلي - سمبوسة - بسبوسة - سوبيا
 
@@ -152,7 +189,8 @@ export default function Login() {
               <FooterText class />
             </div>
           </main>
-          <Challenges/>
+          <Challenges />
+        <ToastContainer />
         </HelmetProvider>
       </div>
     </>
