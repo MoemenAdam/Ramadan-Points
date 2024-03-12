@@ -14,7 +14,7 @@ export default memo(function LeaderBoard() {
   const [AllData, setAllData] = useState(false);
   const [currentUser, setCurrentUser] = useState(false);
   const navigate = useNavigate();
-  const {data,loading} = useAuth(`${url}v1/users/top?page=1&limit=50`,Cookies.get('token') || 'noToken','GET',null)
+  const {data,loading} = useAuth(`${url}v1/users/top?page=1&limit=100`,Cookies.get('token') || 'noToken','GET',null)
 
   useEffect(()=>{
     if(loading)return;
