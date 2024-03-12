@@ -1,19 +1,39 @@
-import React,{useContext,useEffect,useState} from 'react'
+import { useContext, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { NavBarctx } from '../store/NavBarCtx'
 import SideNavBar from '../components/SideNavBar'
-import Challenges from '../components/ChallengesComponents/Challenges';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Root() {
-  const {navBar, setNavBar} = useContext(NavBarctx)
-  const {url, setUrl} = useContext(NavBarctx)
-  const handleBackDropClicked = ()=>{
-    if(!navBar)return;
-    setNavBar(prev=>!prev)
+  const { navBar, setNavBar } = useContext(NavBarctx)
+  const { url, setUrl } = useContext(NavBarctx)
+  const handleBackDropClicked = () => {
+    if (!navBar) return;
+    setNavBar(prev => !prev)
   }
-  useEffect(()=>{
-    if(url!=='')setNavBar(false)
-  },[url])
+  useEffect(() => {
+    if (url !== '') setNavBar(false)
+  }, [url])
+
+  useEffect(() => {
+    const Slah3laAlRasool = setInterval(() => {
+      toast.error('صلي على رسول الله ❤️', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }, 3*60*100)
+
+    return () => {
+      clearInterval(Slah3laAlRasool)
+    }
+  }, [])
 
   const styles = {
     backdrop: 'pointer-events-none select-none bg-black opacity-50 overflow-hidden',
@@ -21,12 +41,13 @@ export default function Root() {
   }
   return (
     <>
-      <SideNavBar/>
+      <SideNavBar />
       <div onClick={handleBackDropClicked}>
-        <div className={navBar?`${styles.backdrop} ${styles.backdropReverse} BackDrop`:null}>
-          <Outlet/>
+        <div className={navBar ? `${styles.backdrop} ${styles.backdropReverse} BackDrop` : null}>
+          <Outlet />
         </div>
       </div>
+      <ToastContainer/>
     </>
   )
 }
