@@ -70,7 +70,7 @@ export default function Login() {
   }
 
   if (loading || !data || data.status !== 'success') {
-    return
+    return null;
   }
   // جيلي - سمبوسة - بسبوسة - سوبيا
 
