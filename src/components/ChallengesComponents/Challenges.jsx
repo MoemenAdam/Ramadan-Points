@@ -119,7 +119,11 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
                 {type === 'running' && <span className='text-white opacity-40'>{title}</span>}
               </p>
               <div className='self-end'>
-                <p style={{ direction: 'ltr' }} className='loginColor text-lg'>{MyTime.hours}:{MyTime.minutes}:{MyTime.seconds}</p>
+                <p style={{ direction: 'ltr' }} className='loginColor text-lg'>
+                  {MyTime.hours<10&&'0'}{MyTime.hours}
+                  :{MyTime.minutes<10&&'0'}{MyTime.minutes}
+                  :{MyTime.seconds<10&&'0'}{MyTime.seconds}
+                  </p>
               </div>
             </div>
             <div className='self-center'>
