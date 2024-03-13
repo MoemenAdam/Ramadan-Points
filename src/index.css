@@ -341,6 +341,7 @@ body{
 }
 
 .ayaText{
+  white-space: pre-wrap;
   font-family: hafs,"Times New Roman";
   @apply text-xl mobile:text-[30px] mobile:leading-[50px] leading-[30px];
 }

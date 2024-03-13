@@ -132,30 +132,108 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
     </div>
   )
 }
-function QuranText({ ele,aya,surahNumber,surah,surahName }) {
-  if(surahName!==aya?.surah?.name)return null;
+
+function getTextWidth(text, font) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
+
+let widthHolder = 0;
+
+
+function QuranText({ aya, surahName }) {
+  const [formattedText, setFormattedText] = useState('');
+
+  useEffect(() => {
+    const addSpacesToEndOfLine  = (text, containerWidth, fontSize, number) => {
+      if(!text)
+        return '';
+      console.log(`width = ${widthHolder}`);
+      widthHolder += getTextWidth(number, `${fontSize}px hafs`);
+      console.log(text);
+      const words = text.trim().split(' ');
+      console.log(words);
+      let newText = '', curr = '';
+      for (let i = 0; i < words.length; i++) {
+        const wordWidth = getTextWidth(words[i], `${fontSize}px hafs`); // Adjust font size and family accordingly
+        // const spacesNeeded = Math.floor((containerWidth - wordWidth) / getTextWidth(' ', `${fontSize}px hafs`));
+        let test = getTextWidth(curr, `${fontSize}px hafs`) + getTextWidth(words[i], `${fontSize}px hafs`) + widthHolder;
+        console.log(test);  
+        if(test > containerWidth){
+          let addingSpaces = test - containerWidth;
+          let addMoreSpaces = 0;
+          let spaceSize = getTextWidth(' ', `${fontSize}px hafs`);
+          while (addingSpaces> 0) {
+            addMoreSpaces += 1;
+            addingSpaces -= spaceSize; 
+          }
+          const currWords = curr.split(' ');
+          console.log(`currWords = ${currWords} Space = ${addMoreSpaces}`)
+          console.log(`i'm here -> ${newText}`);
+          for(let j = currWords.length - 1; j >= 0; j--){
+            // let toBeginning = '';
+            //   currWords[j] = toBeginning + currWords[j];
+              // currWords[j] = newText.padEnd(currWords[j].length + Math.floor(addingSpaces / currWords.length), ' ');
+              if(!currWords[j])
+                continue;
+              if(addMoreSpaces <= 0)
+                break;
+               currWords[j] = ' '.repeat(Math.floor(addMoreSpaces / currWords.length)) + currWords[j];
+              console.log(`hello thisWord = ${currWords[j]}`);
+              addMoreSpaces -= Math.floor(addMoreSpaces / currWords.length);
+              // if(addingSpaces <= 0)
+              //   break;
+          }
+          for(let j = 0; j < currWords.length; j++){
+            newText = newText + currWords[j] + ' ';
+          }
+          // let addMoreSpaces = 0;
+          // let spaceSize = getTextWidth(' ', `${fontSize}px hafs`);
+          // while (addingSpaces - spaceSize > 0) {
+          //   addMoreSpaces += 1;
+          //   addingSpaces -= spaceSize; 
+          // }
+          // console.log(`spaces to add = ${addMoreSpaces}`);
+          // newText = newText + curr;
+          // newText = newText.padEnd(newText.length + addMoreSpaces, ' ');
+          curr = '';
+          widthHolder = 0;
+        } 
+        curr = curr + words[i] + ' ';
+      }
+      
+      if(curr.length)
+        newText = newText + curr;
+  
+      widthHolder += getTextWidth(newText, `${fontSize}px hafs`);
+      return newText;
+    }
+
+    const verseText = aya.numberInSurah === 1
+      ? aya.surah.name === 'سُورَةُ ٱلْفَاتِحَةِ'
+        ? 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
+        : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1]
+      : aya.text;
+
+    const formatted = addSpacesToEndOfLine(verseText, 600, 30, convertToArabicNumbers(aya.numberInSurah));
+    setFormattedText(formatted);
+
+    // Clean up function
+    return () => {
+    };
+  }, [aya, convertToArabicNumbers, surahName]);
+
+  if (surahName !== aya?.surah?.name) return null;
+
   return (
-    <>
-      <span key={aya.number} className="hover:bg-ayah ayaText duration-500 ">
-        {aya.numberInSurah === 1 ?
-          <>
-            <span>
-              {aya.surah.name === 'سُورَةُ ٱلْفَاتِحَةِ' ?
-                'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
-                : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1]
-              }
-            </span>
-            <span className="px-2 text-green-600 font-semibold">{convertToArabicNumbers(aya.numberInSurah)}</span>
-          </>
-          :
-          <>
-            <span>{aya.text}</span>
-            <span className="px-2 text-green-600 font-semibold">{convertToArabicNumbers(aya.numberInSurah)}</span>
-          </>
-        }
-      </span>
-    </>
-  )
+    <span key={aya.number} className="hover:bg-ayah ayaText duration-500">
+      <span className="quranContainer">{formattedText}</span>
+      <span className="quranContainer px-2 text-green-600 font-semibold">{convertToArabicNumbers(aya.numberInSurah)}</span>
+    </span>
+  );
 }
 // )
 export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClicked,Jozoa,setJozoa,JozoaClicked }) {
@@ -235,7 +313,7 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
             <div>الجزء {convertToArabicNumbers(JozoaHolder)}</div>
             <div>{surahName}</div>
           </div>
-          <div className='max-w-[600px] h-fit min-h-[700px] surahbg p-10 text-ayahColor'>
+          <div className='quranTesting max-w-[600px] h-fit min-h-[700px] surahbg text-ayahColor'>
             <>
             {surahsInPage?.map((ele)=>(
               <div key={ele.name} className="pt-10 sm:pt-10 md:pt-0 pb-10" id="quranTextLoop">
