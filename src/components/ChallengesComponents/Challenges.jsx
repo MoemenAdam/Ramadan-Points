@@ -38,7 +38,7 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
     title = 'بعد إتمام صلاة ' + Prays[name] + ' اضغط على إنهاء المهمة.';
     name = 'صلاة ' + Prays[name];
   } else {
-    name = 'قراءة الجزء ' + name.split(' ')[1] + ' من القرآن';
+    name = 'قراءة جزء جديد من القرآن الكريم'
     title = 'بعد إتمام قراءة الجزء اضغط على إنهاء المهمة.'
   }
 

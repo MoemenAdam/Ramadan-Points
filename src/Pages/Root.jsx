@@ -48,7 +48,7 @@ export default function Root() {
                 initial={{ opacity: 0, y: '-100%' }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: '-100%' }}
-                className='fixed top-0 right-0 cursor-pointer bg-black z-[100] m-3 py-5 px-20 text-white select-none'
+                className='fixed top-0 right-0 text-center text-sm sm:text-md cursor-pointer bg-black z-[100] m-3 py-5 px-20 text-white select-none'
                 whileHover={{ scale: 1.05}}
                 onClick={() => setShowSala2(false)}
               >
