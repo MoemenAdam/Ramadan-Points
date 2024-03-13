@@ -9,11 +9,13 @@ export default memo(function Footer() {
     <footer className="fold3:h-[276px] h-[386px]  bg-black2 flex justify-center items-center">
       <div className="h-fit w-full  mainMargin fold3:gap-4 fold3:mb-8 fold2:mb-16 mb-32 flex-col flex justify-center items-center">
         <div className="h-[66px] w[80px] overflow-hidden flex justify-center items-center">
-          <img
-            className="w-[119.15px] h-[119.97px]"
-            src="Logo.png"
-            alt="logo"
-          />
+          <Link to='/'>
+            <img
+              className="w-[119.15px] h-[119.97px]"
+              src="Logo.png"
+              alt="logo"
+            />
+          </Link>
         </div>
         <div className="ChallengeActiveFooter h-[6px] w-full fold3:m-0 m-5 "></div>
         <div className="flex fold3:justify-around fold3:flex-row gap-y-10 flex-col items-cdenter   w-full   fold3:mt-5 h-[28px]">

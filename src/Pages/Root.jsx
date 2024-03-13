@@ -17,22 +17,22 @@ export default function Root() {
   }, [url])
 
   useEffect(() => {
-    // const Slah3laAlRasool = setInterval(() => {
-    //   toast.error('صلي على رسول الله ❤️', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //   });
-    // }, 180000)
+    const Slah3laAlRasool = setInterval(() => {
+      // toast.error('صلي على رسول الله ❤️', {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "dark",
+      // });
+    }, 1*60*1000)
 
-    // return () => {
-    //   clearInterval(Slah3laAlRasool)
-    // }
+    return () => {
+      clearInterval(Slah3laAlRasool)
+    }
   }, [])
 
   const styles = {
