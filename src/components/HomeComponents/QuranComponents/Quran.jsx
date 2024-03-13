@@ -151,17 +151,13 @@ function QuranText({ aya, surahName }) {
     const addSpacesToEndOfLine  = (text, containerWidth, fontSize, number) => {
       if(!text)
         return '';
-      console.log(`width = ${widthHolder}`);
       widthHolder += getTextWidth(number, `${fontSize}px hafs`);
-      console.log(text);
       const words = text.trim().split(' ');
-      console.log(words);
       let newText = '', curr = '';
       for (let i = 0; i < words.length; i++) {
         const wordWidth = getTextWidth(words[i], `${fontSize}px hafs`); // Adjust font size and family accordingly
         // const spacesNeeded = Math.floor((containerWidth - wordWidth) / getTextWidth(' ', `${fontSize}px hafs`));
         let test = getTextWidth(curr, `${fontSize}px hafs`) + getTextWidth(words[i], `${fontSize}px hafs`) + widthHolder;
-        console.log(test);  
         if(test > containerWidth){
           let addingSpaces = test - containerWidth;
           let addMoreSpaces = 0;
@@ -171,8 +167,6 @@ function QuranText({ aya, surahName }) {
             addingSpaces -= spaceSize; 
           }
           const currWords = curr.split(' ');
-          console.log(`currWords = ${currWords} Space = ${addMoreSpaces}`)
-          console.log(`i'm here -> ${newText}`);
           for(let j = currWords.length - 1; j >= 0; j--){
             // let toBeginning = '';
             //   currWords[j] = toBeginning + currWords[j];
@@ -182,7 +176,6 @@ function QuranText({ aya, surahName }) {
               if(addMoreSpaces <= 0)
                 break;
                currWords[j] = ' '.repeat(Math.floor(addMoreSpaces / currWords.length)) + currWords[j];
-              console.log(`hello thisWord = ${currWords[j]}`);
               addMoreSpaces -= Math.floor(addMoreSpaces / currWords.length);
               // if(addingSpaces <= 0)
               //   break;
