@@ -4,6 +4,8 @@ import { NavBarctx } from '../store/NavBarCtx'
 import SideNavBar from '../components/SideNavBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Analytics } from "@vercel/analytics/react"
+
 
 export default function Root() {
   const { navBar, setNavBar } = useContext(NavBarctx)
@@ -45,6 +47,7 @@ export default function Root() {
       <div onClick={handleBackDropClicked}>
         <div className={navBar ? `${styles.backdrop} ${styles.backdropReverse} BackDrop` : null}>
           <Outlet />
+          <Analytics />
         </div>
       </div>
       <ToastContainer/>
