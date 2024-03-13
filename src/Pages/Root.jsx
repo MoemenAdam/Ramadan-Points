@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function Root() {
   const { navBar, setNavBar } = useContext(NavBarctx)
   const { url } = useContext(NavBarctx)
-  const [ShowSala2 , setShowSala2] = useState(false);
+  const [ShowSala2 , setShowSala2] = useState(true);
   const handleBackDropClicked = () => {
     if (!navBar) return;
     setNavBar(prev => !prev)
@@ -21,16 +21,12 @@ export default function Root() {
   }, [url])
   useEffect(() => {
     const StartSala2 = setInterval(() => {
-      setShowSala2(true);
-    }, 20000)
-    const StopSala2 = setInterval(() => {
-      setShowSala2(false);
-    }, 25000)
+      setShowSala2(prev=>!prev);
+    }, 60000)
 
 
     return () => {
       clearInterval(StartSala2)
-      clearInterval(StopSala2)
     }
   }, [])
 
