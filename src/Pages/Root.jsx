@@ -1,15 +1,17 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { NavBarctx } from '../store/NavBarCtx'
 import SideNavBar from '../components/SideNavBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from "@vercel/analytics/react"
+import { motion, AnimatePresence } from 'framer-motion'
 
 
 export default function Root() {
   const { navBar, setNavBar } = useContext(NavBarctx)
-  const { url, setUrl } = useContext(NavBarctx)
+  const { url } = useContext(NavBarctx)
+  const [ShowSala2 , setShowSala2] = useState(false);
   const handleBackDropClicked = () => {
     if (!navBar) return;
     setNavBar(prev => !prev)
@@ -17,23 +19,18 @@ export default function Root() {
   useEffect(() => {
     if (url !== '') setNavBar(false)
   }, [url])
-
   useEffect(() => {
-    const Slah3laAlRasool = setInterval(() => {
-      // toast.error('صلي على رسول الله ❤️', {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "dark",
-      // });
-    }, 1*60*1000)
+    const StartSala2 = setInterval(() => {
+      setShowSala2(true);
+    }, 20000)
+    const StopSala2 = setInterval(() => {
+      setShowSala2(false);
+    }, 25000)
+
 
     return () => {
-      clearInterval(Slah3laAlRasool)
+      clearInterval(StartSala2)
+      clearInterval(StopSala2)
     }
   }, [])
 
@@ -48,6 +45,21 @@ export default function Root() {
         <div className={navBar ? `${styles.backdrop} ${styles.backdropReverse} BackDrop` : null}>
           <Outlet />
           <Analytics />
+          <AnimatePresence>
+            {
+              ShowSala2 && 
+              <motion.div
+                initial={{ opacity: 0, y: '-100%' }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: '-100%' }}
+                className='fixed top-0 right-0 cursor-pointer bg-black z-[100] m-3 py-5 px-20 text-white select-none'
+                whileHover={{ scale: 1.05}}
+                onClick={() => setShowSala2(false)}
+              >
+                صلي على رسول الله ❤️
+              </motion.div>
+            }
+          </AnimatePresence>
         </div>
       </div>
       <ToastContainer/>
