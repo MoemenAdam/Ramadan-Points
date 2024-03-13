@@ -5,107 +5,118 @@
 
 /* Width */
 ::-webkit-scrollbar {
-  width: 8px; /* Change width as needed */
+  width: 8px;
+  /* Change width as needed */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1E2820 /* Change background color as needed */
-  
+  background: #1E2820
+    /* Change background color as needed */
+
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
   border-radius: 99px;
-  
+
 }
 
 @font-face {
   font-family: hafs;
   src: url('../assets/HAFS.otf');
 }
+
 @font-face {
   font-family: Tajawal;
   src: url('../assets/Tajawal-Regular.ttf');
 }
+
 @font-face {
   font-family: Noto;
   src: url('../assets/NotoNaskhArabic-Regular.ttf');
 }
-*{
+
+* {
   direction: rtl;
 }
-body{
+
+body {
   font-family: Tajawal;
 }
 
-.TitleFont{
+.TitleFont {
   font-family: Noto;
 }
 
-.welcomePage{
+.welcomePage {
   background-image: url('../assets/background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.mainPage{
+
+.mainPage {
   background-image: url('../assets/texture.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.Topbg{
+
+.Topbg {
   background-image: url('../assets/TopUser.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.TopbgCurrent{
+.TopbgCurrent {
   background-image: url('../assets/TopUserCurrent.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.surahbg{
+.surahbg {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
-.loginbg{
+.loginbg {
   background-image: url('../assets/Loginbg.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
-.duasTop{
+.duasTop {
   background-image: url('../assets/duas1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.duasLeft{
+
+.duasLeft {
   background-image: url('../assets/duas2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
-.Fanoos{
+.Fanoos {
   background-image: url('../assets/Lantern.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.Aboutbg{
+
+.Aboutbg {
   position: relative;
 }
-.Aboutbg::after{
+
+.Aboutbg::after {
   content: '';
   position: absolute;
   background-image: linear-gradient(146.6deg, #9B7D24 55.54%, #D7B550 99.75%);
@@ -117,43 +128,50 @@ body{
   top: 0;
   left: 10px;
 }
-.duasActive{
+
+.duasActive {
   position: relative;
   @apply loginColor;
 }
+
 .duasActive::after {
   content: "";
   position: absolute;
   right: -15px;
-  top:-10px;
+  top: -10px;
   width: 2px;
   height: 200%;
   background-image: radial-gradient(301.88% 50% at 100% 50%, #F0E600 0%, rgba(57, 91, 100, 0) 100%);
 }
 
-.loginColor{
+.loginColor {
   background: linear-gradient(90.16deg, #9B7D24 50%, #D7B550 100%);
   font-weight: bold;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.loginColor2{
+
+.loginColor2 {
   background-image: linear-gradient(90deg, #9B7D24 50.28%, #D7B550 100%);
 }
 
-.loginInput{
+.loginInput {
   @apply bg-transparent border-b-2 border-[#D7B55099] text-white brightness-90 outline-none p-2;
 }
+
 .loginInput::selection {
   background-color: #9B7D24;
 }
+
 .loginInput {
   caret-color: #ffcc00;
 }
-.active{
+
+.active {
   position: relative;
 }
+
 .active::after {
   content: "";
   position: absolute;
@@ -164,7 +182,7 @@ body{
   background-image: radial-gradient(50% 301.88% at 50% 100%, #9B7D24 0%, rgba(57, 91, 100, 0) 100%);
 }
 
-.ChallengeActiveFooter{
+.ChallengeActiveFooter {
   position: relative;
 }
 
@@ -176,12 +194,13 @@ body{
   bottom: -12px;
   width: 50%;
   height: 4px;
-  background-image: radial-gradient(50.14% 50.14% at 49.86% 75%, #2F2F2F 0%, rgba(23, 23, 23, 0) 100%) 
+  background-image: radial-gradient(50.14% 50.14% at 49.86% 75%, #2F2F2F 0%, rgba(23, 23, 23, 0) 100%)
 }
 
-.ProfileLine{
+.ProfileLine {
   position: relative;
 }
+
 .ProfileLine::after {
   content: "";
   position: absolute;
@@ -190,16 +209,20 @@ body{
   bottom: 10px;
   width: 50%;
   height: 4px;
-  background-image: radial-gradient(50.14% 50.14% at 49.86% 75%, #2F2F2F 0%, rgba(23, 23, 23, 0) 100%) 
+  background-image: radial-gradient(50.14% 50.14% at 49.86% 75%, #2F2F2F 0%, rgba(23, 23, 23, 0) 100%)
 }
 
 
 
-.ChallengeActive,.ChallengesActive,.rightBorder{
+.ChallengeActive,
+.ChallengesActive,
+.rightBorder {
   position: relative;
   transition: all 0.3s;
 }
-.ChallengeActive::after,.ChallengesActive::after {
+
+.ChallengeActive::after,
+.ChallengesActive::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -209,11 +232,13 @@ body{
   height: 4px;
   background-image: radial-gradient(50% 301.88% at 50% 100%, #9B7D24 0%, rgba(57, 91, 100, 0) 100%);
 }
+
 .ChallengesActive::after {
   bottom: -15px;
   height: 2px;
 }
-.rightBorder::after{
+
+.rightBorder::after {
   content: "";
   position: absolute;
   height: 100%;
@@ -221,82 +246,93 @@ body{
   background-image: radial-gradient(50% 301.88% at 50% 100%, #9B7D24 0%, rgba(57, 91, 100, 0) 100%);
 }
 
-.surahLine{
+.surahLine {
   width: 100%;
   height: 8px;
   margin: 10px 0;
   background: radial-gradient(50% 50% at 50% 50%, #343020 0%, rgba(234, 234, 234, 0) 100%);
 }
-.LeaderBoardBg{
+
+.LeaderBoardBg {
   background: linear-gradient(90deg, #26303B 50%, #3A4857 100%);
 }
-.LeaderBoardCurrentBg{
+
+.LeaderBoardCurrentBg {
   background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
   @apply text-black font-medium;
 }
-.Aozr{
+
+.Aozr {
   border: 1px solid #9B7D24;
   border-radius: 4px;
 }
-.ChallengeBTN{
+
+.ChallengeBTN {
   border-top: 4px solid #9B7D24;
   border-right: 4px solid #9B7D24;
   border-top-right-radius: 8px;
-  background-color: rgba(16,16,16,0.5);
+  background-color: rgba(16, 16, 16, 0.5);
   @apply font-bold text-white py-5 px-12;
 }
-.ChallengeBTN:hover{
+
+.ChallengeBTN:hover {
   border-image-source: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
   border-image-slice: 1;
   background: linear-gradient(90deg, #9B7D24 50%, #D7B550 100%);
   @apply text-black;
 }
 
-.ChallengesContent{
-  border:1px solid #9B7D24;
+.ChallengesContent {
+  border: 1px solid #9B7D24;
   border-bottom: 0;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  @apply bg-black fixed bottom-0 left-0 fold3:left-[210px] z-[600] w-full  fold3:w-[400px] h-[600px] ;
+  @apply bg-black fixed bottom-0 left-0 fold3:left-[210px] z-[600] w-full fold3:w-[400px] fold:h-[600px];
 }
-.mainMargin{
+
+.mainMargin {
   @apply mx-6 lg:mx-14;
 }
 
-.mainMargin2{
+.mainMargin2 {
   @apply mx-6 sm:mr-40 lg:mr-44;
 }
 
-.Mainbtn{
+.Mainbtn {
   @apply w-fit text-center loginColor2 px-12 py-3 hover:scale-105 duration-150 font-medium text-black rounded-lg;
 }
 
 .qFrameTop {
   height: 23px;
 }
-.qFrameMiddle{
-    line-height: 2.35em;
+
+.qFrameMiddle {
+  line-height: 2.35em;
 }
+
 .qFrameBottom {
   height: 23px;
   rotate: 180deg;
 }
-.quranText{
-  background-color: #f7fce3 ;
-    padding: 16px 14px;
-    font-size: 24px;
-    font-family: hafs,"Times New Roman";
+
+.quranText {
+  background-color: #f7fce3;
+  padding: 16px 14px;
+  font-size: 24px;
+  font-family: hafs, "Times New Roman";
 }
-.suraHeaderFrame{
+
+.suraHeaderFrame {
   background: url('../assets/sura-frame.png') no-repeat center center;
   background-size: contain;
-    margin: 5px 0px;
-    text-align: center;
-    font-family: hafs, "Times New Roman";
-    font-size: 20px;
-    line-height: 45px;
-    height: 49px;
+  margin: 5px 0px;
+  text-align: center;
+  font-family: hafs, "Times New Roman";
+  font-size: 20px;
+  line-height: 45px;
+  height: 49px;
 }
+
 .select-dropdown,
 .select-dropdown * {
   margin: 0;
@@ -305,13 +341,15 @@ body{
   box-sizing: border-box;
   padding: 10px;
 }
+
 .select-dropdown {
   position: relative;
   background-color: #304E64;
-  color:white;
+  color: white;
   border-radius: 4px;
   border-radius: 8px;
 }
+
 .select-dropdown select {
   font-size: 1rem;
   font-weight: normal;
@@ -319,14 +357,17 @@ body{
   padding: 8px 24px 8px 10px;
   border: none;
   background-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
 }
-.select-dropdown select:active, .select-dropdown select:focus {
+
+.select-dropdown select:active,
+.select-dropdown select:focus {
   outline: none;
   box-shadow: none;
 }
+
 .select-dropdown:after {
   content: "";
   position: absolute;
@@ -340,16 +381,16 @@ body{
   border-left: 5px solid transparent;
 }
 
-.ayaText{
+.ayaText {
   white-space: pre-wrap;
-  font-family: hafs,"Times New Roman";
+  font-family: hafs, "Times New Roman";
   @apply text-xl mobile:text-[30px] mobile:leading-[50px] leading-[30px];
 }
 
-.surahSearchText{
-  font-family: hafs,"Times New Roman";
+.surahSearchText {
+  font-family: hafs, "Times New Roman";
 }
 
-img{
+img {
   pointer-events: none;
 }
