@@ -141,7 +141,7 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
   }
   return (
     <div className="flex items-center justify-center flex-grow">
-      {page <= 1 && <div><FaCaretRight color="gray" size={25} /></div>}
+      {page <= 1 && <div className="ml-3"><FaCaretRight color="gray" size={25} /></div>}
       {page > 1 && <div onClick={() => handlePageChange(-1)} className="opacity-85  cursor-pointer ml-3"><FaCaretRight size={25} /></div>}
 
       <form className="flex justify-center items-center " onSubmit={(e)=>{
@@ -161,8 +161,8 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
         value={PageHolder}/>
       </form>
 
-      {page >= 604 && <div><FaCaretLeft color="gray" size={25} /></div>}
-      {page < 604 && <div onClick={() => handlePageChange(1)} className="opacity-85  cursor-pointer mr-3"><FaCaretLeft size={25} /></div>}
+      {page >= 604 && <div className="mr-3"><FaCaretLeft color="gray" size={25} /></div>}
+      {page < 604 && <div onClick={() => handlePageChange(1)} className="opacity-85 cursor-pointer mr-3"><FaCaretLeft size={25} /></div>}
     </div>
   )
 }
@@ -328,14 +328,14 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
       {(surahsPerPageLoading || JozoaLoading) ?
       <>
       
-      <div className='w-[600px] lg:min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
+      <div className='w-[600px] big:min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
         <SurahLoader />
         </div>
       </>
 
         :
 
-        <div className="flex flex-col justify-center items-center text-ayahColor">
+        <div className="flex flex-col justify-center h-full items-center text-ayahColor">
           <div className="w-full text-xl font-semibold flex justify-between flex-wrap px-10 mb-5">
             <div>الجزء {convertToArabicNumbers(JozoaHolder)}</div>
             <div>{surahName}</div>

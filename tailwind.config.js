@@ -21,7 +21,7 @@ export default {
         
       },
       screens:{
-        'big': '1200px',
+        'big': '1250px',
         'nav': '920px',
         'nav2':'330px',
         'mobile': '450px',
