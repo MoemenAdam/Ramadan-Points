@@ -14,7 +14,7 @@ export default memo(function QuranSection() {
         <section className="flex-grow-[1] overflow-hidden bg-quranColor rounded-[32px]">
           <QuranSearch type={type} setType={setType} setJozoaClicked={setJozoaClicked} surahNumber={surahNumber} setSurahNumber={setSurahNumber} setSurahClicked={setSurahClicked} Jozoa={Jozoa} setJozoa={setJozoa}/>
         </section>
-        <section className="w-auto overflow-hidden bg-quranColor flex items-center justify-center flex-grow-[4] rounded-[32px] min-h-[834px] py-8 px-4 h-fit">
+        <section className="w-auto overflow-hidden bg-quranColor flex items-center justify-center flex-grow-[4] rounded-[32px] lg:min-h-[834px] py-8 px-4 h-fit">
           <Quran type={type} setType={setType} JozoaClicked={JozoaClicked} surahNumber={surahNumber} setSurahNumber={setSurahNumber} surahClicked={surahClicked} Jozoa={Jozoa} setJozoa={setJozoa}/>
         </section>
       </main>

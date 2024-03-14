@@ -294,7 +294,7 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
       {(surahsPerPageLoading || JozoaLoading) ?
       <>
       
-      <div className='w-[600px] min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
+      <div className='w-[600px] lg:min-h-[1000px] surahbg flex justify-center items-center text-ayahColor'>
         <SurahLoader />
         </div>
       </>
@@ -306,10 +306,10 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
             <div>الجزء {convertToArabicNumbers(JozoaHolder)}</div>
             <div>{surahName}</div>
           </div>
-          <div className='quranTesting max-w-[600px] h-fit min-h-[700px] surahbg text-ayahColor'>
+          <div className='quranTesting max-w-[600px] h-fit surahbg text-ayahColor'>
             <>
             {surahsInPage?.map((ele)=>(
-              <div key={ele.name} className="pt-10 sm:pt-10 md:pt-0 pb-10" id="quranTextLoop">
+              <div key={ele.name} className="pt-10 sm:pt-10 md:pt-0" id="quranTextLoop">
                 {handleQuranMap(surahsInPage,ele.name)}
                 {surah?.map((aya,idx)=>(
                     <span key={idx}>
