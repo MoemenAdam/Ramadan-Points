@@ -116,16 +116,32 @@ function convertToArabicNumbers(englishNumber) {
   return arabicNumber;
 }
 function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,surahsPerPage }) {
+  const [PageHolder, setPageHolder] = useState(page);
   const handlePageChange = (num) => {
     if(page + num<=0 || page + num>604)return;
     setPageNumber(prev => prev + num);
+  }
+
+  const handleChange = (e)=>{
+    const myValue = parseInt(e.target.value.replace(/\D/g, '').trim());
+    if(myValue>604 || myValue<=0 || isNaN(myValue))return;
+    // setPageNumber(myValue);
+    setPageHolder(myValue);
   }
   return (
     <div className="flex items-center justify-center flex-grow">
       {page <= 1 && <div><FaCaretRight color="gray" size={25} /></div>}
       {page > 1 && <div onClick={() => handlePageChange(-1)} className="cursor-pointer"><FaCaretRight size={25} /></div>}
 
-      <div className="px-4 select-none">{page}</div>
+      <form onSubmit={(e)=>{
+        e.preventDefault();
+        setPageNumber(PageHolder)
+      }}>
+        <input onChange={handleChange} 
+        className="px-4 text-center select-none w-[75px] border-4 
+        border-black rounded-lg" style={{direction:'ltr'}} 
+        value={PageHolder}/>
+      </form>
 
       {page >= 604 && <div><FaCaretLeft color="gray" size={25} /></div>}
       {page < 604 && <div onClick={() => handlePageChange(1)} className="cursor-pointer"><FaCaretLeft size={25} /></div>}
