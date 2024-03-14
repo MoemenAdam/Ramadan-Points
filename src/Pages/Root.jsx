@@ -22,7 +22,7 @@ export default function Root() {
   useEffect(() => {
     const StartSala2 = setInterval(() => {
       setShowSala2(prev=>!prev);
-    }, 60000)
+    }, 120000)
 
 
     return () => {

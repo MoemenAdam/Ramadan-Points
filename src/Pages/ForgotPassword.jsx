@@ -16,7 +16,7 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [btn, setBtn] = useState(false);
   const statusBtn = 'pointer-events-none select-none cursor-default';
-  const [token, setToken] = useState('');  
+  const [token, setToken] = useState('');
 
   // page1
   const handleEmail = (e) => {
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      })
+    })
   }
   const ToastAcc = (message) => {
     toast.success(message, {
@@ -45,7 +45,7 @@ export default function ForgotPassword() {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      })
+    })
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,11 +56,11 @@ export default function ForgotPassword() {
       ToastERR('الرجاء ادخال البريد الالكتروني');
       setBtn(false);
       return;
-    } 
+    }
 
     fetch(`${url}v1/users/forgotPassword`, {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -88,33 +88,47 @@ export default function ForgotPassword() {
         <meta charSet="utf-8" />
         <title>Ramadan Points - Forgot Password </title>
       </Helmet>
-        <LoginLayout>
-      <AnimatePresence>
+      <LoginLayout>
+        <AnimatePresence>
           {
-            page === 1 ? 
-            <form className='flex flex-col justify-center pb-20 pt-32 px-5 fold2:px-10 fold3:px-24 gap-5'
-            >
-              <h1 className='loginColor w-fit text-3xl font-bold pb-5 self-center'> 
-                تغيير كلمة المرور   
-              </h1>
-              <div className='flex flex-col'>
-                <label className='loginColor w-fit'>البريد الإلكتروني</label>
-                <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
-              </div>
-              <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] ${btn&&statusBtn}`}>
-                <button className={`h-[56px] ${btn&&statusBtn}`}> 
-                {btn && <SurahLoader/>}
-                {!btn && 'ارسال'}  
-                </button>
-              </div>
-            </form>
-            : page === 2 ? 
-              <ResetToken token={token} setToken={setToken} setPage={setPage} />
-            :
-            <ResetPassword token={token} setPage={setPage} />
+            page === 1 ?
+              <form className='flex flex-col justify-center pb-20 pt-32 px-5 fold2:px-10 fold3:px-[80px] gap-5'
+              >
+                <h1 className='loginColor w-fit text-2xl fold3:text-3xl font-bold pb-5 self-center'>
+                  تغيير كلمة المرور
+                </h1>
+                <div className='flex flex-col'>
+                  <label className='loginColor w-fit'>البريد الإلكتروني</label>
+                  <input onChange={handleEmail} className='loginInput' type="text" value={email} placeholder='ادخل بريدك الالكتروني' />
+                </div>
+                
+                <div className='flex flex-wrap justify-center gap-y-5 gap-x-20 mb-5' style={{visibility:'hidden',height:'1px'}}>
+                  <div className='flex justify-center items-center gap-3'>
+                    <input className='w-4 h-4' type="checkbox" />
+                    <label className='text-[#bababa]'>احفظ بياناتي</label>
+                  </div>
+                  <Link to='/forgot-password' className='text-[#9B7D24] text-center border-b-2 border-b-[#9B7D24] pb-1'>نسيت كلمة المرور</Link>
+                </div>
+
+                <div onClick={handleSubmit} className={`cursor-pointer text-center w-full text-2xl font-bold loginColor2 text-black rounded-[4px] ${btn && statusBtn}`}>
+                  <button className={`h-[56px] ${btn && statusBtn}`}>
+                    {btn && <SurahLoader />}
+                    {!btn && 'ارسال'}
+                  </button>
+                </div>
+
+                <div className='flex justify-center text-center items-center mt-5' style={{visibility:'hidden',height:'1px'}}>
+                  <p>ليس لديك حساب؟ <Link to='/signup' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>إنشاء حساب</Link></p>
+                </div>
+                
+              </form>
+              : page === 2 ?
+                <ResetToken token={token} setToken={setToken} setPage={setPage} />
+                :
+                <ResetPassword token={token} setPage={setPage} />
           }
-      </AnimatePresence>
-        </LoginLayout>
+        </AnimatePresence>
+      </LoginLayout>
       <ToastContainer />
     </HelmetProvider>
   )
