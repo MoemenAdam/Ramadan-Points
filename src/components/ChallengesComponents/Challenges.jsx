@@ -17,7 +17,7 @@ const convertSeconds = (seconds) => {
   return [hours, minutes, remainingSeconds];
 }
 
-const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
+const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => {
   const [hours, minutes, seconds] = convertSeconds(parseInt(time));
   const [MyTime, setMyTime] = useState({ hours, minutes, seconds });
   const [data, setData] = useState({});
@@ -25,27 +25,65 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
   const navigate = useNavigate();
 
   const Prays = {
-    Fajr: 'الفجر',
-    Dhuhr: 'الظهر',
-    Asr: 'العصر',
-    Maghrib: 'المغرب',
-    Isha: 'العشاء',
+    Fajr: {
+      name: 'صلاة الفجر',
+      title: 'بعد إتمام صلاة الجفر اضغط على إنهاء المهمة.'
+    },
+    Dhuhr: {
+      name: 'صلاة الظهر',
+      title: 'بعد إتمام صلاة الظهر اضغط على إنهاء المهمة.'
+    },
+    Asr: {
+      name: 'صلاة العصر',
+      title: 'بعد إتمام صلاة العصر اضغط على إنهاء المهمة.'
+    },
+    Maghrib: {
+      name: 'صلاة المغرب',
+      title: 'بعد إتمام صلاة المغرب اضغط على إنهاء المهمة.'
+    },
+    Isha: {
+      name: 'صلاة العشاء',
+      title: 'بعد إتمام صلاة العشاء اضغط على إنهاء المهمة.'
+    },
   };
-  let title = Prays[name] || name.split(' ')[1];
-  let imgSrc = title === Prays[name] ? pray : quran;
-
-  if (title === Prays[name]) {
-    title = 'بعد إتمام صلاة ' + Prays[name] + ' اضغط على إنهاء المهمة.';
-    name = 'صلاة ' + Prays[name];
+  const Others = {
+    Quran : {
+      name: 'قراءة جزء جديد من القرآن الكريم',
+      title: 'بعد إتمام القراءة اضغط على إنهاء المهمة.'
+    },
+    Tasbeeh : '',
+    Dua : '',
+    Slaa3laElnbi : '',
+  }
+  let title;
+  let imgSrc;
+  if (Prays[name]) {
+    title = Prays[name].title;
+    name = Prays[name].name;
+    imgSrc = pray;
   } else {
-    name = 'قراءة جزء جديد من القرآن الكريم'
-    title = 'بعد إتمام قراءة الجزء اضغط على إنهاء المهمة.'
+    if(name.split(' ')[0] === 'Part') name = 'Quran';
+    title = Others[name].title;
+    name = Others[name].name;
+    imgSrc = quran;
   }
 
+  function calculateTimePassed(remainingHours, remainingMinutes, remainingSeconds) {
+     // Convert total time to seconds
+     const [totalHours, totalMinutes, totalSeconds] = convertSeconds(startTime);
+     const totalInSeconds = totalHours * 3600 + totalMinutes * 60 + totalSeconds;
+    
+     // Convert remaining time to seconds
+     const remainingInSeconds = remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
+     
+     // Calculate progress percentage
+     const progressPercentage = ((totalInSeconds - remainingInSeconds) / totalInSeconds) * 100;
+ 
+     return progressPercentage.toFixed(2); // Round to two decimal places
+}
 
   const handleSubmit = async () => {
     setLoading(true);
-    // const {data} = useAuth(`${url}v1/schedules/${scheduleID}/finish`, (Cookies.get('token'), 'POST', null));
     try {
       setLoading(true);
       const fetchData = async (url) => {
@@ -120,20 +158,27 @@ const ChallengeDesign = ({ type, name, time, points, scheduleID }) => {
               </p>
               <div className='self-end'>
                 <p style={{ direction: 'ltr' }} className='loginColor text-lg'>
-                  {MyTime.hours<10&&'0'}{MyTime.hours}
-                  :{MyTime.minutes<10&&'0'}{MyTime.minutes}
-                  :{MyTime.seconds<10&&'0'}{MyTime.seconds}
-                  </p>
+                  {MyTime.hours < 10 && '0'}{MyTime.hours}
+                  :{MyTime.minutes < 10 && '0'}{MyTime.minutes}
+                  :{MyTime.seconds < 10 && '0'}{MyTime.seconds}
+                </p>
               </div>
             </div>
             <div className='self-center'>
               <img className='min-w-20 min-h-20 pointer-events-none select-none' src={imgSrc} alt="" />
             </div>
           </div>
+          <div className='bg-[#6D6D6E] w-full h-[6px] rounded-full overflow-hidden' style={{direction:'ltr'}}>
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: `${calculateTimePassed(MyTime.hours, MyTime.minutes, MyTime.seconds)}%` }}
+              className={`loginColor2 h-full`}
+            />
+          </div>
           <div className='flex justify-center fold:justify-between fold:flex-row flex-col flex-wrap gap-y-5'>
             <div className='loginColor self-center fold:self-end font-normal'>{points} نقطة</div>
             <div className='flex flex-wrap gap-5 font-medium'>
-              {type === 'running' && <button onClick={handleSubmit} className={`loginColor2 py-2 px-4 rounded-[4px] h-10 w-full fold:w-[120px] ${Loading ? 'cursor-default pointer-events-none' : ''}`}>
+              {type === 'running' && <button onClick={handleSubmit} className={`loginColor2 py-2 px-4 rounded-[4px] min-h-10 w-full fold:w-[120px] ${Loading ? 'cursor-default pointer-events-none' : ''}`}>
                 {Loading ? <SurahLoader /> : 'إنهاء المهمة'}
               </button>}
             </div>
@@ -149,13 +194,14 @@ const AllChallenges = ({ type }) => {
   const { data, loading } = useAuth(`${url}v1/schedules/${type}`, (Cookies.get('token') || 'noToken'), 'GET', null);
   if (loading) return (<SurahLoader />);
   if (!data.data.schedules.length) return (<h1 className='loginColor text-center'>لا يوجد مهام</h1>);
+  console.log(data);
   return (
     <>
       <motion.div layout>
         {
           data.data.schedules.map(e => {
             return (
-              <ChallengeDesign key={e._id} scheduleID={e._id} type={type} name={e.name} time={e.remaining} points={e.points} />
+              <ChallengeDesign key={e._id} scheduleID={e._id} type={type} name={e.name} time={e.remaining} points={e.points} startTime={e.long}/>
             )
           })
         }
