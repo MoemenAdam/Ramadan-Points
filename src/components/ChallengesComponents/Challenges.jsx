@@ -68,7 +68,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     if(name.split(' ')[0] === 'Part') name = 'Quran';
     title = Others[name].title;
     name = Others[name].name;
-    imgSrc = name === 'Quran' ? quran : '';
+    imgSrc = name === 'Quran' ? quran : quran;
   }
 
   function calculateTimePassed(remainingHours, remainingMinutes, remainingSeconds) {
