@@ -40,7 +40,7 @@ export default function Login() {
     
 
   const handleEmail = (e) => {
-    setEmail(e.target.value.trim());
+    setEmail(e.target.value);
   }
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -63,7 +63,7 @@ export default function Login() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          email: email,
+          email: email.trim(),
           password: password
         })
       });
