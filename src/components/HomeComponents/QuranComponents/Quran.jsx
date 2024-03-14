@@ -144,7 +144,7 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
       {page <= 1 && <div><FaCaretRight color="gray" size={25} /></div>}
       {page > 1 && <div onClick={() => handlePageChange(-1)} className="opacity-85  cursor-pointer ml-3"><FaCaretRight size={25} /></div>}
 
-      <form onSubmit={(e)=>{
+      <form className="flex justify-center items-center " onSubmit={(e)=>{
         e.preventDefault();
         setPageNumber(
           Math.max(
@@ -155,10 +155,9 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
       }}>
         <input onChange={handleChange} 
         className="
-        flex justify-center items-center text-center
-        select-none outline-none 
-        px-4 py-1 w-[75px] border-[1px] font-thin
-        border-[#aaaaaa] rounded-md text-sm" style={{direction:'ltr'}} 
+        text-center select-none outline-none 
+        px-4 py-1 w-[75px] border-[1px] font-normal
+        border-[#aaaaaa] rounded-md text-lg" style={{direction:'ltr'}} 
         value={PageHolder}/>
       </form>
 
