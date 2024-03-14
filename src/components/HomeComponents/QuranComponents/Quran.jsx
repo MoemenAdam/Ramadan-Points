@@ -124,7 +124,18 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
 
   const handleChange = (e)=>{
     const myValue = parseInt(e.target.value.replace(/\D/g, '').trim());
-    if(myValue>604 || myValue<=0 || isNaN(myValue))return;
+    if(isNaN(myValue)){
+      setPageHolder('');
+      return;
+    }
+    if(myValue>604){
+      setPageHolder(604);
+      return;
+    }
+    if(myValue<=0){
+      setPageHolder(1);
+      return;
+    }
     // setPageNumber(myValue);
     setPageHolder(myValue);
   }
@@ -135,11 +146,16 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
 
       <form onSubmit={(e)=>{
         e.preventDefault();
-        setPageNumber(PageHolder)
+        setPageNumber(
+          Math.max(
+            1,
+            Math.min(604,parseInt(PageHolder) || 0)
+          )
+        )
       }}>
         <input onChange={handleChange} 
-        className="px-4 text-center select-none w-[75px] border-4 
-        border-black rounded-lg" style={{direction:'ltr'}} 
+        className="px-4 text-center select-none outline-none w-[75px] border-[1px]
+        border-[#aaaaaa] rounded-md" style={{direction:'ltr'}} 
         value={PageHolder}/>
       </form>
 

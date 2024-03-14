@@ -53,7 +53,10 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     },
     Tasbeeh : '',
     Dua : '',
-    Slaa3laElnbi : '',
+    Slaa3laElnbi : {
+      name: 'صلي على النبي 300 مرة',
+      title: 'بعد إتمام الصلاة على النبي اضغط على إنهاء المهمة.'
+    },
   }
   let title;
   let imgSrc;
@@ -65,7 +68,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     if(name.split(' ')[0] === 'Part') name = 'Quran';
     title = Others[name].title;
     name = Others[name].name;
-    imgSrc = quran;
+    imgSrc = name === 'Quran' ? quran : '';
   }
 
   function calculateTimePassed(remainingHours, remainingMinutes, remainingSeconds) {
