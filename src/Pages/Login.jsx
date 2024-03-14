@@ -40,7 +40,7 @@ export default function Login() {
     
 
   const handleEmail = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.trim());
   }
   const handlePassword = (e) => {
     setPassword(e.target.value);
