@@ -156,8 +156,8 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
         <input onChange={handleChange} 
         className="
         text-center select-none outline-none 
-        px-4 py-1 w-[75px] border-[1px] font-normal
-        border-[#aaaaaa] rounded-md text-lg" style={{direction:'ltr'}} 
+        px-4 py-1 w-[75px] border-b-[1px] font-normal 
+        border-[#aaaaaa] text-lg" style={{direction:'ltr'}} 
         value={PageHolder}/>
       </form>
 
