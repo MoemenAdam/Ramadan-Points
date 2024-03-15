@@ -55,7 +55,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     Tasbeeh : '',
     Dua : '',
     Slaa3laElnbi : {
-      name: 'صلي على النبي 300 مرة',
+      name: 'صلي على النبي 100 مرة',
       title: 'بعد إتمام الصلاة على النبي اضغط على إنهاء المهمة.'
     },
   }
