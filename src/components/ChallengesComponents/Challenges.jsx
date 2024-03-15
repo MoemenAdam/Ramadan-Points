@@ -67,7 +67,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     title = Prays[name].title;
     name = Prays[name].name;
   } else {
-    imgSrc = name === 'Quran' ? Slaa3laElnbi : Slaa3laElnbi;
+    imgSrc = name === 'Quran' ? quran : Slaa3laElnbi;
     title = Others[name].title;
     name = Others[name].name;
   }
