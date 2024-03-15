@@ -192,7 +192,6 @@ const AllChallenges = ({ type }) => {
   const { data, loading } = useAuth(`${url}v1/schedules/${type}`, (Cookies.get('token') || 'noToken'), 'GET', null);
   if (loading) return (<SurahLoader />);
   if (!data.data.schedules.length) return (<h1 className='loginColor text-center'>لا يوجد مهام</h1>);
-  console.log(data);
   return (
     <>
       <motion.div layout>
