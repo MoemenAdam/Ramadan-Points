@@ -26,7 +26,10 @@ export const useAuth = (url, token, method, body) => {
             Cookies.remove('name');
             Cookies.remove('token');
           }else{
-            Cookies.set('name',data.data.user.name.split(' ')[0]);
+            Cookies.set('name',data.data.user.name.split(' ')[0],{
+              expires: 1,
+              secure: true
+            });
           }
         }
       }
