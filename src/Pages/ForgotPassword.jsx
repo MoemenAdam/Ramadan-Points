@@ -35,18 +35,6 @@ export default function ForgotPassword() {
       theme: "dark",
     })
   }
-  const ToastAcc = (message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    })
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -123,9 +111,9 @@ export default function ForgotPassword() {
                 
               </form>
               : page === 2 ?
-                <ResetToken token={token} setToken={setToken} setPage={setPage} />
+                <ResetToken email={email} token={token} setToken={setToken} setPage={setPage} />
                 :
-                <ResetPassword token={token} setPage={setPage} />
+                <ResetPassword email={email} token={token} setPage={setPage} />
           }
         </AnimatePresence>
       </LoginLayout>
