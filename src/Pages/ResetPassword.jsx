@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
-import { motion } from 'framer-motion';
 import { IoIosArrowBack } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -70,6 +69,7 @@ export default function ResetPassword(params) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        email: params.email,
         token,
         password,
         passwordConfirm
@@ -99,7 +99,7 @@ export default function ResetPassword(params) {
       <div onClick={handleBackTo2} className='cursor-pointer self-end p-3 bg-[#CBA947] rounded-lg'>
         <IoIosArrowBack color='black' size={30} />
       </div>
-      <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تسجيل الدخول </h1>
+      <h1 className='loginColor w-fit text-4xl font-bold pb-5 self-center'> تغيير كلمه المرور </h1>
       <div className='flex flex-col'>
         <label className='loginColor w-fit'>كلمه المرور الجديده</label>
         <input onChange={handlePassword} className='loginInput' type="password" value={password} placeholder='ادخل كلمه مرورك الجديده' />

@@ -14,7 +14,16 @@ import ChangePassword from "./components/ChangePassword"
 import Profile from "./Pages/Profile"
 import ChallngeCtxProvider from "./store/ChallngeCtx"
 
+
+
 function App() {
+  // load env file: import.meta.env.VITE_<NAME>;
+  // process.env.NODE_ENV
+  // = development   Here development is the default environment
+  // = production    Onrender production build
+  // console.log(import.meta.env.MODE);
+  // console.log(import.meta.env.VITE_API_URL_DEV);
+  // console.log(import.meta.env.VITE_API_URL_DEV);
   return (
     <>
     <ChallngeCtxProvider>

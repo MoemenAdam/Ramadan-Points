@@ -66,6 +66,7 @@ export default function ResetToken(params) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        email: params.email,
         token: params.token,
       })
     }).then(response => response.json()).then(res => {

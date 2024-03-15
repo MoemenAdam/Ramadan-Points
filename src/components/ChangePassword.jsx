@@ -53,7 +53,8 @@ export default function ChangePassword() {
       setCheckData(true);
     }
   },[passwordConfirm,password])
-
+  // token 
+  // reset password verification email
   const handleSubmit = (e) => {
     e.preventDefault();
     setBtn(true);
@@ -63,7 +64,7 @@ export default function ChangePassword() {
       return;
     }
 
-    // 
+  
     fetch(`${url}users/changePassword`, {
       method: 'PATCH',
       headers: { 
