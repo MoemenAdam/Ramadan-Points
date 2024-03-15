@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import pray from './pray.svg'
 import quran from './quran.svg'
+import Slaa3laElnbi from './Slaa3laElnbi.png'
 import { useAuth } from '../../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
@@ -60,29 +61,23 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
   }
   let title;
   let imgSrc;
+  if(name.split(' ')[0] === 'Part') name = 'Quran';
   if (Prays[name]) {
+    imgSrc = pray;
     title = Prays[name].title;
     name = Prays[name].name;
-    imgSrc = pray;
   } else {
-    if(name.split(' ')[0] === 'Part') name = 'Quran';
+    imgSrc = name === 'Quran' ? quran : Slaa3laElnbi;
     title = Others[name].title;
     name = Others[name].name;
-    imgSrc = name === 'Quran' ? quran : quran;
   }
 
   function calculateTimePassed(remainingHours, remainingMinutes, remainingSeconds) {
-     // Convert total time to seconds
-     const [totalHours, totalMinutes, totalSeconds] = convertSeconds(startTime);
-     const totalInSeconds = totalHours * 3600 + totalMinutes * 60 + totalSeconds;
-    
-     // Convert remaining time to seconds
-     const remainingInSeconds = remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
-     
-     // Calculate progress percentage
-     const progressPercentage = ((totalInSeconds - remainingInSeconds) / totalInSeconds) * 100;
- 
-     return progressPercentage.toFixed(2); // Round to two decimal places
+     const totalInSeconds = remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
+     const res1 = 100 - ((totalInSeconds/startTime) * 100);
+     const res2 = 100 - ((totalInSeconds/(48*60*60)) * 100);
+     const res = type === 'running' ? res1 : res2;
+     return res;
 }
 
   const handleSubmit = async () => {
@@ -168,7 +163,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
               </div>
             </div>
             <div className='self-center'>
-              <img className='min-w-20 min-h-20 pointer-events-none select-none' src={imgSrc} alt="" />
+              <img className={`w-80px] fold3:w-[${type==='running'?"120":"80"}px] h-[80px] pointer-events-none select-none`} src={imgSrc} alt="" />
             </div>
           </div>
           <div className='bg-[#6D6D6E] w-full h-[6px] rounded-full overflow-hidden' style={{direction:'ltr'}}>
@@ -197,6 +192,7 @@ const AllChallenges = ({ type }) => {
   const { data, loading } = useAuth(`${url}v1/schedules/${type}`, (Cookies.get('token') || 'noToken'), 'GET', null);
   if (loading) return (<SurahLoader />);
   if (!data.data.schedules.length) return (<h1 className='loginColor text-center'>لا يوجد مهام</h1>);
+  console.log(data);
   return (
     <>
       <motion.div layout>
