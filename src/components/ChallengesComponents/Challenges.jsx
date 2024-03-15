@@ -67,7 +67,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     title = Prays[name].title;
     name = Prays[name].name;
   } else {
-    imgSrc = name === 'Quran' ? quran : Slaa3laElnbi;
+    imgSrc = name === 'Quran' ? Slaa3laElnbi : Slaa3laElnbi;
     title = Others[name].title;
     name = Others[name].name;
   }
@@ -162,8 +162,8 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
                 </p>
               </div>
             </div>
-            <div className='self-center'>
-              <img className={`w-80px] fold3:w-[${type==='running'?"120":"80"}px] h-[80px] pointer-events-none select-none`} src={imgSrc} alt="" />
+            <div className={`self-center w-[80px]`}>
+              <img className='w-full h-full pointer-events-none select-none' src={imgSrc} alt="" />
             </div>
           </div>
           <div className='bg-[#6D6D6E] w-full h-[6px] rounded-full overflow-hidden' style={{direction:'ltr'}}>
