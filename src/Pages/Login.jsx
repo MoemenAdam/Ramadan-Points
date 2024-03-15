@@ -70,8 +70,9 @@ export default function Login() {
 
       const res = await response.json();
       if (res.status === 'success') {
+        console.log(save);
         Cookies.set('token', res.data.token,{
-          expires: 1,
+          expires: save?40:1,
           secure: true
         });
         navigate('/');
