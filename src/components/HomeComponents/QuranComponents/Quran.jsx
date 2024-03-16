@@ -242,12 +242,11 @@ function QuranText({ aya, surahName }) {
     const verseText = aya.numberInSurah === 1
       ? aya.surah.name === 'سُورَةُ ٱلْفَاتِحَةِ'
         ? 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'
-        : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1]
+        : aya.text.split('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')[1] || aya.text
       : aya.text;
 
     const formatted = addSpacesToEndOfLine(verseText, 600, 30, convertToArabicNumbers(aya.numberInSurah));
     setFormattedText(formatted);
-
     // Clean up function
     return () => {
     };
