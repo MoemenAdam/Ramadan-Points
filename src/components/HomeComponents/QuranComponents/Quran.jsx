@@ -292,8 +292,8 @@ export default memo(function Quran({ surahNumber,type, setSurahNumber,surahClick
     const holder = Object.values(surahsPerPage?.data?.surahs||[]);
     if(holder.length===0)return;
     setSurahName( holder[1]?holder[1].name:holder[0].name );
-
-    setJozoaHolder(surahsPerPage?.data?.ayahs[0]?.juz);
+    const n = surahsPerPage?.data?.ayahs?.length
+    setJozoaHolder(surahsPerPage?.data?.ayahs[n-1]?.juz);
     // if(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ) !== surahNumber){
     //   localStorage.setItem('SurahNumber', holder[1]?holder[1]?.number:holder[0]?.number);
     //   setSurahNumber(parseInt( holder[1]?holder[1]?.number:holder[0]?.number ))
