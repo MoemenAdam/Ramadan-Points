@@ -30,7 +30,6 @@ const ArrowL = () => {
   )
 }
 const DuasPrint = ({arr,type='none',Turn,direction})=>{
-  console.log({type,Turn});
   return(
     <>
       {
