@@ -1,6 +1,4 @@
-import { useEffect, useState, memo } from 'react'
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { useState, memo } from 'react'
 import Lantern from '/assets/Lantern.svg'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RandomDuas,SabahDuas,MassaDuas,EftarDuas,QuranEndDuas } from '../../store/Duas';
@@ -31,7 +29,8 @@ const ArrowL = () => {
     </svg>
   )
 }
-const DuasPrint = ({arr,Turn,direction})=>{
+const DuasPrint = ({arr,type='none',Turn,direction})=>{
+  console.log({type,Turn});
   return(
     <>
       {
@@ -49,6 +48,12 @@ const DuasPrint = ({arr,Turn,direction})=>{
               {e.times && <p className='text-green-700 text-xl absolute -top-16'>
               تكرار : {e.times}
               </p>}
+              <p className='mb-2'>
+                {
+                  (type === 'BismAllah' && Turn>=2 && Turn<=4) && 
+                  <span>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+                }
+              </p>
               {e.content}
             
             </motion.div>
@@ -142,8 +147,8 @@ export default memo(function Duas() {
           <div>
             <AnimatePresence mode='wait'> 
               {active === 1 && <DuasPrint arr={RandomDuas} Turn={Turn} direction={direction} />}
-              {active === 2 && <DuasPrint arr={SabahDuas} Turn={Turn} direction={direction} />}
-              {active === 3 && <DuasPrint arr={MassaDuas} Turn={Turn} direction={direction} />}
+              {active === 2 && <DuasPrint arr={SabahDuas} type='BismAllah' Turn={Turn} direction={direction} />}
+              {active === 3 && <DuasPrint arr={MassaDuas} type='BismAllah' Turn={Turn} direction={direction} />}
               {active === 4 && <DuasPrint arr={EftarDuas} Turn={Turn} direction={direction} />}
               {active === 5 && <DuasPrint arr={QuranEndDuas} Turn={Turn} direction={direction} />}
             </AnimatePresence>
