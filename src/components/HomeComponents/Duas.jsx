@@ -153,12 +153,12 @@ export default memo(function Duas() {
             </AnimatePresence>
           </div>
           <div className=' flex justify-center text-center gap-10 text-white w-[250px] relative top-[420px]'>
-            <div className={`order-1 cursor-pointer pointe ${!can[0] ? 'brightness-50 pointer-events-none' : ''}`} onClick={() => { handleNextDua(-1) }}>
+            <button className={`order-1 cursor-pointer pointe ${!can[0] ? 'brightness-50 pointer-events-none' : ''}`} onClick={() => { handleNextDua(-1) }}>
               <ArrowL />
-            </div>
-            <div className={`cursor-pointer pointe ${!can[1] ? 'brightness-50 pointer-events-none' : ''}`} onClick={() => { handleNextDua(1) }}>
+            </button>
+            <button className={`cursor-pointer pointe ${!can[1] ? 'brightness-50 pointer-events-none' : ''}`} onClick={() => { handleNextDua(1) }}>
               <ArrowR />
-            </div>
+            </button>
           </div>
         </div>
       </section>

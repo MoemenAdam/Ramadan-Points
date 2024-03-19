@@ -141,8 +141,8 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
   }
   return (
     <div className="flex items-center justify-center flex-grow">
-      {page <= 1 && <div className="ml-3"><FaCaretRight color="gray" size={25} /></div>}
-      {page > 1 && <div onClick={() => handlePageChange(-1)} className="opacity-85  cursor-pointer ml-3"><FaCaretRight size={25} /></div>}
+      {page <= 1 && <button className="ml-3"><FaCaretRight color="gray" size={25} /></button>}
+      {page > 1 && <button onClick={() => handlePageChange(-1)} className="opacity-85  cursor-pointer ml-3"><FaCaretRight size={25} /></button>}
 
       <form className="flex justify-center items-center " onSubmit={(e)=>{
         e.preventDefault();
@@ -161,8 +161,8 @@ function Pagenation({ page, setPageNumber,surahNumber,setSurahNumber,surahName,s
         value={PageHolder}/>
       </form>
 
-      {page >= 604 && <div className="mr-3"><FaCaretLeft color="gray" size={25} /></div>}
-      {page < 604 && <div onClick={() => handlePageChange(1)} className="opacity-85 cursor-pointer mr-3"><FaCaretLeft size={25} /></div>}
+      {page >= 604 && <button className="mr-3"><FaCaretLeft color="gray" size={25} /></button>}
+      {page < 604 && <button onClick={() => handlePageChange(1)} className="opacity-85 cursor-pointer mr-3"><FaCaretLeft size={25} /></button>}
     </div>
   )
 }
