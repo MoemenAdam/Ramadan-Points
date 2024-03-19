@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import pray from './pray.svg'
 import quran from './quran.svg'
 import Slaa3laElnbi from './Slaa3laElnbi.png'
+import QuestionMark from './QuestionMark.png'
+import PrayingNight from './PrayingNight.png'
+import SubhanAllah from './SubhanAllah.png'
 import { useAuth } from '../../CustomHooks/useAuth';
 import Cookies from 'js-cookie';
 import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
@@ -50,13 +53,23 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
   const Others = {
     Quran : {
       name: 'قراءة جزء جديد من القرآن الكريم',
-      title: 'بعد إتمام القراءة اضغط على إنهاء المهمة.'
+      title: 'بعد إتمام القراءة اضغط على إنهاء المهمة.',
+      imgSrc: quran
     },
-    Tasbeeh : '',
-    Dua : '',
+    SubhanAllah : {
+      name: 'سبح الله 100 تسبيحة',
+      title: 'بعد التسبيح 100 تسبيحة اضغط على إنهاء المهمة.',
+      imgSrc: SubhanAllah
+    },
+    PrayingNight : {
+      name: 'قيام الليل',
+      title: 'بعد إتمام قيام الليل اضغط على إنهاء المهمة.',
+      imgSrc: PrayingNight
+    },
     Slaa3laElnbi : {
       name: 'صلي على النبي 100 مرة',
-      title: 'بعد إتمام الصلاة على النبي اضغط على إنهاء المهمة.'
+      title: 'بعد إتمام الصلاة على النبي اضغط على إنهاء المهمة.',
+      imgSrc: Slaa3laElnbi
     },
   }
   let title;
@@ -67,7 +80,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
     title = Prays[name].title;
     name = Prays[name].name;
   } else {
-    imgSrc = name === 'Quran' ? quran : Slaa3laElnbi;
+    imgSrc = Others[name].imgSrc;
     title = Others[name].title;
     name = Others[name].name;
   }
