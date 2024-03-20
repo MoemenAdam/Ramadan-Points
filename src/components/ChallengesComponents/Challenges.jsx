@@ -57,7 +57,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
       imgSrc: quran
     },
     SubhanAllah : {
-      name: 'سبح الله 100 تسبيحة',
+      name: 'قل سبحان الله و بحمده 100 مرة',
       title: 'بعد التسبيح 100 تسبيحة اضغط على إنهاء المهمة.',
       imgSrc: SubhanAllah
     },
