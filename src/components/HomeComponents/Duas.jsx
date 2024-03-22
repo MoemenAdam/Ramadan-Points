@@ -34,7 +34,7 @@ const DuasPrint = ({arr,type='none',Turn,direction})=>{
     <>
       {
         arr.map(e => {
-          if (e.id != Turn) return;
+          if (e.id !== Turn) return;
           return (
             <motion.div
               initial={{ opacity: 0, x: direction * 250 }}
