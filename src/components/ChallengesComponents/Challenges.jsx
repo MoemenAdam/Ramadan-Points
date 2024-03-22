@@ -272,7 +272,6 @@ export default function Challenges({ Show, setShow }) {
       <div className='fixed bottom-0 left-0 z-[500] overflow-hidden' style={{ borderRadius: '0 8px 0 0' }}>
         <button onClick={() => { setShowChallnge(prev => !prev) }} className='ChallengeBTN'>قائمة المهام</button>
       </div>
-      <ToastContainer />
     </main>
   )
 }

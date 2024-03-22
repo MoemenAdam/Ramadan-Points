@@ -134,18 +134,6 @@ return (
         </div>
       </form>
     </LoginLayout>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-    />
   </HelmetProvider>
 )
 }

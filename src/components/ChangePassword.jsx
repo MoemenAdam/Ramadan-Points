@@ -131,7 +131,6 @@ export default function ChangePassword() {
           </button>
         </div>
       </form>
-      <ToastContainer />
     </LoginLayout>
   )
 }

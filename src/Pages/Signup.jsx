@@ -211,7 +211,6 @@ export default function Login() {
           
         </form>
       </LoginLayout>
-      <ToastContainer />
     </HelmetProvider>
   )
 }

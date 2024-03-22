@@ -114,7 +114,6 @@ export default function ResetPassword(params) {
           {!btn && 'تغيير كلمه المرور'}
         </button>
       </div>
-      <ToastContainer />
     </form>
   )
 }

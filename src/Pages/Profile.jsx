@@ -105,7 +105,6 @@ export default function Login() {
         <div className='flex-grow flex justify-center items-center'>
           <SurahLoader />
         </div>
-        <ToastContainer />
       </div>
     );
   }
@@ -190,7 +189,6 @@ export default function Login() {
             </div>
           </main>
           <Challenges />
-        <ToastContainer />
         </HelmetProvider>
       </div>
     </>

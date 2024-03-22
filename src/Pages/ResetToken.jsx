@@ -111,7 +111,6 @@ export default function ResetToken(params) {
             <p>هل تريد تسجيل الدخول؟ <Link to='/login' className='text-[#9B7D24] border-b-2 border-b-[#9B7D24] pb-1 mx-3'>تسجيل الدخول</Link></p>
           </div>
         </form>
-        <ToastContainer />
         </>
   )
 }

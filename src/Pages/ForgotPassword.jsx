@@ -117,7 +117,6 @@ export default function ForgotPassword() {
           }
         </AnimatePresence>
       </LoginLayout>
-      <ToastContainer />
     </HelmetProvider>
   )
 }
