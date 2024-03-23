@@ -18,7 +18,7 @@ export default function TopNavBar() {
   const Token = Cookies.get('token');
   const location = useLocation().pathname.split('/')[1];
 
-  const {data:userData,loading:userDataLoading} = useAuth('https://ramadan-points.onrender.com/api/v1/users/me',Token,'GET',null);
+  const {data:userData,loading:userDataLoading} = useAuth('https://ramadan-points-backend.onrender.com/api/v1/users/me',Token,'GET',null);
 
   useEffect(()=>{
     if(userDataLoading)return;

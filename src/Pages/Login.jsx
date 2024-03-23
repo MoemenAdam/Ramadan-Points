@@ -8,7 +8,7 @@ import { NavBarctx } from '../store/NavBarCtx';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const url = 'https://ramadan-points.onrender.com/api/';
+const url = 'https://ramadan-points-backend.onrender.com/api/';
 
 
 

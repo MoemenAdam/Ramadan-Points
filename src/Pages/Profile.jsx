@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import Cookies from 'js-cookie';
-const url = 'https://ramadan-points.onrender.com/api/v1/';
+const url = 'https://ramadan-points-backend.onrender.com/api/v1/';
 import FooterText from '../components/FooterText';
 import Challenges from '../components/ChallengesComponents/Challenges';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';

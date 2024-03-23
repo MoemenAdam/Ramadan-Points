@@ -8,7 +8,7 @@ import { useEffect, useState, memo } from "react";
 import Cookies from "js-cookie";
 import Challenges from "../components/ChallengesComponents/Challenges";
 import SurahLoader from "../components/HomeComponents/QuranComponents/SurahLoader";
-const url = 'https://ramadan-points.onrender.com/api/';
+const url = 'https://ramadan-points-backend.onrender.com/api/';
 export default memo(function LeaderBoard() {
   const location = useLocation().pathname.split('/')[1];
   const [Top3Data, setTop3Data] = useState(false);

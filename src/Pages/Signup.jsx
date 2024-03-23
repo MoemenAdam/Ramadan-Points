@@ -103,7 +103,7 @@ export default function Login() {
       return;
     }
 
-    fetch(`https://ramadan-points.onrender.com/api/v1/users/signup`, {
+    fetch(`https://ramadan-points-backend.onrender.com/api/v1/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

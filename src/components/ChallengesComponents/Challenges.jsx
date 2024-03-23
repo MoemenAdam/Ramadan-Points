@@ -12,7 +12,7 @@ import SurahLoader from '../HomeComponents/QuranComponents/SurahLoader';
 import { useNavigate } from 'react-router-dom';
 import { ChallngeCtx } from '../../store/ChallngeCtx';
 import { ToastContainer, toast } from 'react-toastify';
-const url = 'https://ramadan-points.onrender.com/api/';
+const url = 'https://ramadan-points-backend.onrender.com/api/';
 
 const convertSeconds = (seconds) => {
   var hours = Math.floor(seconds / 3600);

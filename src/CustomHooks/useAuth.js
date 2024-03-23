@@ -21,7 +21,7 @@ export const useAuth = (url, token, method, body) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
-        if(url==='https://ramadan-points.onrender.com/api/v1/users/me'){
+        if(url==='https://ramadan-points-backend.onrender.com/api/v1/users/me'){
           if(data.status!=='success'){
             Cookies.remove('name');
             Cookies.remove('token');

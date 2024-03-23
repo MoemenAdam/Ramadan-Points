@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const url = 'https://ramadan-points.onrender.com/api/v1/';
+const url = 'https://ramadan-points-backend.onrender.com/api/v1/';
 
 
 export default function ChangePassword() {

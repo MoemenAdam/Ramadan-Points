@@ -3,7 +3,7 @@ import LoginLayout from './LoginLayout';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SurahLoader from '../components/HomeComponents/QuranComponents/SurahLoader';
-const url = 'https://ramadan-points.onrender.com/api/';
+const url = 'https://ramadan-points-backend.onrender.com/api/';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
