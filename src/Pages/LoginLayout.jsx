@@ -8,7 +8,7 @@ import FooterText from "../components/FooterText";
 export default function Login({children}) {
   const navigate = useNavigate();
   return (
-    <section className='mainPage min-h-screen text-white flex flex-col'>
+    <section className='mainPage min-h-[100dvh] text-white flex flex-col'>
       <header className='ml-6 lg:ml-14 flex justify-between items-center'>
         <div className='sm:pr-6'>
           <Link to='/'>

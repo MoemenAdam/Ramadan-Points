@@ -41,7 +41,7 @@ export default function SideNavBar() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '-100%' }}
           transition={{ duration: 0.2 }}
-          className="nav:hidden fixed bg-[#1E2820] font-normal text-white p-10 h-screen left-0 top-0 z-[100]  nav2:w-[300px] w-full">
+          className="nav:hidden fixed bg-[#1E2820] font-normal text-white p-10 h-[100dvh] left-0 top-0 z-[100]  nav2:w-[300px] w-full">
 
           <div onClick={handleMenuClicked} className="cursor-pointer mb-10">
             <GiHamburgerMenu size={30} />

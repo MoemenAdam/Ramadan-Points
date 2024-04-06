@@ -80,7 +80,7 @@ export default function Home() {
       <div ref={quran}>
         <QuranSection />
       </div>
-      <div className='min-h-screen' ref={leaderboard}>
+      <div className='min-h-[100dvh]' ref={leaderboard}>
         <LeaderBoard/>
       </div>
       <div ref={footer}>

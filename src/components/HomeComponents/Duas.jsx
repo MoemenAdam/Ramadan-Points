@@ -107,7 +107,7 @@ export default memo(function Duas() {
   }
 
   return (
-    <main className='mainPage h-fit min-h-screen relative flex flex-col overflow-hidden pb-20'>
+    <main className='mainPage h-fit min-h-[100dvh] relative flex flex-col overflow-hidden pb-20'>
       <section>
         <div className='duasTop flex flex-col justify-center items-center text-center gap-5 py-20 pb-40'>
           <h1 className='loginColor text-4xl mainMargin'>أدعية</h1>

@@ -91,7 +91,7 @@ export default function Login() {
 
   if (loading || !data || data.status !== 'success') {
     return (
-      <div className='bg-black flex flex-col mainPage min-h-screen overflow-x-hidden'>
+      <div className='bg-black flex flex-col mainPage min-h-[100dvh] overflow-x-hidden'>
         <header className=' ml-6 lg:ml-14 flex justify-between items-center'>
           <div className='sm:pr-6'>
             <Link to='/'>
@@ -112,7 +112,7 @@ export default function Login() {
 
   return (
     <>
-      <div className='bg-black mainPage min-h-screen overflow-x-hidden'>
+      <div className='bg-black mainPage min-h-[100dvh] overflow-x-hidden'>
         <HelmetProvider>
           <Helmet>
             <meta charSet="utf-8" />

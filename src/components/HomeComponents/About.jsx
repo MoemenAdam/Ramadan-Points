@@ -8,7 +8,7 @@ export default function About() {
     setShowChallnge(prev=>!prev);
   }
   return (
-    <main className='mainPage min-h-screen bg-black flex justify-center'>
+    <main className='mainPage min-h-[100dvh] bg-black flex justify-center'>
       <div className='mainMargin py-20 loginColor'>
         <h1 className='text-4xl mb-20 text-center TitleFont'>عن رمضان بوينتس</h1>
         <section className='mainMargin2 nav:grid grid-cols-12 flex flex-col items-center gap-y-10 font-bold'>

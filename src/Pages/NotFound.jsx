@@ -6,7 +6,7 @@ import FooterText from "../components/FooterText";
 export default function NotFound() {
   const navigate = useNavigate();
   return (
-    <section className="mainPage flex flex-col bg-black text-white min-h-screen">
+    <section className="mainPage flex flex-col bg-black text-white min-h-[100dvh]">
       <TopNavBar />
       <div className="mainMargin flex mt-20 nav:mt-0 nav:flex-row flex-col gap-y-10 gap-x-20 flex-grow items-center justify-center">
         <div className="flex flex-col gap-y-5 nav:order-1 order-2">

@@ -81,7 +81,7 @@ export default memo(function LeaderBoard() {
   
   if (loading || !data || data.status !== 'success') {
     return (
-      <div className='bg-black flex flex-col mainPage min-h-screen overflow-hidden'>
+      <div className='bg-black flex flex-col mainPage min-h-[100dvh] overflow-hidden'>
        {location==='top' && <TopNavBar/>}
         <div className='flex-grow flex justify-center items-center'>
           <SurahLoader />
@@ -91,7 +91,7 @@ export default memo(function LeaderBoard() {
   }
 
   return (
-    <div style={{direction:'ltr'}} className="mainPage bg-black min-h-screen overflow-x-hidden">
+    <div style={{direction:'ltr'}} className="mainPage bg-black min-h-[100dvh] overflow-x-hidden">
       {location==='top' && <TopNavBar/>}
       <div className=" mainMargin">
 

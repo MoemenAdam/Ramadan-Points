@@ -9,7 +9,7 @@ export default memo(function QuranSection() {
   const [surahClicked, setSurahClicked] = useState(1)
   const [type , setType] = useState('surah')
   return (
-    <main className="mainPage min-h-screen relative flex flex-col pb-10">
+    <main className="mainPage min-h-[100dvh] relative flex flex-col pb-10">
       <main className="mainMargin2 mt-10 flex-grow flex flex-wrap items-start justify-center gap-20">
         <section className="flex-grow-[1] overflow-hidden bg-quranColor rounded-[32px]">
           <QuranSearch type={type} setType={setType} setJozoaClicked={setJozoaClicked} surahNumber={surahNumber} setSurahNumber={setSurahNumber} setSurahClicked={setSurahClicked} Jozoa={Jozoa} setJozoa={setJozoa}/>

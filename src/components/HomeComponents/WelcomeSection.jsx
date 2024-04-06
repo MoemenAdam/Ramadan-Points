@@ -19,7 +19,7 @@ export default memo(function WelcomeSection() {
     }
   }
   return (
-    <main className="welcomePage min-h-screen relative overflow-hidden flex flex-col pb-10">
+    <main className="welcomePage min-h-[100dvh] relative overflow-hidden flex flex-col pb-10">
       <TopNavBar/>
       <section className="mainMargin2 flex-grow flex items-center">
         <div className="flex flex-col mobile:w-[400px] w-[350px] ">
