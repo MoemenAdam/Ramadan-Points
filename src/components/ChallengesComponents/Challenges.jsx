@@ -135,7 +135,7 @@ const ChallengeDesign = ({ startTime,type, name, time, points, scheduleID }) => 
         progress: undefined,
         theme: "dark",
       })
-      console.log(e);
+      console.e(e);
     }
   }
 

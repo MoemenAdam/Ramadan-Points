@@ -78,7 +78,6 @@ export default memo(function LeaderBoard() {
     setAllData([...users.splice(3)]);
     setTop3Data(holder);
   },[data])
-  
   if (loading || !data || data.status !== 'success') {
     return (
       <div className='bg-black flex flex-col mainPage min-h-[100dvh] overflow-hidden'>
@@ -86,6 +85,7 @@ export default memo(function LeaderBoard() {
         <div className='flex-grow flex justify-center items-center'>
           <SurahLoader />
         </div>
+      <Challenges/>
       </div>
     );
   }

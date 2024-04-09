@@ -13,17 +13,11 @@ import LeaderBoard from "./Pages/LeaderBoard"
 import ChangePassword from "./components/ChangePassword"
 import Profile from "./Pages/Profile"
 import ChallngeCtxProvider from "./store/ChallngeCtx"
+import PreviousChallenges from "./Pages/PreviousChallenges"
 
 
 
 function App() {
-  // load env file: import.meta.env.VITE_<NAME>;
-  // process.env.NODE_ENV
-  // = development   Here development is the default environment
-  // = production    Onrender production build
-  // console.log(import.meta.env.MODE);
-  // console.log(import.meta.env.VITE_API_URL_DEV);
-  // console.log(import.meta.env.VITE_API_URL_DEV);
   return (
     <>
     <ChallngeCtxProvider>
@@ -39,6 +33,7 @@ function App() {
                 <Route path="change-password" element={<ChangePassword />}/>
                 <Route path="top" element={<LeaderBoard/>}/>
                 <Route path="profile" element={<Profile/>}/>
+                <Route path="previous-challenges" element={<PreviousChallenges />}/>
                 <Route path="*" element={<NotFound />}/>
               </Route>
             </Routes>

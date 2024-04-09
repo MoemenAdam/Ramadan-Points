@@ -50,6 +50,7 @@ export default function TopNavBar() {
           <nav className="hidden nav:block ml-[136px]">
             <ul className="flex gap-x-12 justify-center text">
             <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
+            <li><NavLink onClick={handleLink('')} to="/previous-challenges">المسابقات الفائتة</NavLink></li>
               <li><NavLink onClick={handleLink('top')} to="/top">ترتيب المتسابقين</NavLink></li>
 
               <li className="loginColor">

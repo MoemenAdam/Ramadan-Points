@@ -43,7 +43,7 @@ export default function Login() {
         progress: undefined,
         theme: "dark",
       })
-      console.log(err);
+      console.error(err);
     }
   }
   useEffect(() => {

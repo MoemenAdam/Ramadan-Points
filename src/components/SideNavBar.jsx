@@ -53,6 +53,7 @@ export default function SideNavBar() {
               </li>
               <li><NavLink onClick={handleLink('')} to="/">الرئيسية</NavLink></li>
               <li><NavLink onClick={handleLink('top')} to="/top">ترتيب المتسابقين</NavLink></li>
+              <li><NavLink onClick={handleLink('')} to="/previous-challenges">المسابقات الفائتة</NavLink></li>
               {!isLoggedin &&<li className="loginColor">
                  <Link to="/login">تسجيل الدخول</Link>
               </li>}
